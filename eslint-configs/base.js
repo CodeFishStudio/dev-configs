@@ -1,0 +1,63 @@
+// @ts-check
+
+import eslint from '@eslint/js';
+import importPlugin from 'eslint-plugin-import';
+import tseslint from 'typescript-eslint';
+
+/**
+ * Base ESLint configuration with our fundamental rules for TypeScript projects
+ * @type {import('eslint').Linter.Config[]}
+ */
+export const baseConfig = [
+    eslint.configs.recommended,
+    // @ts-expect-error: typescript-eslint is not typed in a friendly way
+    tseslint.configs.recommended,
+    importPlugin.flatConfigs.recommended,
+    importPlugin.flatConfigs.typescript,
+    {
+        settings: {
+            'import/resolver': 'typescript',
+        },
+        rules: {
+            // Is overly cautious, many packages have duplicated default/named exports
+            'import/no-named-as-default-member': 'off',
+
+            // Configure import ordering
+            'import/order': [
+                'warn',
+                {
+                    groups: [
+                        ['builtin', 'external'],
+                        ['internal', 'object', 'type', 'index'],
+                        ['sibling', 'parent'],
+                    ],
+                    alphabetize: {
+                        order: 'asc',
+                        caseInsensitive: true,
+                    },
+                    distinctGroup: false,
+                    pathGroups: [
+                        {
+                            pattern: 'react',
+                            group: 'external',
+                            position: 'before',
+                        },
+                        {
+                            pattern: 'react-native',
+                            group: 'external',
+                            position: 'before',
+                        },
+                    ],
+                    pathGroupsExcludedImportTypes: ['react', 'react-native'],
+                    'newlines-between': 'never',
+                },
+            ],
+
+            // Prevent { key: key } in object declarations
+            'object-shorthand': ['warn', 'always'],
+
+            // Auto fix value + string into `${value}${string}`
+            'prefer-template': 'warn',
+        },
+    },
+];
