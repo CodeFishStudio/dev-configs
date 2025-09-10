@@ -7,13 +7,10 @@
     "exports": {
         ".": "./index.js"
     },
-    "files": [
-        "index.js"
-    ],
     "scripts": {
-        "release:major": "pnpm version major && git push && git push --tags && pnpm publish",
-        "release:minor": "pnpm version minor && git push && git push --tags && pnpm publish",
-        "release:patch": "pnpm version patch && git push && git push --tags && pnpm publish",
+        "release:major": "pnpm version major && git push && git push --tags",
+        "release:minor": "pnpm version minor && git push && git push --tags",
+        "release:patch": "pnpm version patch && git push && git push --tags",
         "version": "git add .",
         "format": "prettier . --write"
     },
