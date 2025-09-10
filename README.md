@@ -15,19 +15,19 @@ pnpm add --save-dev github:CodeFishStudio/cfs-dev-configs#v0.0.2 "@eslint/js@>=9
 Create an `eslint.config.js` file in your project root:
 
 ```javascript
-import { eslintConfig } from 'cfs-dev-configs';
+import { eslintConfigs } from 'cfs-dev-configs';
 
-export default eslintConfig.react;
+export default eslintConfigs.react;
 ```
 
 Or if you need to customise the configuration:
 
 ```javascript
 import { defineConfig } from 'eslint/config';
-import { eslintConfig } from 'cfs-dev-configs';
+import { eslintConfigs } from 'cfs-dev-configs';
 
 export default defineConfig([
-    ...eslintConfig.react,
+    ...eslintConfigs.react,
     {
         // Your custom rules here
         rules: {
@@ -39,4 +39,5 @@ export default defineConfig([
 
 ### Available Configurations
 
-- `eslintConfig.react` - ESLint configuration for React + TypeScript projects on web
+- `eslintConfigs.react` - TypeScript React web projects
+- `eslintConfigs.reactNative` - TypeScript React Native projects

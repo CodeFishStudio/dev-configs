@@ -1,3 +1,5 @@
+// @ts-check
+
 import globals from 'globals';
 
 /**

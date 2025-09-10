@@ -28,6 +28,9 @@ export const reactUniversalConfig = [
 
             // Prevent useless fragments
             'react/jsx-no-useless-fragment': 'warn',
+
+            // Using Typescript for prop typing
+            'react/prop-types': 'off',
         },
     },
 ];

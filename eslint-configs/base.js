@@ -19,6 +19,12 @@ export const baseConfig = [
             'import/resolver': 'typescript',
         },
         rules: {
+            // Allow empty TypeScript interfaces that extend other interfaces
+            '@typescript-eslint/no-empty-object-type': [
+                'warn',
+                { allowInterfaces: 'with-single-extends' },
+            ],
+
             // Is overly cautious, many packages have duplicated default/named exports
             'import/no-named-as-default-member': 'off',
 
