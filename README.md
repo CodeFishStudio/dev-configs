@@ -7,7 +7,7 @@ Shared configurations for dev tools across CodeFish Studio projects.
 ### Installation
 
 ```bash
-pnpm add --save-dev github:CodeFishStudio/cfs-dev-configs#v0.0.1 "@eslint/js@>=9" "eslint-config-prettier@>=10" "eslint-import-resolver-typescript@>=4.4" "eslint-plugin-import@>=2.32" "eslint-plugin-react-hooks@6.0.0-rc.1" "eslint-plugin-react@>=7.37" "eslint@>=9" "globals@>=16.3" "typescript-eslint@>=8"
+pnpm add --save-dev github:CodeFishStudio/cfs-dev-configs#v0.0.2 "@eslint/js@>=9" "eslint-config-prettier@>=10" "eslint-import-resolver-typescript@>=4.4" "eslint-plugin-import@>=2.32" "eslint-plugin-react-hooks@6.0.0-rc.1" "eslint-plugin-react@>=7.37" "eslint@>=9" "globals@>=16.3" "typescript-eslint@>=8"
 ```
 
 ### Usage

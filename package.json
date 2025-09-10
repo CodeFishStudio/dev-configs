@@ -11,7 +11,7 @@
         "release:major": "pnpm version major && git push && git push --tags",
         "release:minor": "pnpm version minor && git push && git push --tags",
         "release:patch": "pnpm version patch && git push && git push --tags",
-        "version": "git add .",
+        "version": "node scripts/update-readme-version.js && git add .",
         "format": "prettier . --write"
     },
     "peerDependencies": {
