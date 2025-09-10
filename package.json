@@ -1,7 +1,7 @@
 {
-    "name": "codefish/dev-configs",
-    "version": "0.0.1",
-    "description": "Shared configurations for dev tools.",
+    "name": "cfs-dev-configs",
+    "version": "0.0.0",
+    "description": "Shared configurations for dev tools across CodeFish Studio projects.",
     "type": "module",
     "main": "index.js",
     "exports": {
@@ -10,22 +10,25 @@
     "files": [
         "index.js"
     ],
-    "keywords": [
-        "eslint",
-        "eslint-config",
-        "react",
-        "react-native",
-        "typescript"
-    ],
+    "scripts": {
+        "release:major": "pnpm version major && git push && git push --tags && pnpm publish",
+        "release:minor": "pnpm version minor && git push && git push --tags && pnpm publish",
+        "release:patch": "pnpm version patch && git push && git push --tags && pnpm publish",
+        "version": "git add .",
+        "format": "prettier . --write"
+    },
     "peerDependencies": {
         "@eslint/js": ">= 9",
+        "eslint": ">= 9",
         "eslint-config-prettier": ">= 10",
         "eslint-import-resolver-typescript": ">= 4.4",
         "eslint-plugin-import": ">= 2.32",
-        "eslint-plugin-react-hooks": ">= 6",
         "eslint-plugin-react": ">= 7.37",
-        "eslint": ">= 9",
+        "eslint-plugin-react-hooks": "6.0.0-rc.1",
         "globals": ">= 16.3",
         "typescript-eslint": ">= 8"
+    },
+    "devDependencies": {
+        "prettier": "^3.6.2"
     }
 }
