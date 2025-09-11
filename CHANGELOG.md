@@ -1,8 +1,8 @@
 # Change Log
 
-## Next
+## 0.0.4
 
-- Updated React Native rules
+- Updated React Native ESLint config
 
 ## 0.0.3
 
