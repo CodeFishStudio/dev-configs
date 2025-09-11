@@ -5,7 +5,7 @@ import { baseConfig, dependencies as baseDependencies } from './base.js';
  */
 export const dependencies = {
     ...baseDependencies,
-    globals: '>= 16.3',
+    globals: '^16.3',
 };
 /**
  * Node project ESLint configuration.

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        // TODO: setup this config
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        }
+    }
+}

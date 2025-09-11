@@ -8,7 +8,7 @@ import { reactConfig, dependencies as reactDependencies } from './react.js';
  */
 export const dependencies = {
     ...reactDependencies,
-    globals: '>= 16.3',
+    globals: '^16.3',
 } as const;
 
 /**

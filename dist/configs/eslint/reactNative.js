@@ -7,8 +7,8 @@ import { reactConfig, dependencies as reactDependencies } from './react.js';
  */
 export const dependencies = {
     ...reactDependencies,
-    '@eslint/compat': '>= 1',
-    'eslint-plugin-react-native': '>= 5',
+    '@eslint/compat': '^1',
+    'eslint-plugin-react-native': '^5',
 };
 /**
  * React Native project ESLint configuration.

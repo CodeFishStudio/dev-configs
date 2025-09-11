@@ -23,7 +23,7 @@
         "dist",
         "**/*.test.ts",
         "**/*.spec.ts",
-        "src/scripts/update-readme-version.ts"
+        "src/scripts/updateReadmeVersion/index.ts"
     ],
     "ts-node": {
         "esm": true

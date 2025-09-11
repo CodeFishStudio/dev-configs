@@ -9,7 +9,7 @@ import type { Linter } from 'eslint';
  */
 export const dependencies = {
     ...baseDependencies,
-    globals: '>= 16.3',
+    globals: '^16.3',
 } as const;
 
 /**

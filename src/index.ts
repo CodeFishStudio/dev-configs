@@ -3,11 +3,11 @@ import prettierConfig from 'eslint-config-prettier/flat';
 import { nodeConfig } from './configs/eslint/node.js';
 import { reactNativeConfig } from './configs/eslint/reactNative.js';
 import { reactWebConfig } from './configs/eslint/reactWeb.js';
-import { LintConfigType } from './types';
+import { ProjectType } from './types';
 
 import type { Linter } from 'eslint';
 
-export const eslintConfigs: Record<LintConfigType, Linter.Config[]> = {
+export const eslintConfigs: Record<ProjectType, Linter.Config[]> = {
     /**
      * CodeFish Studio ESLint configuration for Node.js + TypeScript projects
      */

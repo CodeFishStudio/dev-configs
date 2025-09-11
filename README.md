@@ -13,7 +13,7 @@ Shared configurations for dev tools across CodeFish Studio projects.
 2. Run the install script to automatically set up all required dev dependencies:
 
     ```bash
-    npx cfs-dev-setup
+    npx cfs-setup
     ```
 
     This script will:
