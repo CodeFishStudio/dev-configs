@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { readFileSync, writeFileSync } from 'fs';
-import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 interface PackageJson {
     version: string;
@@ -19,7 +19,7 @@ const currentVersion = packageJson.version;
 
 // Read README.md
 const readmePath = join(rootDir, 'README.md');
-let readmeContent = readFileSync(readmePath, 'utf8');
+const readmeContent = readFileSync(readmePath, 'utf8');
 
 // Replace all instances of the GitHub URL with version tags
 const githubUrlPattern = /github:CodeFishStudio\/cfs-dev-configs#v\d+\.\d+\.\d+/g;

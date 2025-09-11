@@ -2,8 +2,8 @@
 import { execSync } from 'child_process';
 import { readFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
 import { createInterface } from 'readline';
+import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 // Read the package.json to get peer dependencies
@@ -11,7 +11,6 @@ const packageJsonPath = join(__dirname, '..', '..', 'package.json');
 const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
 // Extract peer dependencies
 const peerDeps = packageJson.peerDependencies || {};
-const peerDepsMeta = packageJson.peerDependenciesMeta || {};
 // Define dependencies for each config type
 const configDependencies = {
     react: {

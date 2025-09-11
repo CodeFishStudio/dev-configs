@@ -1,7 +1,8 @@
-import type { Linter } from 'eslint';
 import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
 import * as reactHooks from 'eslint-plugin-react-hooks';
+
+import type { Linter } from 'eslint';
 
 const reactPluginConfig = {
     ...reactPlugin.configs.flat.recommended,

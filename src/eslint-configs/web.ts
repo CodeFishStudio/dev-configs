@@ -1,8 +1,11 @@
 import globals from 'globals';
+
+import type { Linter } from 'eslint';
+
 /**
- * Web React project ESLint configuration.
+ * Web project ESLint configuration.
  */
-export const reactWebConfig = [
+export const webConfig: Linter.Config[] = [
     {
         files: ['**/*.{js,jsx,ts,tsx}'],
         languageOptions: {
@@ -11,4 +14,3 @@ export const reactWebConfig = [
         },
     },
 ];
-//# sourceMappingURL=reactWeb.js.map

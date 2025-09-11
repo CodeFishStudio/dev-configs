@@ -1,0 +1,1 @@
+{"version":3,"file":"web.js","sourceRoot":"","sources":["../../src/eslint-configs/web.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,SAAS,CAAC;AAI9B;;GAEG;AACH,MAAM,CAAC,MAAM,SAAS,GAAoB;IACtC;QACI,KAAK,EAAE,CAAC,sBAAsB,CAAC;QAC/B,eAAe,EAAE;YACb,WAAW,EAAE,IAAI;YACjB,OAAO,EAAE,OAAO,CAAC,OAAO;SAC3B;KACJ;CACJ,CAAC"}

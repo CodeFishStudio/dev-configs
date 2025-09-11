@@ -1,6 +1,7 @@
-import type { Linter } from 'eslint';
 import { fixupPluginRules } from '@eslint/compat';
 import reactNativePlugin from 'eslint-plugin-react-native';
+
+import type { Linter } from 'eslint';
 
 /**
  * React Native project ESLint configuration.

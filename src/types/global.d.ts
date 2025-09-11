@@ -1,8 +1,6 @@
-// Type declarations for packages that don't have TypeScript support
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-declare module '@eslint/compat' {
-    export function fixupPluginRules(rules: any): any;
-}
+// Type declarations for packages that don't have TypeScript support
 
 declare module 'eslint-plugin-react-native' {
     const plugin: {

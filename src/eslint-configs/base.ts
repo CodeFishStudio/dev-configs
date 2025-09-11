@@ -1,7 +1,8 @@
 import eslint from '@eslint/js';
-import type { Linter } from 'eslint';
 import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
+
+import type { Linter } from 'eslint';
 
 /**
  * Base ESLint configuration with our fundamental rules for TypeScript projects

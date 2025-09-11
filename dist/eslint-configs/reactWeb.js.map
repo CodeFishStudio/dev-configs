@@ -1,1 +1,0 @@
-{"version":3,"file":"reactWeb.js","sourceRoot":"","sources":["../../src/eslint-configs/reactWeb.ts"],"names":[],"mappings":"AACA,OAAO,OAAO,MAAM,SAAS,CAAC;AAE9B;;GAEG;AACH,MAAM,CAAC,MAAM,cAAc,GAAoB;IAC3C;QACI,KAAK,EAAE,CAAC,sBAAsB,CAAC;QAC/B,eAAe,EAAE;YACb,WAAW,EAAE,IAAI;YACjB,OAAO,EAAE,OAAO,CAAC,OAAO;SAC3B;KACJ;CACJ,CAAC"}
