@@ -55,7 +55,7 @@ export const baseConfig = [
                         },
                     ],
                     pathGroupsExcludedImportTypes: ['react', 'react-native'],
-                    'newlines-between': 'never',
+                    'newlines-between': 'always',
                 },
             ],
 
