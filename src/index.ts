@@ -1,15 +1,23 @@
-// @ts-check
-
+import type { Linter } from 'eslint';
 import prettierConfig from 'eslint-config-prettier/flat';
-import { baseConfig } from './eslint-configs/base.js';
-import { reactUniversalConfig } from './eslint-configs/reactUniversal.js';
-import { reactWebConfig } from './eslint-configs/reactWeb.js';
-import { reactNativeConfig } from './eslint-configs/reactNative.js';
+import { baseConfig } from './eslint-configs/base';
+import { reactUniversalConfig } from './eslint-configs/reactUniversal';
+import { reactWebConfig } from './eslint-configs/reactWeb';
+import { reactNativeConfig } from './eslint-configs/reactNative';
 
-export const eslintConfigs = {
+export const eslintConfigs: Record<string, Linter.Config[]> = {
+    /**
+     * CodeFish Studio ESLint configuration for Node.js + TypeScript projects
+     */
+    node: [
+        ...baseConfig,
+
+        // Prettier must come last to override conflicting rules
+        prettierConfig,
+    ],
+
     /**
      * CodeFish Studio ESLint configuration for React + TypeScript projects
-     * @type {import('eslint').Linter.Config[]}
      */
     react: [
         ...baseConfig,
@@ -22,7 +30,6 @@ export const eslintConfigs = {
 
     /**
      * CodeFish Studio ESLint configuration for React Native + TypeScript projects
-     * @type {import('eslint').Linter.Config[]}
      */
     reactNative: [
         ...baseConfig,

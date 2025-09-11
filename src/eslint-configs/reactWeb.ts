@@ -1,12 +1,10 @@
-// @ts-check
-
+import type { Linter } from 'eslint';
 import globals from 'globals';
 
 /**
  * Web React project ESLint configuration.
- * @type {import('eslint').Linter.Config[]}
  */
-export const reactWebConfig = [
+export const reactWebConfig: Linter.Config[] = [
     {
         files: ['**/*.{js,jsx,ts,tsx}'],
         languageOptions: {

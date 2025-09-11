@@ -4,13 +4,17 @@ import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
+interface PackageJson {
+    version: string;
+}
+
 // Get the directory of this script
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const rootDir = join(__dirname, '..');
+const rootDir = join(__dirname, '..', '..');
 
 // Read package.json to get current version
-const packageJson = JSON.parse(readFileSync(join(rootDir, 'package.json'), 'utf8'));
+const packageJson: PackageJson = JSON.parse(readFileSync(join(rootDir, 'package.json'), 'utf8'));
 const currentVersion = packageJson.version;
 
 // Read README.md

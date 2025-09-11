@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "target": "es2022",
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "moduleDetection": "force",
+        "isolatedModules": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "outDir": "dist",
+        "sourceMap": true,
+        "declaration": true,
+        "lib": ["es2022"],
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true
+    },
+    "include": ["src/**/*"],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "src/scripts/update-readme-version.ts"
+    ],
+    "ts-node": {
+        "esm": true
+    }
+}

@@ -1,5 +1,4 @@
-// @ts-check
-
+import type { Linter } from 'eslint';
 import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
 import * as reactHooks from 'eslint-plugin-react-hooks';
@@ -14,12 +13,11 @@ const reactPluginConfig = {
 /**
  * Universal React project ESLint configuration. Used across web and React
  * Native projects.
- * @type {import('eslint').Linter.Config[]}
  */
-export const reactUniversalConfig = [
+export const reactUniversalConfig: Linter.Config[] = [
     importPlugin.flatConfigs.react,
     reactPluginConfig,
-    reactPlugin.configs.flat['jsx-runtime'],
+    reactPlugin.configs.flat['jsx-runtime']!,
     reactHooks.configs.recommended,
     {
         rules: {

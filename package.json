@@ -3,22 +3,33 @@
     "version": "0.0.5",
     "description": "Shared configurations for dev tools across CodeFish Studio projects.",
     "type": "module",
-    "main": "index.js",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
-        ".": "./index.js"
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        }
     },
     "bin": {
-        "cfs-dev-setup": "./scripts/setup.js"
+        "cfs-dev-setup": "./dist/scripts/setup.js"
     },
     "scripts": {
+        "build": "tsc",
+        "type-check": "tsc --noEmit",
+        "clean": "rm -rf dist",
+        "prebuild": "pnpm clean",
         "release:major": "pnpm version major && git push && git push --tags",
         "release:minor": "pnpm version minor && git push && git push --tags",
         "release:patch": "pnpm version patch && git push && git push --tags",
-        "version": "node scripts/update-readme-version.js && git add .",
+        "version": "tsx src/scripts/update-readme-version.ts && git add .",
         "format": "prettier . --write"
     },
     "devDependencies": {
-        "prettier": "^3.6.2"
+        "@types/node": "^24.3.1",
+        "prettier": "^3.6.2",
+        "tsx": "^4.20.5",
+        "typescript": "^5.9.2"
     },
     "peerDependencies": {
         "@eslint/compat": ">= 1",

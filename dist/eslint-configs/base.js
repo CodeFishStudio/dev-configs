@@ -1,12 +1,8 @@
-// @ts-check
-
 import eslint from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
-
 /**
  * Base ESLint configuration with our fundamental rules for TypeScript projects
- * @type {import('eslint').Linter.Config[]}
  */
 export const baseConfig = [
     eslint.configs.recommended,
@@ -24,10 +20,8 @@ export const baseConfig = [
                 'warn',
                 { allowInterfaces: 'with-single-extends' },
             ],
-
             // Is overly cautious, many packages have duplicated default/named exports
             'import/no-named-as-default-member': 'off',
-
             // Configure import ordering
             'import/order': [
                 'warn',
@@ -58,12 +52,11 @@ export const baseConfig = [
                     'newlines-between': 'always',
                 },
             ],
-
             // Prevent { key: key } in object declarations
             'object-shorthand': ['warn', 'always'],
-
             // Auto fix value + string into `${value}${string}`
             'prefer-template': 'warn',
         },
     },
 ];
+//# sourceMappingURL=base.js.map
