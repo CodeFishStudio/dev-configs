@@ -15,9 +15,8 @@
         "cfs-dev-setup": "./dist/scripts/setup.js"
     },
     "scripts": {
-        "build": "tsc",
+        "build": "pnpm clean && tsc",
         "clean": "rm -rf dist",
-        "prebuild": "pnpm clean",
         "release:major": "pnpm version major && git push && git push --tags",
         "release:minor": "pnpm version minor && git push && git push --tags",
         "release:patch": "pnpm version patch && git push && git push --tags",
@@ -27,34 +26,20 @@
         "format": "prettier . --write"
     },
     "devDependencies": {
-        "@eslint/js": "^9.35.0",
-        "@types/node": "^24.3.1",
-        "eslint": "^9.35.0",
-        "globals": "^16.4.0",
-        "prettier": "^3.6.2",
-        "tsx": "^4.20.5",
-        "typescript": "^5.9.2",
-        "typescript-eslint": "^8.43.0"
-    },
-    "peerDependencies": {
         "@eslint/compat": ">= 1",
         "@eslint/js": ">= 9",
-        "eslint": ">= 9",
+        "@types/node": "^24.3.1",
         "eslint-config-prettier": ">= 10",
         "eslint-import-resolver-typescript": ">= 4.4",
         "eslint-plugin-import": ">= 2.32",
-        "eslint-plugin-react": ">= 7.37",
         "eslint-plugin-react-hooks": "6.0.0-rc.1",
         "eslint-plugin-react-native": ">= 5",
+        "eslint-plugin-react": ">= 7.37",
+        "eslint": ">= 9",
         "globals": ">= 16.3",
-        "typescript-eslint": ">= 8"
-    },
-    "peerDependenciesMeta": {
-        "@eslint/compat": {
-            "optional": true
-        },
-        "eslint-plugin-react-native": {
-            "optional": true
-        }
+        "prettier": "^3.6.2",
+        "tsx": "^4.20.5",
+        "typescript-eslint": ">= 8",
+        "typescript": "^5.9.2"
     }
 }

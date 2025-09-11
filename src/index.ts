@@ -1,19 +1,17 @@
 import prettierConfig from 'eslint-config-prettier/flat';
 
+import { nodeConfig } from './configs/eslint/node.js';
+import { reactNativeConfig } from './configs/eslint/reactNative.js';
+import { reactWebConfig } from './configs/eslint/reactWeb.js';
+import { LintConfigType } from './types';
+
 import type { Linter } from 'eslint';
 
-import { baseConfig } from './eslint-configs/base';
-import { nodeConfig } from './eslint-configs/node';
-import { reactNativeConfig } from './eslint-configs/reactNative';
-import { reactUniversalConfig } from './eslint-configs/reactUniversal';
-import { webConfig } from './eslint-configs/web';
-
-export const eslintConfigs: Record<string, Linter.Config[]> = {
+export const eslintConfigs: Record<LintConfigType, Linter.Config[]> = {
     /**
      * CodeFish Studio ESLint configuration for Node.js + TypeScript projects
      */
     node: [
-        ...baseConfig,
         ...nodeConfig,
 
         // Prettier must come last to override conflicting rules
@@ -24,9 +22,7 @@ export const eslintConfigs: Record<string, Linter.Config[]> = {
      * CodeFish Studio ESLint configuration for React + TypeScript projects
      */
     react: [
-        ...baseConfig,
-        ...webConfig,
-        ...reactUniversalConfig,
+        ...reactWebConfig,
 
         // Prettier must come last to override conflicting rules
         prettierConfig,
@@ -36,8 +32,6 @@ export const eslintConfigs: Record<string, Linter.Config[]> = {
      * CodeFish Studio ESLint configuration for React Native + TypeScript projects
      */
     reactNative: [
-        ...baseConfig,
-        ...reactUniversalConfig,
         ...reactNativeConfig,
 
         // Prettier must come last to override conflicting rules

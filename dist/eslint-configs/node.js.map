@@ -1,1 +1,0 @@
-{"version":3,"file":"node.js","sourceRoot":"","sources":["../../src/eslint-configs/node.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,SAAS,CAAC;AAI9B;;GAEG;AACH,MAAM,CAAC,MAAM,UAAU,GAAoB;IACvC;QACI,KAAK,EAAE,CAAC,8BAA8B,CAAC;QACvC,eAAe,EAAE;YACb,WAAW,EAAE,IAAI;YACjB,OAAO,EAAE,OAAO,CAAC,IAAI;SACxB;KACJ;CACJ,CAAC"}

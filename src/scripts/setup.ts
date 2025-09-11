@@ -1,87 +1,129 @@
 #!/usr/bin/env node
 
 import { execSync } from 'child_process';
-import { readFileSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
-import { createInterface } from 'readline';
-import { fileURLToPath } from 'url';
+import { existsSync } from 'fs';
+import { join } from 'path';
+import { stdin, stdout } from 'process';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { dependencies as nodeDependencies } from '../configs/eslint/node.js';
+import { dependencies as reactDependencies } from '../configs/eslint/react.js';
+import { dependencies as reactNativeDependencies } from '../configs/eslint/reactNative.js';
 
-interface PackageJson {
-    peerDependencies?: Record<string, string>;
-    peerDependenciesMeta?: Record<string, { optional?: boolean }>;
-}
+import type { LintConfigType } from '../types';
 
 interface ConfigDependencies {
-    [key: string]: string | undefined;
+    [key: string]: string;
 }
 
-type ConfigType = 'react' | 'reactNative';
 type PackageManager = 'npm' | 'pnpm' | 'yarn';
 
-// Read the package.json to get peer dependencies
-const packageJsonPath = join(__dirname, '..', '..', 'package.json');
-const packageJson: PackageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+const KeyCodes = {
+    CTRL_C: '\u0003',
+    ENTER: '\u000d',
+    UP_ARROW: '\u001b[A',
+    DOWN_ARROW: '\u001b[B',
+} as const;
 
-// Extract peer dependencies
-const peerDeps = packageJson.peerDependencies || {};
+const Styles = {
+    CYAN: '\x1B[36m',
+    GRAY: '\x1B[90m',
+    BOLD: '\x1B[1m',
+    UNDERLINE: '\x1B[4m',
+    RESET: '\x1B[0m',
+} as const;
 
-// Define dependencies for each config type
-const configDependencies: Record<ConfigType, ConfigDependencies> = {
+// Map config types to their dependencies
+const lintConfigDependencies: Record<LintConfigType, ConfigDependencies> = {
+    node: nodeDependencies,
+    react: reactDependencies,
+    reactNative: reactNativeDependencies,
+};
+
+const options: Record<LintConfigType, { label: string }> = {
     react: {
-        // Base dependencies (always required)
-        '@eslint/js': peerDeps['@eslint/js'],
-        eslint: peerDeps['eslint'],
-        'eslint-config-prettier': peerDeps['eslint-config-prettier'],
-        'eslint-import-resolver-typescript': peerDeps['eslint-import-resolver-typescript'],
-        'eslint-plugin-import': peerDeps['eslint-plugin-import'],
-        'eslint-plugin-react': peerDeps['eslint-plugin-react'],
-        'eslint-plugin-react-hooks': peerDeps['eslint-plugin-react-hooks'],
-        globals: peerDeps['globals'],
-        'typescript-eslint': peerDeps['typescript-eslint'],
+        label: 'React',
     },
     reactNative: {
-        // Base dependencies + React Native specific
-        '@eslint/compat': peerDeps['@eslint/compat'],
-        '@eslint/js': peerDeps['@eslint/js'],
-        eslint: peerDeps['eslint'],
-        'eslint-config-prettier': peerDeps['eslint-config-prettier'],
-        'eslint-import-resolver-typescript': peerDeps['eslint-import-resolver-typescript'],
-        'eslint-plugin-import': peerDeps['eslint-plugin-import'],
-        'eslint-plugin-react': peerDeps['eslint-plugin-react'],
-        'eslint-plugin-react-hooks': peerDeps['eslint-plugin-react-hooks'],
-        'eslint-plugin-react-native': peerDeps['eslint-plugin-react-native'],
-        globals: peerDeps['globals'],
-        'typescript-eslint': peerDeps['typescript-eslint'],
+        label: 'React Native',
+    },
+    node: {
+        label: 'Node',
     },
 };
 
-// Function to prompt user for config type
-async function promptForConfigType(): Promise<ConfigType> {
-    const rl = createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    });
+// Function to prompt user for config type with arrow key navigation
+async function promptForConfigType(): Promise<LintConfigType> {
+    const configTypes = Object.keys(options) as LintConfigType[];
+    let selectedIndex = 0;
 
-    return new Promise((resolve) => {
-        console.log('\n🎯 Which ESLint configuration would you like to set up?');
-        console.log('1. React (for web projects)');
-        console.log('2. React Native (for mobile projects)');
+    const renderMenu = () => {
+        // Clear screen and move cursor to top
+        stdout.write('\x1B[2J\x1B[0f');
 
-        rl.question('\nEnter your choice (1 or 2): ', (answer) => {
-            rl.close();
-            const choice = answer.trim();
-            if (choice === '1') {
-                resolve('react');
-            } else if (choice === '2') {
-                resolve('reactNative');
+        const INDENT = '  ';
+
+        console.log(
+            `${Styles.CYAN}?${Styles.RESET}${Styles.BOLD} Choose an ESLint config:${Styles.RESET}${Styles.GRAY} › Use arrow-keys. Return to submit.${Styles.RESET}`
+        );
+
+        configTypes.forEach((configType, index) => {
+            const option = options[configType];
+            const isSelected = index === selectedIndex;
+
+            if (isSelected) {
+                // Selected option: cyan > prefix, cyan underlined text, white description
+                console.log(
+                    `${Styles.CYAN}❯ ${INDENT}${Styles.UNDERLINE}${option.label}${Styles.RESET}`
+                );
             } else {
-                console.log('❌ Invalid choice. Please enter 1 or 2.');
-                process.exit(1);
+                // Unselected option: no prefix, white text
+                console.log(`  ${INDENT}${option.label}`);
             }
         });
+    };
+
+    return new Promise((resolve, reject) => {
+        // Set raw mode to capture individual key presses
+        stdin.setRawMode(true);
+        stdin.resume();
+        stdin.setEncoding('utf8');
+
+        renderMenu();
+
+        const handleKeyPress = (key: string) => {
+            switch (key) {
+                case KeyCodes.CTRL_C: {
+                    stdin.setRawMode(false);
+                    stdin.pause();
+                    process.exit(0);
+                    break;
+                }
+                case KeyCodes.ENTER: {
+                    stdin.setRawMode(false);
+                    stdin.pause();
+                    stdin.removeListener('data', handleKeyPress);
+                    const selectedConfigType = configTypes[selectedIndex];
+                    if (selectedConfigType) {
+                        resolve(selectedConfigType);
+                    } else {
+                        reject(new Error('No option selected'));
+                    }
+                    break;
+                }
+                case KeyCodes.UP_ARROW: {
+                    selectedIndex = selectedIndex > 0 ? selectedIndex - 1 : configTypes.length - 1;
+                    renderMenu();
+                    break;
+                }
+                case KeyCodes.DOWN_ARROW: {
+                    selectedIndex = selectedIndex < configTypes.length - 1 ? selectedIndex + 1 : 0;
+                    renderMenu();
+                    break;
+                }
+            }
+        };
+
+        stdin.on('data', handleKeyPress);
     });
 }
 
@@ -107,13 +149,18 @@ console.log(`🔧 Detected package manager: ${packageManager}`);
 // Main execution
 async function main(): Promise<void> {
     const configType = await promptForConfigType();
-    const requiredDeps = configDependencies[configType];
+    const requiredDeps = lintConfigDependencies[configType];
 
-    console.log(`\n📦 Installing dependencies for ${configType} configuration...`);
+    if (!requiredDeps) {
+        console.error(`❌ No dependencies found for config type: ${configType}`);
+        process.exit(1);
+    }
 
-    // Build install command
+    console.log(`\n📦 Installing dev dependencies...\n`);
+
+    // Build install command with all dependencies
     const depsList = Object.entries(requiredDeps)
-        .map(([name, version]) => `${name}@${version}`)
+        .map(([name, version]) => `"${name}@${version}"`)
         .join(' ');
 
     let installCommand: string;
@@ -128,21 +175,15 @@ async function main(): Promise<void> {
             installCommand = `npm install --save-dev ${depsList}`;
     }
 
-    console.log(`Running: ${installCommand}`);
-
     try {
         execSync(installCommand, { stdio: 'inherit' });
-        console.log('✅ Successfully installed all required dev dependencies!');
-        console.log('\n📝 Next steps:');
-        console.log('1. Create an eslint.config.js file in your project root');
-        console.log('2. Import and use the configuration:');
-        console.log(`   import { eslintConfigs } from "cfs-dev-configs";`);
-        console.log(`   export default eslintConfigs.${configType};`);
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
         console.error('❌ Failed to install dependencies:', errorMessage);
         process.exit(1);
     }
+
+    console.log('\n✅ Successfully installed dev dependencies\n');
 }
 
 main().catch(console.error);
