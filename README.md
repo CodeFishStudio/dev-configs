@@ -2,15 +2,27 @@
 
 Shared configurations for dev tools across CodeFish Studio projects.
 
+## Installation
+
+1. Install the package:
+
+    ```bash
+    pnpm i -D github:CodeFishStudio/cfs-dev-configs#v0.0.5
+    ```
+
+2. Run the install script to automatically set up all required dev dependencies:
+
+    ```bash
+    npx cfs-dev-setup
+    ```
+
+    This script will:
+    - Detect your package manager (npm, pnpm, or yarn)
+    - Prompt you to choose between React or React Native configuration
+    - Install the appropriate ESLint dependencies for your chosen config
+    - Provide next steps for configuration
+
 ## ESLint Config
-
-### Installation
-
-```bash
-pnpm add --save-dev github:CodeFishStudio/cfs-dev-configs#v0.0.5 "@eslint/js@>=9" "eslint-config-prettier@>=10" "eslint-import-resolver-typescript@>=4.4" "eslint-plugin-import@>=2.32" "eslint-plugin-react-hooks@6.0.0-rc.1" "eslint-plugin-react@>=7.37" "eslint@>=9" "globals@>=16.3" "typescript-eslint@>=8"
-```
-
-### Usage
 
 Create an `eslint.config.js` file in your project root:
 

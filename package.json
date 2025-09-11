@@ -7,6 +7,9 @@
     "exports": {
         ".": "./index.js"
     },
+    "bin": {
+        "cfs-dev-setup": "./scripts/setup.js"
+    },
     "scripts": {
         "release:major": "pnpm version major && git push && git push --tags",
         "release:minor": "pnpm version minor && git push && git push --tags",
