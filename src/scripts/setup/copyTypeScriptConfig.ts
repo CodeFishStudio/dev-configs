@@ -1,7 +1,6 @@
-import { copyFileSync } from 'fs';
 import { join } from 'path/posix';
 
-import { handleFileOperation } from './handleFileOperation.js';
+import { fileActions } from './fileActions.js';
 import { __dirname } from '../utils/constants.js';
 
 import type { ProjectType } from '../../types/index.js';
@@ -14,10 +13,11 @@ export const copyTypeScriptConfig = (projectType: ProjectType): void => {
     const sourcePath = join(__dirname, '..', '..', 'configs', 'typescript', configFileName);
     const targetPath = join(process.cwd(), 'tsconfig.json');
 
-    handleFileOperation(
-        targetPath,
-        () => copyFileSync(sourcePath, targetPath),
-        (fileName) => `Copied ${fileName}`,
-        (fileName) => `Failed to copy ${fileName}`
-    );
+    if (fileActions.skipIfExists(targetPath)) return;
+
+    try {
+        fileActions.copy(sourcePath, targetPath);
+    } catch (error) {
+        fileActions.copyError(error, targetPath);
+    }
 };

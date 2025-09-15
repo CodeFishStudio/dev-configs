@@ -1,12 +1,12 @@
-import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'fs';
+import { existsSync, mkdirSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
 
-import { handleFileOperation } from './handleFileOperation.js';
+import { fileActions } from './fileActions.js';
 import { __dirname, CLI_PROGRESS_ITEM_INDENT } from '../utils/constants.js';
 import { Icons } from '../utils/enums.js';
 
 /**
- * Recursively copy directory contents
+ * Recursively copy directory contents, overwriting any existing files
  */
 const copyDirectoryRecursive = (source: string, target: string): void => {
     const items = readdirSync(source);
@@ -15,6 +15,7 @@ const copyDirectoryRecursive = (source: string, target: string): void => {
         const sourcePath = join(source, item);
         const targetPath = join(target, item);
 
+        // Handle directory
         if (statSync(sourcePath).isDirectory()) {
             // Create target directory if it doesn't exist
             if (!existsSync(targetPath)) {
@@ -22,13 +23,14 @@ const copyDirectoryRecursive = (source: string, target: string): void => {
             }
             // Recursively copy subdirectory
             copyDirectoryRecursive(sourcePath, targetPath);
-        } else {
-            handleFileOperation(
-                targetPath,
-                () => copyFileSync(sourcePath, targetPath),
-                (fileName) => `Copied ${fileName}`,
-                (fileName) => `Failed to copy ${fileName}`
-            );
+            return;
+        }
+
+        // Handle file
+        try {
+            fileActions.copy(sourcePath, targetPath);
+        } catch (error) {
+            fileActions.copyError(error, targetPath);
         }
     }
 };

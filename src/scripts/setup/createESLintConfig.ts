@@ -1,7 +1,6 @@
-import { writeFileSync } from 'fs';
 import { join } from 'path/posix';
 
-import { handleFileOperation } from './handleFileOperation.js';
+import { fileActions } from './fileActions.js';
 import { eslintConfigFileTemplate } from '../../configs/eslint/template.js';
 
 import type { ProjectType } from '../../types/index.js';
@@ -12,13 +11,11 @@ import type { ProjectType } from '../../types/index.js';
 export const createESLintConfig = (projectType: ProjectType): void => {
     const targetPath = join(process.cwd(), 'eslint.config.js');
 
-    handleFileOperation(
-        targetPath,
-        () => {
-            const configContent = eslintConfigFileTemplate(projectType);
-            writeFileSync(targetPath, configContent);
-        },
-        (fileName) => `Created ${fileName}`,
-        (fileName) => `Failed to create ${fileName}`
-    );
+    if (fileActions.skipIfExists(targetPath)) return;
+
+    try {
+        fileActions.create(targetPath, eslintConfigFileTemplate(projectType));
+    } catch (error) {
+        fileActions.createError(error, targetPath);
+    }
 };
