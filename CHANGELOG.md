@@ -2,6 +2,8 @@
 
 ## Next
 
+- Add .gitignore setup
+- Add package.json scripts setup
 - Added Prettier configs
 - Added TypeScript configs
 - Added setup script

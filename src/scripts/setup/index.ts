@@ -3,6 +3,7 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
 
+import { addGitignoreForConfigType } from './addGitignoreForConfigType.js';
 import { addScriptsForConfigType } from './addScriptsForConfigType.js';
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
@@ -29,11 +30,11 @@ const main = async (): Promise<void> => {
     }
 
     // Prompt for project type
-    const projectType = await promptSingleChoice('Choose project type', projectTypeOptions);
+    const projectType = await promptSingleChoice('Select project type', projectTypeOptions);
 
     // Prompt for config types
     const selectedOptions = await promptMultipleChoice(
-        'Select configs to initialize',
+        'Select configs to install',
         configTypeOptions
     );
 
@@ -60,6 +61,9 @@ const main = async (): Promise<void> => {
                 copyTypeScriptConfig(projectType);
                 break;
         }
+
+        // Add gitignore patterns for this config type
+        await addGitignoreForConfigType(configType);
 
         // Add scripts for this config type if scripts are requested
         if (addScripts) {
