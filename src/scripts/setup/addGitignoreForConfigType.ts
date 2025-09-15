@@ -50,7 +50,7 @@ export const addGitignoreForConfigType = async (configType: ConfigType): Promise
         if (result.skippedPatterns.length > 0) {
             result.skippedPatterns.forEach((pattern) => {
                 console.log(
-                    `${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} '${pattern}' already exists in .gitignore, skipping...`
+                    `${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} '${pattern}' already exists in .gitignore, skipping...`
                 );
             });
         }

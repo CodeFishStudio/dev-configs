@@ -6,9 +6,8 @@ export const projectTypeOptions: SelectOption<ProjectType>[] = [
     { label: 'Node', value: 'node' },
 ];
 
-export const configTypeOptions: SelectOption<ConfigType | 'scripts'>[] = [
-    { label: 'ESLint', value: 'eslint' },
-    { label: 'Prettier', value: 'prettier' },
+export const configTypeOptions: SelectOption<ConfigType>[] = [
     { label: 'TypeScript', value: 'typescript' },
-    { label: 'Add package.json scripts', value: 'scripts' },
+    { label: 'Prettier', value: 'prettier' },
+    { label: 'ESLint', value: 'eslint' },
 ];

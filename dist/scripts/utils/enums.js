@@ -9,7 +9,6 @@ export const TextStyles = {
     CYAN: '\x1B[36m',
     GREEN: '\x1B[32m',
     RED: '\x1B[31m',
-    YELLOW: '\x1B[33m',
     GRAY: '\x1B[90m',
     BOLD: '\x1B[1m',
     UNDERLINE: '\x1B[4m',
@@ -18,6 +17,6 @@ export const TextStyles = {
 export const Icons = {
     SUCCESS: `${TextStyles.GREEN}✔${TextStyles.RESET}`,
     ERROR: `${TextStyles.RED}✖${TextStyles.RESET}`,
-    WARNING: `${TextStyles.YELLOW}◇${TextStyles.RESET}`,
+    SKIPPED: `${TextStyles.GRAY}○${TextStyles.RESET}`,
 };
 //# sourceMappingURL=enums.js.map

@@ -7,7 +7,7 @@ import { Icons } from '../utils/enums.js';
 export const handleFileOperation = (targetPath, operation, successMessage, errorMessage) => {
     const fileName = targetPath.split('/').pop() || targetPath;
     if (existsSync(targetPath)) {
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} ${fileName} already exists, skipping...`);
+        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} ${fileName} already exists, skipping...`);
         return;
     }
     try {

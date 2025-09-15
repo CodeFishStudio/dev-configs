@@ -67,7 +67,7 @@ export const installDependencies = async (
 
     if (!requiredDeps || Object.keys(requiredDeps).length === 0) {
         console.log(`\n${TextStyles.BOLD}${configLabel}${TextStyles.RESET}`);
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} No dependencies required`);
+        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} No dependencies required`);
         return;
     }
 

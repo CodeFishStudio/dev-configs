@@ -56,7 +56,7 @@ export const addScriptsForConfigType = async (configType) => {
         if (filteredScriptsToAdd.length === 0) {
             if (scriptsToSkip.length > 0) {
                 scriptsToSkip.forEach((scriptName) => {
-                    console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} '${scriptName}' package.json script already exists, skipping...`);
+                    console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} '${scriptName}' package.json script already exists, skipping...`);
                 });
             }
             return;
@@ -76,7 +76,7 @@ export const addScriptsForConfigType = async (configType) => {
         // Log skipped scripts
         if (scriptsToSkip.length > 0) {
             scriptsToSkip.forEach((scriptName) => {
-                console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} '${scriptName}' package.json script already exists, skipping...`);
+                console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} '${scriptName}' package.json script already exists, skipping...`);
             });
         }
     }

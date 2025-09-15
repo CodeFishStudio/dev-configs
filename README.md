@@ -110,3 +110,8 @@ This script will provide options to:
     | TypeScript React web    | `eslintConfigs.react`       |
     | TypeScript React Native | `eslintConfigs.reactNative` |
     | TypeScript Node.js      | `eslintConfigs.node`        |
+
+## 📝 Todo
+
+- Copy across IDE settings for consumer projects
+- Include AI/Cursor rules for project type

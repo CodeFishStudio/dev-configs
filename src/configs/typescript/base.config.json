@@ -41,6 +41,12 @@
          * modules as isolated files.
          */
         "isolatedModules": true,
+        /**
+         * Recommended option for projects that are not transpiling TypeScript
+         * (which is the majority of our projects). This can be overridden if not
+         * desired.
+         */
+        "module": "preserve",
 
         /* --------------------------------------------------------
          * STRICTNESS

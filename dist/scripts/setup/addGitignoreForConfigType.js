@@ -37,7 +37,7 @@ export const addGitignoreForConfigType = async (configType) => {
         // Log skipped patterns
         if (result.skippedPatterns.length > 0) {
             result.skippedPatterns.forEach((pattern) => {
-                console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} '${pattern}' already exists in .gitignore, skipping...`);
+                console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} '${pattern}' already exists in .gitignore, skipping...`);
             });
         }
     }

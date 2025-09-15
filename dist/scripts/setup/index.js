@@ -24,10 +24,7 @@ const main = async () => {
     // Prompt for project type
     const projectType = await promptSingleChoice('Select project type', projectTypeOptions);
     // Prompt for config types
-    const selectedOptions = await promptMultipleChoice('Select configs to install', configTypeOptions);
-    // Separate config types from scripts option
-    const selectedConfigs = selectedOptions.filter((option) => option !== 'scripts');
-    const addScripts = selectedOptions.includes('scripts');
+    const selectedConfigs = await promptMultipleChoice('Select configs to install', configTypeOptions);
     // Process each selected config
     for (const configType of selectedConfigs) {
         // Install dependencies for this config type
@@ -46,10 +43,8 @@ const main = async () => {
         }
         // Add gitignore patterns for this config type
         await addGitignoreForConfigType(configType);
-        // Add scripts for this config type if scripts are requested
-        if (addScripts) {
-            await addScriptsForConfigType(configType);
-        }
+        // Add scripts for this config type
+        await addScriptsForConfigType(configType);
     }
     console.log('\n⚡️ Project setup complete!\n');
 };

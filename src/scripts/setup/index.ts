@@ -14,8 +14,6 @@ import { Icons } from '../utils/enums.js';
 import { promptMultipleChoice } from '../utils/promptMultipleChoice.js';
 import { promptSingleChoice } from '../utils/promptSingleChoice.js';
 
-import type { ConfigType } from '../../types/index.js';
-
 /**
  * Main execution
  */
@@ -33,16 +31,10 @@ const main = async (): Promise<void> => {
     const projectType = await promptSingleChoice('Select project type', projectTypeOptions);
 
     // Prompt for config types
-    const selectedOptions = await promptMultipleChoice(
+    const selectedConfigs = await promptMultipleChoice(
         'Select configs to install',
         configTypeOptions
     );
-
-    // Separate config types from scripts option
-    const selectedConfigs = selectedOptions.filter(
-        (option): option is ConfigType => option !== 'scripts'
-    );
-    const addScripts = selectedOptions.includes('scripts');
 
     // Process each selected config
     for (const configType of selectedConfigs) {
@@ -65,10 +57,8 @@ const main = async (): Promise<void> => {
         // Add gitignore patterns for this config type
         await addGitignoreForConfigType(configType);
 
-        // Add scripts for this config type if scripts are requested
-        if (addScripts) {
-            await addScriptsForConfigType(configType);
-        }
+        // Add scripts for this config type
+        await addScriptsForConfigType(configType);
     }
 
     console.log('\n⚡️ Project setup complete!\n');

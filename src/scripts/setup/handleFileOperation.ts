@@ -16,7 +16,7 @@ export const handleFileOperation = (
 
     if (existsSync(targetPath)) {
         console.log(
-            `${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} ${fileName} already exists, skipping...`
+            `${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} ${fileName} already exists, skipping...`
         );
         return;
     }
