@@ -9,7 +9,8 @@
         ".": {
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
-        }
+        },
+        "./tsconfig.base": "./dist/configs/typescript/base.json"
     },
     "bin": {
         "cfs-setup": "./dist/scripts/setup/index.js"
@@ -22,9 +23,10 @@
         "release:minor": "pnpm version minor && git push && git push --tags",
         "release:patch": "pnpm version patch && git push && git push --tags",
         "version": "tsx src/scripts/update-readme-version.ts && git add .",
-        "lint": "eslint . --cache && pnpm typecheck",
-        "typecheck": "tsc --noEmit",
-        "format": "prettier . --write"
+        "lint": "eslint . --cache",
+        "types": "tsc --noEmit",
+        "format": "prettier . --write",
+        "check": "pnpm run lint && pnpm run types"
     },
     "dependencies": {
         "@eslint/compat": ">= 1",

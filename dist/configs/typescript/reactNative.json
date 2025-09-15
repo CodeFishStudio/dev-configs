@@ -1,9 +1,6 @@
 {
-    "extends": "expo/tsconfig.base",
+    "extends": ["expo/tsconfig.base", "cfs-dev-configs/tsconfig.base"],
     "compilerOptions": {
-        "strict": true,
-        "noUncheckedIndexedAccess": true,
-        "noImplicitOverride": true,
         "jsx": "react-jsx",
         "baseUrl": ".",
         "paths": {

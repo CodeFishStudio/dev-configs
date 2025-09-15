@@ -1,5 +1,11 @@
 # Change Log
 
+## Next
+
+- Added Prettier configs
+- Added TypeScript configs
+- Added setup script
+
 ## 0.0.5
 
 - Update base ESLint config

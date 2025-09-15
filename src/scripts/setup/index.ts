@@ -70,10 +70,10 @@ const clearCurrentLine = (): void => {
     readline.cursorTo(process.stdout, 0);
 };
 
-const marks = {
-    success: `${TextStyles.GREEN}✔${TextStyles.RESET}`,
-    error: `${TextStyles.RED}✖${TextStyles.RESET}`,
-    warning: `${TextStyles.YELLOW}◇${TextStyles.RESET}`,
+const Icons = {
+    SUCCESS: `${TextStyles.GREEN}✔${TextStyles.RESET}`,
+    ERROR: `${TextStyles.RED}✖${TextStyles.RESET}`,
+    WARNING: `${TextStyles.YELLOW}◇${TextStyles.RESET}`,
 };
 
 /**
@@ -89,18 +89,18 @@ const handleFileOperation = (
 
     if (existsSync(targetPath)) {
         console.log(
-            `${CLI_PROGRESS_ITEM_INDENT}${marks.warning} ${fileName} already exists, skipping...`
+            `${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} ${fileName} already exists, skipping...`
         );
         return;
     }
 
     try {
         operation();
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${marks.success} ${successMessage(fileName)}`);
+        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} ${successMessage(fileName)}`);
     } catch (error) {
         const errorMsg = error instanceof Error ? error.message : String(error);
         console.error(
-            `${CLI_PROGRESS_ITEM_INDENT}${marks.error} ${errorMessage(fileName)}:`,
+            `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} ${errorMessage(fileName)}:`,
             errorMsg
         );
     }
@@ -154,7 +154,7 @@ const installDependencies = async (
 
     if (!requiredDeps || Object.keys(requiredDeps).length === 0) {
         console.log(`\n${TextStyles.BOLD}${configLabel}${TextStyles.RESET}`);
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${marks.warning} No dependencies required`);
+        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} No dependencies required`);
         return;
     }
 
@@ -181,12 +181,12 @@ const installDependencies = async (
     try {
         execSync(installCommand, { stdio: 'pipe' });
         clearCurrentLine();
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${marks.success} Installed dependencies`);
+        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} Installed dependencies`);
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
         clearCurrentLine();
         console.error(
-            `${CLI_PROGRESS_ITEM_INDENT}${marks.error} Failed to install dependencies: ${errorMessage}`
+            `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Failed to install dependencies: ${errorMessage}`
         );
     }
 };
@@ -221,7 +221,7 @@ const main = async (): Promise<void> => {
     const projectPackageJsonPath = join(process.cwd(), 'package.json');
     if (!existsSync(projectPackageJsonPath)) {
         console.error(
-            `${marks.error} No package.json found in current directory. Please run this command from your project root.`
+            `${Icons.ERROR} No package.json found in current directory. Please run this command from your project root.`
         );
         process.exit(1);
     }

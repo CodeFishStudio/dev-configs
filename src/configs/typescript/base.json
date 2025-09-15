@@ -1,0 +1,63 @@
+/**
+ * Base TypeScript configuration for all projects.
+ *
+ * These have been taken from Matt Pocock's 'TSConfig Cheat Sheet':
+ * https://www.totaltypescript.com/tsconfig-cheat-sheet
+ */
+{
+    "compilerOptions": {
+        /* --------------------------------------------------------
+         * BASE OPTIONS
+         * -------------------------------------------------------- */
+        /**
+         * Helps mend a few of the fences between CommonJS and ES Modules.
+         */
+        "esModuleInterop": true,
+        /**
+         * Skips checking the types of .d.ts files. This is important for
+         * performance, because otherwise all node_modules will be checked.
+         */
+        "skipLibCheck": true,
+        /**
+         * The version of JavaScript you're targeting. Matt Pocock recommends
+         * es2022 over esnext for stability.
+         */
+        "target": "es2022",
+        /**
+         * Allows importing of .js files.
+         */
+        "allowJs": true,
+        /**
+         * Allows importing of .json files.
+         */
+        "resolveJsonModule": true,
+        /**
+         * This option forces TypeScript to consider all files as modules. This
+         * helps to avoid 'cannot redeclare block-scoped variable' errors.
+         */
+        "moduleDetection": "force",
+        /**
+         * This option prevents a few TS features which are unsafe when treating
+         * modules as isolated files.
+         */
+        "isolatedModules": true,
+
+        /* --------------------------------------------------------
+         * STRICTNESS
+         * -------------------------------------------------------- */
+        /**
+         * Enables all strict type checking options.
+         */
+        "strict": true,
+        /**
+         * Prevents from accessing an array or object without first checking if
+         * it's defined.
+         */
+        "noUncheckedIndexedAccess": true,
+        /**
+         * Ensures that the sub-classes never go out of sync, by ensuring that
+         * functions which override include the keyword override.
+         */
+        "noImplicitOverride": true
+    }
+}
