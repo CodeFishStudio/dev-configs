@@ -1,0 +1,1 @@
+{"version":3,"file":"scripts.js","sourceRoot":"","sources":["../../../src/configs/eslint/scripts.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,MAAM,CAAC,MAAM,aAAa,GAAG;IACzB;QACI,IAAI,EAAE,MAAM;QACZ,OAAO,EAAE,kBAAkB;KAC9B;IACD;QACI,IAAI,EAAE,OAAO;QACb,OAAO,EAAE,+DAA+D;KAC3E;CACK,CAAC"}

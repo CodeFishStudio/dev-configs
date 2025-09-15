@@ -16,3 +16,9 @@ export const TextStyles = {
     UNDERLINE: '\x1B[4m',
     RESET: '\x1B[0m',
 } as const;
+
+export const Icons = {
+    SUCCESS: `${TextStyles.GREEN}✔${TextStyles.RESET}`,
+    ERROR: `${TextStyles.RED}✖${TextStyles.RESET}`,
+    WARNING: `${TextStyles.YELLOW}◇${TextStyles.RESET}`,
+} as const;

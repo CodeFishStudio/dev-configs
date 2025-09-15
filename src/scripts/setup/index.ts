@@ -1,217 +1,19 @@
 #!/usr/bin/env node
 
-import { execSync } from 'child_process';
-import { existsSync, copyFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
-import readline from 'readline';
-import { fileURLToPath } from 'url';
+import { existsSync } from 'fs';
+import { join } from 'path';
 
-import { dependencies as nodeDependencies } from '../../configs/eslint/node.js';
-import { dependencies as reactDependencies } from '../../configs/eslint/react.js';
-import { dependencies as reactNativeDependencies } from '../../configs/eslint/reactNative.js';
-import { eslintConfigFileTemplate } from '../../configs/eslint/template.js';
-import { prettierDependencies } from '../../configs/prettier/dependencies.js';
-import { typescriptDependencies } from '../../configs/typescript/dependencies.js';
-import { CLI_PROGRESS_ITEM_INDENT } from '../utils/constants.js';
-import { TextStyles } from '../utils/enums.js';
-import { getPackageManager } from '../utils/getPackageManager.js';
+import { addScriptsForConfigType } from './addScriptsForConfigType.js';
+import { copyPrettierConfig } from './copyPrettierConfig.js';
+import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
+import { createESLintConfig } from './createESLintConfig.js';
+import { installDependencies } from './installDependencies.js';
+import { configTypeOptions, projectTypeOptions } from './options.js';
+import { Icons } from '../utils/enums.js';
 import { promptMultipleChoice } from '../utils/promptMultipleChoice.js';
 import { promptSingleChoice } from '../utils/promptSingleChoice.js';
 
-import type { ConfigType, ProjectType, SelectOption } from '../../types/index.js';
-
-// ES module equivalent of __dirname
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-interface ConfigDependencies {
-    [key: string]: string;
-}
-
-// Map project types to their ESLint dependencies
-const lintConfigDependencies: Record<ProjectType, ConfigDependencies> = {
-    node: nodeDependencies,
-    react: reactDependencies,
-    reactNative: reactNativeDependencies,
-};
-
-// Map config types to their dependencies
-const configDependencies: Record<ConfigType, (projectType: ProjectType) => ConfigDependencies> = {
-    eslint: (projectType) => lintConfigDependencies[projectType],
-    prettier: () => prettierDependencies,
-    typescript: () => typescriptDependencies,
-};
-
-const projectTypeOptions: SelectOption<ProjectType>[] = [
-    { label: 'React', value: 'react' },
-    { label: 'React Native (with Expo)', value: 'reactNative' },
-    { label: 'Node', value: 'node' },
-];
-
-const configTypeOptions: SelectOption<ConfigType>[] = [
-    { label: 'ESLint', value: 'eslint' },
-    { label: 'Prettier', value: 'prettier' },
-    { label: 'TypeScript', value: 'typescript' },
-];
-
-/**
- * Helper function to get the display label for a config type
- */
-const getConfigTypeLabel = (configType: ConfigType): string => {
-    const option = configTypeOptions.find((opt) => opt.value === configType);
-    return option?.label || configType;
-};
-
-/**
- * Helper function to clear the current line and move cursor to beginning
- */
-const clearCurrentLine = (): void => {
-    readline.moveCursor(process.stdout, 0, -1);
-    readline.clearLine(process.stdout, 0);
-    readline.cursorTo(process.stdout, 0);
-};
-
-const Icons = {
-    SUCCESS: `${TextStyles.GREEN}✔${TextStyles.RESET}`,
-    ERROR: `${TextStyles.RED}✖${TextStyles.RESET}`,
-    WARNING: `${TextStyles.YELLOW}◇${TextStyles.RESET}`,
-};
-
-/**
- * Helper function to handle file operations with consistent error handling and output
- */
-const handleFileOperation = (
-    targetPath: string,
-    operation: () => void,
-    successMessage: (fileName: string) => string,
-    errorMessage: (fileName: string) => string
-): void => {
-    const fileName = targetPath.split('/').pop() || targetPath;
-
-    if (existsSync(targetPath)) {
-        console.log(
-            `${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} ${fileName} already exists, skipping...`
-        );
-        return;
-    }
-
-    try {
-        operation();
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} ${successMessage(fileName)}`);
-    } catch (error) {
-        const errorMsg = error instanceof Error ? error.message : String(error);
-        console.error(
-            `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} ${errorMessage(fileName)}:`,
-            errorMsg
-        );
-    }
-};
-
-/**
- * Function to copy config files to project root
- */
-const copyConfigFile = (sourcePath: string, targetPath: string): void => {
-    handleFileOperation(
-        targetPath,
-        () => copyFileSync(sourcePath, targetPath),
-        (fileName) => `Copied ${fileName}`,
-        (fileName) => `Failed to copy ${fileName}`
-    );
-};
-
-/**
- * Function to create ESLint config file
- */
-const createESLintConfig = (projectType: ProjectType): void => {
-    const targetPath = join(process.cwd(), 'eslint.config.js');
-
-    handleFileOperation(
-        targetPath,
-        () => {
-            const configContent = eslintConfigFileTemplate(projectType);
-            writeFileSync(targetPath, configContent);
-        },
-        (fileName) => `Created ${fileName}`,
-        (fileName) => `Failed to create ${fileName}`
-    );
-};
-
-/**
- * Generic function to install dependencies for a config type
- */
-const installDependencies = async (
-    configType: ConfigType,
-    projectType: ProjectType
-): Promise<void> => {
-    let requiredDeps: ConfigDependencies;
-
-    if (configType === 'eslint' && projectType) {
-        requiredDeps = lintConfigDependencies[projectType];
-    } else {
-        requiredDeps = configDependencies[configType](projectType);
-    }
-
-    const configLabel = getConfigTypeLabel(configType);
-
-    if (!requiredDeps || Object.keys(requiredDeps).length === 0) {
-        console.log(`\n${TextStyles.BOLD}${configLabel}${TextStyles.RESET}`);
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.WARNING} No dependencies required`);
-        return;
-    }
-
-    console.log(`\n${TextStyles.BOLD}${configLabel}${TextStyles.RESET}`);
-    console.log(`${CLI_PROGRESS_ITEM_INDENT}⏳ Installing dependencies...`);
-
-    // Build install command with all dependencies
-    const depsList = Object.entries(requiredDeps)
-        .map(([name, version]) => `"${name}@${version}"`)
-        .join(' ');
-
-    let installCommand: string;
-    switch (getPackageManager()) {
-        case 'pnpm':
-            installCommand = `pnpm add --save-dev ${depsList}`;
-            break;
-        case 'yarn':
-            installCommand = `yarn add --dev ${depsList}`;
-            break;
-        default:
-            installCommand = `npm install --save-dev ${depsList}`;
-    }
-
-    try {
-        execSync(installCommand, { stdio: 'pipe' });
-        clearCurrentLine();
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} Installed dependencies`);
-    } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        clearCurrentLine();
-        console.error(
-            `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Failed to install dependencies: ${errorMessage}`
-        );
-    }
-};
-
-/**
- * Function to copy Prettier config
- */
-const copyPrettierConfig = (): void => {
-    const targetPath = join(process.cwd(), '.prettierrc');
-
-    // Path to config files in the dist directory
-    const sourcePath = join(__dirname, '..', '..', 'configs', 'prettier', '.prettierrc');
-    copyConfigFile(sourcePath, targetPath);
-};
-
-/**
- * Function to copy TypeScript config
- */
-const copyTypeScriptConfig = (projectType: ProjectType): void => {
-    const configFileName = `${projectType}.json`;
-    const sourcePath = join(__dirname, '..', '..', 'configs', 'typescript', configFileName);
-    const targetPath = join(process.cwd(), 'tsconfig.json');
-
-    copyConfigFile(sourcePath, targetPath);
-};
+import type { ConfigType } from '../../types/index.js';
 
 /**
  * Main execution
@@ -230,10 +32,16 @@ const main = async (): Promise<void> => {
     const projectType = await promptSingleChoice('Choose project type', projectTypeOptions);
 
     // Prompt for config types
-    const selectedConfigs = await promptMultipleChoice(
+    const selectedOptions = await promptMultipleChoice(
         'Select configs to initialize',
         configTypeOptions
     );
+
+    // Separate config types from scripts option
+    const selectedConfigs = selectedOptions.filter(
+        (option): option is ConfigType => option !== 'scripts'
+    );
+    const addScripts = selectedOptions.includes('scripts');
 
     // Process each selected config
     for (const configType of selectedConfigs) {
@@ -252,9 +60,14 @@ const main = async (): Promise<void> => {
                 copyTypeScriptConfig(projectType);
                 break;
         }
+
+        // Add scripts for this config type if scripts are requested
+        if (addScripts) {
+            await addScriptsForConfigType(configType);
+        }
     }
 
-    console.log('\n🚀 Project setup complete!\n');
+    console.log('\n⚡️ Project setup complete!\n');
 };
 
 main().catch(console.error);

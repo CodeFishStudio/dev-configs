@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
 import { readFileSync, writeFileSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
+
+import { __dirname } from '../utils/constants.js';
 
 interface PackageJson {
     version: string;
 }
 
 // Get the directory of this script
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 const rootDir = join(__dirname, '..', '..');
 
 // Read package.json to get current version

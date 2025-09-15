@@ -2,7 +2,7 @@ import { stdout, stdin } from 'process';
 
 import { CLI_OPTION_INDENT } from './constants.js';
 import { TextStyles, KeyCodes } from './enums.js';
-import { SelectOption } from '../../types';
+import { SelectOption } from '../../types/index.js';
 
 /**
  * Generic prompt helper for multiple selection with checkboxes

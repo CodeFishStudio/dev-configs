@@ -1,7 +1,7 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
 
-type PackageManager = 'npm' | 'pnpm' | 'yarn';
+import { PackageManager } from '../../types/index.js';
 
 let packageManager: PackageManager | undefined;
 

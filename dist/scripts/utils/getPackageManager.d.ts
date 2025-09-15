@@ -1,3 +1,2 @@
-type PackageManager = 'npm' | 'pnpm' | 'yarn';
+import { PackageManager } from '../../types/index.js';
 export declare const getPackageManager: () => PackageManager;
-export {};

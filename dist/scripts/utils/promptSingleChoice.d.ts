@@ -1,4 +1,4 @@
-import { SelectOption } from '../../types';
+import { SelectOption } from '../../types/index.js';
 /**
  * Generic prompt helper for single selection
  */

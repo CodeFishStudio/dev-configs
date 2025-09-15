@@ -15,3 +15,8 @@ export declare const TextStyles: {
     readonly UNDERLINE: "\u001B[4m";
     readonly RESET: "\u001B[0m";
 };
+export declare const Icons: {
+    readonly SUCCESS: "\u001B[32m✔\u001B[0m";
+    readonly ERROR: "\u001B[31m✖\u001B[0m";
+    readonly WARNING: "\u001B[33m◇\u001B[0m";
+};
