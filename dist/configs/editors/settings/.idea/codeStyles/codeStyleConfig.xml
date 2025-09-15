@@ -1,0 +1,6 @@
+<component name="ProjectCodeStyleConfiguration">
+    <state>
+        <!-- Tells WebStorm to use project-based code style (rather than global IDE defaults). -->
+        <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+    </state>
+</component>

@@ -17,7 +17,7 @@
     },
     "scripts": {
         "build": "pnpm clean && tsc && pnpm copy-configs",
-        "copy-configs": "cp -r src/configs/prettier dist/configs/ && cp -r src/configs/typescript dist/configs/",
+        "copy-configs": "cp -r src/configs/prettier dist/configs/ && cp -r src/configs/typescript dist/configs/ && cp -r src/configs/editors dist/configs/",
         "clean": "rm -rf dist",
         "release:major": "pnpm version major && git push && git push --tags",
         "release:minor": "pnpm version minor && git push && git push --tags",

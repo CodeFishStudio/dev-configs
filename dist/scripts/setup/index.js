@@ -1,16 +1,24 @@
 #!/usr/bin/env node
 import { existsSync } from 'fs';
 import { join } from 'path';
-import { addGitignoreForConfigType } from './addGitignoreForConfigType.js';
-import { addScriptsForConfigType } from './addScriptsForConfigType.js';
+import { addGitignores } from './addGitignores.js';
+import { addPackageJsonScripts } from './addPackageJsonScripts.js';
+import { copyEditorConfig } from './copyEditorConfig.js';
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
 import { createESLintConfig } from './createESLintConfig.js';
 import { installDependencies } from './installDependencies.js';
 import { configTypeOptions, projectTypeOptions } from './options.js';
-import { Icons } from '../utils/enums.js';
+import { Icons, TextStyles } from '../utils/enums.js';
 import { promptMultipleChoice } from '../utils/promptMultipleChoice.js';
 import { promptSingleChoice } from '../utils/promptSingleChoice.js';
+/**
+ * Helper function to get the display label for a config type
+ */
+const getConfigTypeLabel = (configType) => {
+    const option = configTypeOptions.find((opt) => opt.value === configType);
+    return option?.label || configType;
+};
 /**
  * Main execution
  */
@@ -27,6 +35,8 @@ const main = async () => {
     const selectedConfigs = await promptMultipleChoice('Select configs to install', configTypeOptions);
     // Process each selected config
     for (const configType of selectedConfigs) {
+        const configLabel = getConfigTypeLabel(configType);
+        console.log(`\n${TextStyles.BOLD}${configLabel}${TextStyles.RESET}`);
         // Install dependencies for this config type
         await installDependencies(configType, projectType);
         // Copy/create config file for this config type
@@ -40,11 +50,14 @@ const main = async () => {
             case 'typescript':
                 copyTypeScriptConfig(projectType);
                 break;
+            case 'editor':
+                copyEditorConfig();
+                break;
         }
         // Add gitignore patterns for this config type
-        await addGitignoreForConfigType(configType);
+        await addGitignores(configType);
         // Add scripts for this config type
-        await addScriptsForConfigType(configType);
+        await addPackageJsonScripts(configType);
     }
     console.log('\n⚡️ Project setup complete!\n');
 };

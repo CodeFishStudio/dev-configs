@@ -7,5 +7,6 @@ export const configTypeOptions = [
     { label: 'TypeScript', value: 'typescript' },
     { label: 'Prettier', value: 'prettier' },
     { label: 'ESLint', value: 'eslint' },
+    { label: 'IDE Setup', value: 'editor' },
 ];
 //# sourceMappingURL=options.js.map

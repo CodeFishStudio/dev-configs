@@ -113,5 +113,6 @@ This script will provide options to:
 
 ## 📝 Todo
 
-- Copy across IDE settings for consumer projects
+- Consider which setups should just overwrite. i.e. Prettier config is pretty
+  safe to overwrite an existing config.
 - Include AI/Cursor rules for project type

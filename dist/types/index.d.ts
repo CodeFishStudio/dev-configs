@@ -1,5 +1,5 @@
 export type ProjectType = 'node' | 'react' | 'reactNative';
-export type ConfigType = 'eslint' | 'prettier' | 'typescript';
+export type ConfigType = 'eslint' | 'prettier' | 'typescript' | 'editor';
 export type SelectOption<T> = {
     label: string;
     value: T;

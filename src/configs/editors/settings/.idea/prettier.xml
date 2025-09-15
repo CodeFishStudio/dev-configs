@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+    <component name="PrettierConfiguration">
+        <!-- Always run Prettier on save -->
+        <option name="myRunOnSave" value="true" />
+
+        <!-- Don’t run Prettier automatically on Reformat Code shortcut -->
+        <option name="myRunOnReformat" value="false" />
+
+        <!-- Use the project’s .prettierrc as the source of truth -->
+        <option name="myUseConfig" value="true" />
+
+        <!-- Use the local node_modules version of Prettier -->
+        <option name="myPrettierPackage" value="PROJECT" />
+    </component>
+</project>

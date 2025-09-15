@@ -1,4 +1,5 @@
-import { gitignorePatterns } from '../../configs/eslint/gitignore.js';
+import { gitignorePatterns as editorGitignorePatterns } from '../../configs/editors/gitignore.js';
+import { gitignorePatterns as eslintGitignorePatterns } from '../../configs/eslint/gitignore.js';
 import { CLI_PROGRESS_ITEM_INDENT } from '../utils/constants.js';
 import { Icons } from '../utils/enums.js';
 import { addGitignorePatterns } from '../utils/gitignoreUtils.js';
@@ -6,14 +7,15 @@ import { addGitignorePatterns } from '../utils/gitignoreUtils.js';
  * Map of config types to their gitignore patterns
  */
 const configGitignorePatterns = {
-    eslint: gitignorePatterns,
-    prettier: [], // No patterns for prettier yet
-    typescript: [], // No patterns for typescript yet
+    eslint: eslintGitignorePatterns,
+    prettier: [], // No patterns for prettier
+    typescript: [], // No patterns for typescript
+    editor: editorGitignorePatterns,
 };
 /**
  * Function to add gitignore patterns for a specific config type
  */
-export const addGitignoreForConfigType = async (configType) => {
+export const addGitignores = async (configType) => {
     const directory = process.cwd();
     try {
         // Get patterns for this config type
@@ -30,15 +32,15 @@ export const addGitignoreForConfigType = async (configType) => {
         }
         // Log added patterns
         if (result.addedPatterns.length > 0) {
-            result.addedPatterns.forEach((pattern) => {
-                console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} Added '${pattern}' to .gitignore`);
-            });
+            const entryCount = result.addedPatterns.length;
+            const entryText = entryCount === 1 ? 'entry' : 'entries';
+            console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} Added ${entryCount} ${entryText} to .gitignore`);
         }
         // Log skipped patterns
         if (result.skippedPatterns.length > 0) {
-            result.skippedPatterns.forEach((pattern) => {
-                console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} '${pattern}' already exists in .gitignore, skipping...`);
-            });
+            const skippedCount = result.skippedPatterns.length;
+            const entryText = skippedCount === 1 ? 'entry' : 'entries';
+            console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} Skipped adding ${skippedCount} ${entryText} to .gitignore`);
         }
     }
     catch (error) {
@@ -46,4 +48,4 @@ export const addGitignoreForConfigType = async (configType) => {
         console.error(`${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Failed to add gitignore patterns: ${errorMessage}`);
     }
 };
-//# sourceMappingURL=addGitignoreForConfigType.js.map
+//# sourceMappingURL=addGitignores.js.map
