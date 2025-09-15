@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
-import { reactConfig, dependencies as reactDependencies } from './react.js';
+import { reactConfig, dependencies as reactDependencies } from './react.config.js';
 /**
  * Dependencies required for the web ESLint configuration
  */
@@ -21,4 +21,4 @@ export const reactWebConfig = defineConfig([
         },
     },
 ]);
-//# sourceMappingURL=reactWeb.js.map
+//# sourceMappingURL=reactWeb.config.js.map

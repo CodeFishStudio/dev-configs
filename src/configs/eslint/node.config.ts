@@ -1,6 +1,6 @@
 import globals from 'globals';
 
-import { baseConfig, dependencies as baseDependencies } from './base.js';
+import { baseConfig, dependencies as baseDependencies } from './base.config.js';
 
 import type { Linter } from 'eslint';
 

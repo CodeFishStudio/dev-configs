@@ -1,5 +1,5 @@
 {
-    "extends": "./src/configs/typescript/base.json",
+    "extends": "./src/configs/typescript/base.config.json",
     "compilerOptions": {
         "module": "NodeNext",
         "moduleResolution": "NodeNext",

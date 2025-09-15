@@ -10,7 +10,7 @@
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
         },
-        "./tsconfig.base": "./dist/configs/typescript/base.json"
+        "./tsconfig.base": "./dist/configs/typescript/base.config.json"
     },
     "bin": {
         "cfs-setup": "./dist/scripts/setup/index.js"

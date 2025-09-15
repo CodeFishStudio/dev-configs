@@ -1,8 +1,8 @@
 import prettierConfig from 'eslint-config-prettier/flat';
 
-import { nodeConfig } from './configs/eslint/node.js';
-import { reactNativeConfig } from './configs/eslint/reactNative.js';
-import { reactWebConfig } from './configs/eslint/reactWeb.js';
+import { nodeConfig } from './configs/eslint/node.config.js';
+import { reactNativeConfig } from './configs/eslint/reactNative.config.js';
+import { reactWebConfig } from './configs/eslint/reactWeb.config.js';
 import { ProjectType } from './types/index.js';
 
 import type { Linter } from 'eslint';

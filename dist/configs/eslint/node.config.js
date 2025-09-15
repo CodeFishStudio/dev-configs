@@ -1,5 +1,5 @@
 import globals from 'globals';
-import { baseConfig, dependencies as baseDependencies } from './base.js';
+import { baseConfig, dependencies as baseDependencies } from './base.config.js';
 /**
  * Dependencies required for the Node.js ESLint configuration
  */
@@ -20,4 +20,4 @@ export const nodeConfig = [
         },
     },
 ];
-//# sourceMappingURL=node.js.map
+//# sourceMappingURL=node.config.js.map

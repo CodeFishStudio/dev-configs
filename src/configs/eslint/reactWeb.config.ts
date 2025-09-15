@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 
-import { reactConfig, dependencies as reactDependencies } from './react.js';
+import { reactConfig, dependencies as reactDependencies } from './react.config.js';
 
 /**
  * Dependencies required for the web ESLint configuration

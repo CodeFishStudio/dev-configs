@@ -70,4 +70,4 @@ export const baseConfig = [
         },
     },
 ];
-//# sourceMappingURL=base.js.map
+//# sourceMappingURL=base.config.js.map

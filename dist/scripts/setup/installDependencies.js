@@ -1,9 +1,9 @@
 import { execSync } from 'child_process';
 import readline from 'readline';
 import { configTypeOptions } from './options.js';
-import { dependencies as nodeDependencies } from '../../configs/eslint/node.js';
-import { dependencies as reactDependencies } from '../../configs/eslint/react.js';
-import { dependencies as reactNativeDependencies } from '../../configs/eslint/reactNative.js';
+import { dependencies as nodeDependencies } from '../../configs/eslint/node.config.js';
+import { dependencies as reactDependencies } from '../../configs/eslint/react.config.js';
+import { dependencies as reactNativeDependencies } from '../../configs/eslint/reactNative.config.js';
 import { prettierDependencies } from '../../configs/prettier/dependencies.js';
 import { typescriptDependencies } from '../../configs/typescript/dependencies.js';
 import { CLI_PROGRESS_ITEM_INDENT } from '../utils/constants.js';

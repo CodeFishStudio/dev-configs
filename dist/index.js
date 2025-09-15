@@ -1,7 +1,7 @@
 import prettierConfig from 'eslint-config-prettier/flat';
-import { nodeConfig } from './configs/eslint/node.js';
-import { reactNativeConfig } from './configs/eslint/reactNative.js';
-import { reactWebConfig } from './configs/eslint/reactWeb.js';
+import { nodeConfig } from './configs/eslint/node.config.js';
+import { reactNativeConfig } from './configs/eslint/reactNative.config.js';
+import { reactWebConfig } from './configs/eslint/reactWeb.config.js';
 export const eslintConfigs = {
     /**
      * CodeFish Studio ESLint configuration for Node.js + TypeScript projects

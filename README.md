@@ -43,11 +43,11 @@ This script will provide options to:
 2. Copy the relevant TypeScript config file from `/src/configs/typescript` to your
    project and rename as `tsconfig.json`.
 
-    | Project Type | Config                                     |
-    | ------------ | ------------------------------------------ |
-    | React web    | `/src/configs/typescript/react.json`       |
-    | React Native | `/src/configs/typescript/reactNative.json` |
-    | Node.js      | `/src/configs/typescript/node.json`        |
+    | Project Type | Config                                            |
+    | ------------ | ------------------------------------------------- |
+    | React web    | `/src/configs/typescript/react.config.json`       |
+    | React Native | `/src/configs/typescript/reactNative.config.json` |
+    | Node.js      | `/src/configs/typescript/node.config.json`        |
 
 ### Prettier
 
@@ -71,7 +71,7 @@ This script will provide options to:
 ### ESLint
 
 1. Install eslint dependencies by referring to the `dependencies` const exported
-   from the relevant eslint config in `src/configs/eslint/[projectType].ts`
+   from the relevant eslint config in `src/configs/eslint/[projectType].config.ts`
 
     > **💡 Tip:** This is much easier to do via the Auto Setup detailed above.
 

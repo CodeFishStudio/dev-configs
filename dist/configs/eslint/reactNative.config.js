@@ -1,7 +1,7 @@
 import { fixupPluginRules } from '@eslint/compat';
 import { defineConfig } from 'eslint/config';
 import reactNativePlugin from 'eslint-plugin-react-native';
-import { reactConfig, dependencies as reactDependencies } from './react.js';
+import { reactConfig, dependencies as reactDependencies } from './react.config.js';
 /**
  * Dependencies required for the React Native ESLint configuration
  */
@@ -50,4 +50,4 @@ export const reactNativeConfig = defineConfig([
         },
     },
 ]);
-//# sourceMappingURL=reactNative.js.map
+//# sourceMappingURL=reactNative.config.js.map
