@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.9
+
+- Update React Native ESLint config
+
 ## 0.0.8
 
 - Update React Native ESLint config

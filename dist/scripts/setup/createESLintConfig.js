@@ -5,11 +5,9 @@ import { fileActions } from '../utils/fileActions.js';
  * Function to create ESLint config file
  */
 export const createESLintConfig = (projectType) => {
-    // The `create next-app` outputs the ESLint config as an `mjs` file.
-    const extension = projectType === 'reactNext' ? 'mjs' : 'js';
-    const targetPath = join(process.cwd(), `eslint.config.${extension}`);
-    if (fileActions.skipIfExists(targetPath))
-        return;
+    // Using .mjs extension to prevent having to set "type": "module" in package.json
+    const targetPath = join(process.cwd(), 'eslint.config.mjs');
+    // Create ESLint config, overwriting any existing file
     try {
         fileActions.create(targetPath, eslintConfigFileTemplate(projectType));
     }

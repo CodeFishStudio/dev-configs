@@ -1,3 +1,5 @@
+import { reactNativeEslintTemplate } from './reactNative.template.js';
+import { reactNextEslintTemplate } from './reactNext.template.js';
 import { ProjectType } from '../../types/index.js';
 
 const defaultTemplate = `import { eslintConfigs } from 'cfs-dev-configs';
@@ -10,42 +12,12 @@ export default defineConfig([
 ]);
 `;
 
-/**
- * Mimics the ESLint config file that comes from the `create next-app` tool.
- */
-const nextTemplate = `import { eslintConfigs } from 'cfs-dev-configs';
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  ...eslintConfigs.react,
-  {
-    ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
-      "next-env.d.ts",
-    ],
-  },
-];
-
-export default eslintConfig;
-`;
-
 export const eslintConfigFileTemplate = (projectType: ProjectType) => {
     switch (projectType) {
+        case 'reactNative':
+            return reactNativeEslintTemplate;
         case 'reactNext':
-            return nextTemplate;
+            return reactNextEslintTemplate;
         default:
             return defaultTemplate.replace('{{PROJECT_TYPE}}', projectType);
     }
