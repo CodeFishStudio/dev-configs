@@ -2,13 +2,12 @@ import { execSync } from 'child_process';
 import readline from 'readline';
 
 import { dependencies as nodeDependencies } from '../../configs/eslint/node.config.js';
-import { dependencies as reactDependencies } from '../../configs/eslint/react.config.js';
 import { dependencies as reactNativeDependencies } from '../../configs/eslint/reactNative.config.js';
+import { dependencies as reactWebDependencies } from '../../configs/eslint/reactWeb.config.js';
 import { prettierDependencies } from '../../configs/prettier/dependencies.js';
 import { typescriptDependencies } from '../../configs/typescript/dependencies.js';
-import { CLI_PROGRESS_ITEM_INDENT } from '../utils/constants.js';
-import { Icons } from '../utils/enums.js';
 import { getPackageManager } from '../utils/getPackageManager.js';
+import { print } from '../utils/print.js';
 
 import type { ConfigType, ProjectType } from '../../types/index.js';
 
@@ -19,7 +18,8 @@ interface ConfigDependencies {
 // Map project types to their ESLint dependencies
 const lintConfigDependencies: Record<ProjectType, ConfigDependencies> = {
     node: nodeDependencies,
-    react: reactDependencies,
+    reactNext: reactWebDependencies,
+    reactVite: reactWebDependencies,
     reactNative: reactNativeDependencies,
 };
 
@@ -59,7 +59,7 @@ export const installDependencies = async (
         return;
     }
 
-    console.log(`${CLI_PROGRESS_ITEM_INDENT}⏳ Installing dependencies...`);
+    print(`⏳ Installing dependencies...`, { indent: 1 });
 
     // Build install command with all dependencies
     const depsList = Object.entries(requiredDeps)
@@ -81,12 +81,10 @@ export const installDependencies = async (
     try {
         execSync(installCommand, { stdio: 'pipe' });
         clearCurrentLine();
-        console.log(`${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} Installed dependencies`);
+        print(`Installed dependencies`, { indent: 1, type: 'success' });
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
         clearCurrentLine();
-        console.error(
-            `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Failed to install dependencies: ${errorMessage}`
-        );
+        print(`Failed to install dependencies: ${errorMessage}`, { indent: 1, type: 'error' });
     }
 };

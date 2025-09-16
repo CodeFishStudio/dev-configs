@@ -1,4 +1,4 @@
-export type ProjectType = 'node' | 'react' | 'reactNative';
+export type ProjectType = 'node' | 'reactNative' | 'reactNext' | 'reactVite';
 export type ConfigType = 'eslint' | 'prettier' | 'typescript' | 'editor';
 
 export type SelectOption<T> = {

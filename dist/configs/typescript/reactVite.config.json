@@ -1,0 +1,18 @@
+{
+    "extends": ["cfs-dev-configs/tsconfig.base", "cfs-dev-configs/tsconfig.reactWeb"],
+
+    /* --------------------------------------------------------
+     * FROM THE `create vite` TOOL
+     * -------------------------------------------------------- */
+    "compilerOptions": {
+        "types": ["node", "vite/client"],
+        "module": "ES2022",
+        "moduleResolution": "bundler",
+        "rootDirs": [".", "./.react-router/types"],
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        }
+    },
+    "include": ["**/*", "**/.server/**/*", "**/.client/**/*", ".react-router/types/**/*"]
+}

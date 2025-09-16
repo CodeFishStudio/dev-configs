@@ -1,9 +1,9 @@
-import { existsSync, mkdirSync, readdirSync, statSync } from 'fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
 
-import { fileActions } from './fileActions.js';
-import { __dirname, CLI_PROGRESS_ITEM_INDENT } from '../utils/constants.js';
-import { Icons } from '../utils/enums.js';
+import { __dirname } from '../utils/constants.js';
+import { fileActions } from '../utils/fileActions.js';
+import { print } from '../utils/print.js';
 
 /**
  * Recursively copy directory contents, overwriting any existing files
@@ -23,14 +23,17 @@ const copyDirectoryRecursive = (source: string, target: string): void => {
             }
             // Recursively copy subdirectory
             copyDirectoryRecursive(sourcePath, targetPath);
-            return;
+            continue;
         }
 
-        // Handle file
+        // Handle file - copy silently without individual logging
         try {
-            fileActions.copy(sourcePath, targetPath);
+            copyFileSync(sourcePath, targetPath);
         } catch (error) {
-            fileActions.copyError(error, targetPath);
+            const fileName = fileActions.getFileName(targetPath);
+            const errorMsg = error instanceof Error ? error.message : String(error);
+            print(`Failed to copy ${fileName}: ${errorMsg}`, { indent: 1, type: 'error' });
+            throw error; // Re-throw to be caught by parent function
         }
     }
 };
@@ -45,18 +48,17 @@ export const copyEditorConfig = (): void => {
     try {
         // Check if source directory exists
         if (!existsSync(sourceDir)) {
-            console.error(
-                `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Editor settings directory not found`
-            );
+            print('Editor settings directory not found', { indent: 1, type: 'error' });
             return;
         }
 
         // Copy all files and directories recursively
         copyDirectoryRecursive(sourceDir, targetDir);
+
+        // Show single success message
+        print('Copied editor configs', { indent: 1, type: 'success' });
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        console.error(
-            `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Failed to copy editor configuration: ${errorMessage}`
-        );
+        print(`Failed to copy editor configuration: ${errorMessage}`, { indent: 1, type: 'error' });
     }
 };

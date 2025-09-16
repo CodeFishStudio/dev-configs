@@ -1,1 +1,1 @@
-{"version":3,"file":"gitignore.js","sourceRoot":"","sources":["../../../src/configs/editors/gitignore.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,MAAM,CAAC,MAAM,iBAAiB,GAAG;IAC7B,SAAS;IACT,qBAAqB;IACrB,uCAAuC;IACvC,6BAA6B;CACvB,CAAC"}
+{"version":3,"file":"gitignore.js","sourceRoot":"","sources":["../../../src/configs/editors/gitignore.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,MAAM,CAAC,MAAM,iBAAiB,GAAG,CAAC,SAAS,CAAU,CAAC"}

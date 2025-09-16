@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
+import { print } from './print.js';
 /**
  * Read and parse package.json from a directory
  * @param directory - Directory containing package.json
@@ -15,7 +16,7 @@ export const readPackageJson = (directory) => {
         return JSON.parse(content);
     }
     catch (error) {
-        console.error(`Failed to parse package.json: ${error instanceof Error ? error.message : String(error)}`);
+        print(`Failed to parse package.json: ${error instanceof Error ? error.message : String(error)}`, { type: 'error' });
         return null;
     }
 };
@@ -60,16 +61,6 @@ export const addScripts = (packageJson, scripts) => {
         updated.scripts[name] = command;
     });
     return updated;
-};
-/**
- * Get all existing script names that would conflict with new scripts
- * @param packageJson - Package.json object
- * @param newScriptNames - Array of new script names to check
- * @returns Array of conflicting script names
- */
-export const getConflictingScripts = (packageJson, newScriptNames) => {
-    const existingScripts = Object.keys(packageJson.scripts || {});
-    return newScriptNames.filter((name) => existingScripts.includes(name));
 };
 /**
  * Validate package.json structure

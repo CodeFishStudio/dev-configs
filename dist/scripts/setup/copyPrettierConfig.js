@@ -1,6 +1,6 @@
 import { join } from 'path/posix';
-import { fileActions } from './fileActions.js';
 import { __dirname } from '../utils/constants.js';
+import { fileActions } from '../utils/fileActions.js';
 /**
  * Function to copy Prettier config
  */

@@ -1,7 +1,7 @@
 import { join } from 'path/posix';
 
-import { fileActions } from './fileActions.js';
 import { eslintConfigFileTemplate } from '../../configs/eslint/template.js';
+import { fileActions } from '../utils/fileActions.js';
 
 import type { ProjectType } from '../../types/index.js';
 

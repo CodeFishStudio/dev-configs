@@ -1,6 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
+import { print } from './print.js';
+
 /**
  * Result of gitignore operations
  */
@@ -30,8 +32,9 @@ export const readGitignore = (directory: string): string[] | null => {
             .map((line) => line.trim())
             .filter((line) => line.length > 0 && !line.startsWith('#'));
     } catch (error) {
-        console.error(
-            `Failed to read .gitignore: ${error instanceof Error ? error.message : String(error)}`
+        print(
+            `Failed to read .gitignore: ${error instanceof Error ? error.message : String(error)}`,
+            { type: 'error' }
         );
         return null;
     }

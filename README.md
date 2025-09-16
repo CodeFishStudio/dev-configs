@@ -29,6 +29,7 @@ This script will provide options to:
 - Setup Prettier
 - Setup TypeScript
 - Setup ESLint and install dependencies
+- Setup IDE settings
 - Add relevant package.json scripts
 - Add relevant .gitignore patterns
 
@@ -45,11 +46,12 @@ This script will provide options to:
 2. Copy the relevant TypeScript config file from `/src/configs/typescript` to your
    project and rename as `tsconfig.json`.
 
-    | Project Type | Config                                            |
-    | ------------ | ------------------------------------------------- |
-    | React web    | `/src/configs/typescript/react.config.json`       |
-    | React Native | `/src/configs/typescript/reactNative.config.json` |
-    | Node.js      | `/src/configs/typescript/node.config.json`        |
+    | Project Type                | Config                                            |
+    | --------------------------- | ------------------------------------------------- |
+    | React (Next.js)             | `/src/configs/typescript/reactNext.config.json`   |
+    | React (Vite + React Router) | `/src/configs/typescript/reactVite.config.json`   |
+    | React Native (Expo)         | `/src/configs/typescript/reactNative.config.json` |
+    | Node.js                     | `/src/configs/typescript/node.config.json`        |
 
 ### Prettier
 
@@ -105,14 +107,13 @@ This script will provide options to:
 
     #### Available Configs
 
-    | Project Type            | Config                      |
-    | ----------------------- | --------------------------- |
-    | TypeScript React web    | `eslintConfigs.react`       |
-    | TypeScript React Native | `eslintConfigs.reactNative` |
-    | TypeScript Node.js      | `eslintConfigs.node`        |
+    | Project Type                | Config                      |
+    | --------------------------- | --------------------------- |
+    | React (Next.js)             | `eslintConfigs.react`       |
+    | React (Vite + React Router) | `eslintConfigs.react`       |
+    | React Native (Expo)         | `eslintConfigs.reactNative` |
+    | Node.js                     | `eslintConfigs.node`        |
 
 ## 📝 Todo
 
-- Add React (Vite) option
-- Add React (Next.js) option
 - Include AI/Cursor rules for project type

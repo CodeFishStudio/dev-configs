@@ -12,9 +12,17 @@ export const eslintConfigs = {
         prettierConfig,
     ],
     /**
-     * CodeFish Studio ESLint configuration for React + TypeScript projects
+     * CodeFish Studio ESLint configuration for React (Next.js) + TypeScript projects
      */
-    react: [
+    reactNext: [
+        ...reactWebConfig,
+        // Prettier must come last to override conflicting rules
+        prettierConfig,
+    ],
+    /**
+     * CodeFish Studio ESLint configuration for React (Vite + React Router) + TypeScript projects
+     */
+    reactVite: [
         ...reactWebConfig,
         // Prettier must come last to override conflicting rules
         prettierConfig,

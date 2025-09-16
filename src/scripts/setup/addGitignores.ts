@@ -1,8 +1,7 @@
 import { gitignorePatterns as editorGitignorePatterns } from '../../configs/editors/gitignore.js';
 import { gitignorePatterns as eslintGitignorePatterns } from '../../configs/eslint/gitignore.js';
-import { CLI_PROGRESS_ITEM_INDENT } from '../utils/constants.js';
-import { Icons } from '../utils/enums.js';
 import { addGitignorePatterns } from '../utils/gitignoreUtils.js';
+import { print } from '../utils/print.js';
 
 import type { ConfigType } from '../../types/index.js';
 
@@ -35,7 +34,7 @@ export const addGitignores = async (configType: ConfigType): Promise<void> => {
         const result = addGitignorePatterns(directory, [...patternsToAdd]);
 
         if (!result.success) {
-            console.error(`${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} ${result.message}`);
+            print(result.message, { indent: 1, type: 'error' });
             return;
         }
 
@@ -43,23 +42,20 @@ export const addGitignores = async (configType: ConfigType): Promise<void> => {
         if (result.addedPatterns.length > 0) {
             const entryCount = result.addedPatterns.length;
             const entryText = entryCount === 1 ? 'entry' : 'entries';
-            console.log(
-                `${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} Added ${entryCount} ${entryText} to .gitignore`
-            );
+            print(`Added ${entryCount} ${entryText} to .gitignore`, { indent: 1, type: 'success' });
         }
 
         // Log skipped patterns
         if (result.skippedPatterns.length > 0) {
             const skippedCount = result.skippedPatterns.length;
             const entryText = skippedCount === 1 ? 'entry' : 'entries';
-            console.log(
-                `${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} Skipped adding ${skippedCount} ${entryText} to .gitignore`
-            );
+            print(`Skipped ${skippedCount} ${entryText} already in .gitignore`, {
+                indent: 1,
+                type: 'skipped',
+            });
         }
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        console.error(
-            `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Failed to add gitignore patterns: ${errorMessage}`
-        );
+        print(`Failed to add gitignore patterns: ${errorMessage}`, { indent: 1, type: 'error' });
     }
 };

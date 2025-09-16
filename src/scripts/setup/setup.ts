@@ -12,7 +12,8 @@ import { createESLintConfig } from './createESLintConfig.js';
 import { installDependencies } from './installDependencies.js';
 import { configTypeOptions, projectTypeOptions } from './options.js';
 import { ConfigType } from '../../types/index.js';
-import { Icons, TextStyles } from '../utils/enums.js';
+import { TextStyles } from '../utils/enums.js';
+import { print } from '../utils/print.js';
 import { promptMultipleChoice } from '../utils/promptMultipleChoice.js';
 import { promptSingleChoice } from '../utils/promptSingleChoice.js';
 
@@ -31,8 +32,9 @@ export const setup = async (): Promise<void> => {
     // Check if we're in a project directory
     const projectPackageJsonPath = join(process.cwd(), 'package.json');
     if (!existsSync(projectPackageJsonPath)) {
-        console.error(
-            `${Icons.ERROR} No package.json found in current directory. Please run this command from your project root.`
+        print(
+            `No package.json found in current directory. Please run this command from your project root.`,
+            { type: 'error' }
         );
         process.exit(1);
     }
@@ -49,7 +51,7 @@ export const setup = async (): Promise<void> => {
     // Process each selected config
     for (const configType of selectedConfigs) {
         const configLabel = getConfigTypeLabel(configType);
-        console.log(`\n${TextStyles.BOLD}${configLabel}${TextStyles.RESET}`);
+        print(`\n${TextStyles.BOLD}${configLabel}${TextStyles.RESET}`);
 
         // Install dependencies for this config type
         await installDependencies(configType, projectType);
@@ -77,5 +79,5 @@ export const setup = async (): Promise<void> => {
         await addPackageJsonScripts(configType);
     }
 
-    console.log('\n⚡️ Project setup complete!\n');
+    print('\n⚡️ Project setup complete!\n');
 };

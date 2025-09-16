@@ -4,18 +4,16 @@ import { join } from 'path';
 import { eslintScripts } from '../../configs/eslint/scripts.js';
 import { prettierScripts } from '../../configs/prettier/scripts.js';
 import { typescriptScripts } from '../../configs/typescript/scripts.js';
-import { CLI_PROGRESS_ITEM_INDENT } from '../utils/constants.js';
-import { Icons } from '../utils/enums.js';
 import { getPackageManager } from '../utils/getPackageManager.js';
 import {
     addScripts,
-    getConflictingScripts,
     isValidPackageJson,
     readPackageJson,
     writePackageJson,
 } from '../utils/packageJsonUtils.js';
+import { print } from '../utils/print.js';
 
-import type { ConfigType, PackageManager, PackageJsonScriptDefinition } from '../../types/index.js';
+import type { ConfigType, PackageJsonScriptDefinition, PackageManager } from '../../types/index.js';
 
 /**
  * Map of config types to their script definitions
@@ -54,44 +52,22 @@ export const addPackageJsonScripts = async (configType: ConfigType): Promise<voi
         // Check if package.json exists
         const packageJsonPath = join(directory, 'package.json');
         if (!existsSync(packageJsonPath)) {
-            console.error(
-                `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} No package.json found in directory`
-            );
+            print(`No package.json found in directory`, { indent: 1, type: 'error' });
             return;
         }
 
         // Read existing package.json
         const existingPackageJson = readPackageJson(directory);
         if (!existingPackageJson || !isValidPackageJson(existingPackageJson)) {
-            console.error(
-                `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Invalid or corrupted package.json`
-            );
+            print(`Invalid or corrupted package.json`, { indent: 1, type: 'error' });
             return;
         }
 
         // Get scripts to add
         const scriptsToAdd = getScriptsForConfigType(configType, packageManager);
-        const scriptNamesToAdd = scriptsToAdd.map((script) => script.name);
-
-        // Always skip existing scripts (as per requirements)
-        const scriptsToSkip = getConflictingScripts(existingPackageJson, scriptNamesToAdd);
-        const filteredScriptsToAdd = scriptsToAdd.filter(
-            (script) => !scriptsToSkip.includes(script.name)
-        );
-        // Only proceed if there are scripts to add
-        if (filteredScriptsToAdd.length === 0) {
-            if (scriptsToSkip.length > 0) {
-                scriptsToSkip.forEach((scriptName) => {
-                    console.log(
-                        `${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} '${scriptName}' package.json script already exists, skipping...`
-                    );
-                });
-            }
-            return;
-        }
 
         const scriptsRecord = Object.fromEntries(
-            filteredScriptsToAdd.map((script) => [script.name, script.command])
+            scriptsToAdd.map((script) => [script.name, script.command])
         );
 
         // Add scripts to package.json
@@ -99,29 +75,16 @@ export const addPackageJsonScripts = async (configType: ConfigType): Promise<voi
         const writeResult = writePackageJson(directory, updatedPackageJson);
 
         if (!writeResult.success) {
-            console.error(`${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} ${writeResult.message}`);
+            print(writeResult.message, { indent: 1, type: 'error' });
             return;
         }
 
         // Log added scripts
-        filteredScriptsToAdd.forEach((script) => {
-            console.log(
-                `${CLI_PROGRESS_ITEM_INDENT}${Icons.SUCCESS} Added '${script.name}' package.json script`
-            );
+        scriptsToAdd.forEach((script) => {
+            print(`Added '${script.name}' package.json script`, { indent: 1, type: 'success' });
         });
-
-        // Log skipped scripts
-        if (scriptsToSkip.length > 0) {
-            scriptsToSkip.forEach((scriptName) => {
-                console.log(
-                    `${CLI_PROGRESS_ITEM_INDENT}${Icons.SKIPPED} '${scriptName}' package.json script already exists, skipping...`
-                );
-            });
-        }
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        console.error(
-            `${CLI_PROGRESS_ITEM_INDENT}${Icons.ERROR} Failed to add package.json scripts: ${errorMessage}`
-        );
+        print(`Failed to add package.json scripts: ${errorMessage}`, { indent: 1, type: 'error' });
     }
 };

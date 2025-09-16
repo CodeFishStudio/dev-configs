@@ -10,7 +10,11 @@
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
         },
-        "./tsconfig.base": "./dist/configs/typescript/base.config.json"
+        "./tsconfig.base": "./dist/configs/typescript/base.config.json",
+        "./tsconfig.reactWeb": "./dist/configs/typescript/reactWeb.config.json",
+        "./tsconfig.reactNext": "./dist/configs/typescript/reactNext.config.json",
+        "./tsconfig.reactVite": "./dist/configs/typescript/reactVite.config.json",
+        "./tsconfig.reactNative": "./dist/configs/typescript/reactNative.config.json"
     },
     "bin": {
         "cfs-setup": "./dist/scripts/setup/index.js"

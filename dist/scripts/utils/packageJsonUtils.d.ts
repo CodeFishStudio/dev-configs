@@ -38,13 +38,6 @@ export declare const writePackageJson: (directory: string, packageJson: PackageJ
  */
 export declare const addScripts: (packageJson: PackageJson, scripts: Record<string, string>) => PackageJson;
 /**
- * Get all existing script names that would conflict with new scripts
- * @param packageJson - Package.json object
- * @param newScriptNames - Array of new script names to check
- * @returns Array of conflicting script names
- */
-export declare const getConflictingScripts: (packageJson: PackageJson, newScriptNames: string[]) => string[];
-/**
  * Validate package.json structure
  * @param packageJson - Package.json object to validate
  * @returns True if valid, false otherwise

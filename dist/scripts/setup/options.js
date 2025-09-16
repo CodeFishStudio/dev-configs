@@ -1,6 +1,7 @@
 export const projectTypeOptions = [
-    { label: 'React', value: 'react' },
-    { label: 'React Native (with Expo)', value: 'reactNative' },
+    { label: 'React (Next.js)', value: 'reactNext' },
+    { label: 'React (Vite + React Router)', value: 'reactVite' },
+    { label: 'React Native (Expo)', value: 'reactNative' },
     { label: 'Node', value: 'node' },
 ];
 export const configTypeOptions = [

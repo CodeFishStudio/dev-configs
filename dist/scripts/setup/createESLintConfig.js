@@ -1,6 +1,6 @@
 import { join } from 'path/posix';
-import { fileActions } from './fileActions.js';
 import { eslintConfigFileTemplate } from '../../configs/eslint/template.js';
+import { fileActions } from '../utils/fileActions.js';
 /**
  * Function to create ESLint config file
  */
