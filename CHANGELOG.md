@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.7
+
+- Build fix
+
 ## 0.0.6
 
 - Add .gitignore setup
