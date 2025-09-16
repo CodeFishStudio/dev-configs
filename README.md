@@ -7,13 +7,13 @@ Shared configurations for dev tools across CodeFish Studio projects.
 **Using pnpm**
 
 ```bash
-pnpm add -D github:CodeFishStudio/cfs-dev-configs#v0.0.7
+pnpm add -D github:CodeFishStudio/cfs-dev-configs#v0.0.8
 ```
 
 **Using npm**
 
 ```bash
-npm i -D github:CodeFishStudio/cfs-dev-configs#v0.0.7
+npm i -D github:CodeFishStudio/cfs-dev-configs#v0.0.8
 ```
 
 ## ⚡ Auto Setup (Recommended)

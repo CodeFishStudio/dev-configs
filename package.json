@@ -1,6 +1,6 @@
 {
     "name": "cfs-dev-configs",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Shared configurations for dev tools across CodeFish Studio projects.",
     "type": "module",
     "main": "./dist/index.js",
