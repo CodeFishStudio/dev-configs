@@ -8,8 +8,7 @@ export const copyTypeScriptConfig = (projectType) => {
     const configFileName = `${projectType}.config.json`;
     const sourcePath = join(__dirname, '..', '..', 'configs', 'typescript', configFileName);
     const targetPath = join(process.cwd(), 'tsconfig.json');
-    if (fileActions.skipIfExists(targetPath))
-        return;
+    // Copy TypeScript config, overwriting any existing file
     try {
         fileActions.copy(sourcePath, targetPath);
     }

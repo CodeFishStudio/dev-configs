@@ -1,15 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 
-import { reactConfig, dependencies as reactDependencies } from './react.config.js';
-
-/**
- * Dependencies required for the React (Vite + React Router) ESLint configuration
- */
-export const dependencies = {
-    ...reactDependencies,
-    globals: '^16.3',
-} as const;
+import { reactConfig } from './react.config.js';
 
 /**
  * React (Vite + React Router) project ESLint configuration.

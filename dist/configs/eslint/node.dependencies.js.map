@@ -1,0 +1,1 @@
+{"version":3,"file":"node.dependencies.js","sourceRoot":"","sources":["../../../src/configs/eslint/node.dependencies.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,IAAI,gBAAgB,EAAE,MAAM,wBAAwB,CAAC;AAE1E;;GAEG;AACH,MAAM,CAAC,MAAM,YAAY,GAAG;IACxB,GAAG,gBAAgB;IACnB,OAAO,EAAE,OAAO;CACV,CAAC"}

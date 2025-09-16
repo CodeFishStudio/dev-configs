@@ -1,0 +1,1 @@
+{"version":3,"file":"reactVite.dependencies.js","sourceRoot":"","sources":["../../../src/configs/eslint/reactVite.dependencies.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,IAAI,iBAAiB,EAAE,MAAM,yBAAyB,CAAC;AAE5E;;GAEG;AACH,MAAM,CAAC,MAAM,YAAY,GAAG;IACxB,GAAG,iBAAiB;IACpB,OAAO,EAAE,OAAO;CACV,CAAC"}

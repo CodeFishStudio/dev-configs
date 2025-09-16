@@ -1,12 +1,6 @@
 import { execSync } from 'child_process';
 import readline from 'readline';
 
-import { dependencies as nodeDependencies } from '../../configs/eslint/node.config.js';
-import { dependencies as reactNativeDependencies } from '../../configs/eslint/reactNative.config.js';
-import { dependencies as reactNextDependencies } from '../../configs/eslint/reactNext.config.js';
-import { dependencies as reactViteDependencies } from '../../configs/eslint/reactVite.config.js';
-import { prettierDependencies } from '../../configs/prettier/dependencies.js';
-import { typescriptDependencies } from '../../configs/typescript/dependencies.js';
 import { getPackageManager } from '../utils/getPackageManager.js';
 import { print } from '../utils/print.js';
 
@@ -16,20 +10,54 @@ interface ConfigDependencies {
     [key: string]: string;
 }
 
-// Map project types to their ESLint dependencies
-const lintConfigDependencies: Record<ProjectType, ConfigDependencies> = {
-    node: nodeDependencies,
-    reactNext: reactNextDependencies,
-    reactVite: reactViteDependencies,
-    reactNative: reactNativeDependencies,
+/**
+ * Dynamically load ESLint dependencies to avoid loading ESLint configs before dependencies are installed
+ */
+const getESLintDependencies = async (projectType: ProjectType): Promise<ConfigDependencies> => {
+    switch (projectType) {
+        case 'node': {
+            const { dependencies } = await import('../../configs/eslint/node.dependencies.js');
+            return dependencies;
+        }
+        case 'reactNext': {
+            const { dependencies } = await import('../../configs/eslint/react.dependencies.js');
+            return dependencies;
+        }
+        case 'reactVite': {
+            const { dependencies } = await import('../../configs/eslint/reactVite.dependencies.js');
+            return dependencies;
+        }
+        case 'reactNative': {
+            const { dependencies } = await import(
+                '../../configs/eslint/reactNative.dependencies.js'
+            );
+            return dependencies;
+        }
+        default:
+            return {};
+    }
 };
 
-// Map config types to their dependencies
-const configDependencies: Record<ConfigType, (projectType: ProjectType) => ConfigDependencies> = {
-    eslint: (projectType) => lintConfigDependencies[projectType],
-    prettier: () => prettierDependencies,
-    typescript: () => typescriptDependencies,
-    editor: () => ({}), // No dependencies required for editor config
+/**
+ * Dynamically load other config dependencies
+ */
+const getConfigDependencies = async (configType: ConfigType): Promise<ConfigDependencies> => {
+    switch (configType) {
+        case 'prettier': {
+            const { prettierDependencies } = await import('../../configs/prettier/dependencies.js');
+            return prettierDependencies;
+        }
+        case 'typescript': {
+            const { typescriptDependencies } = await import(
+                '../../configs/typescript/dependencies.js'
+            );
+            return typescriptDependencies;
+        }
+        case 'editor':
+            return {}; // No dependencies required for editor config
+        default:
+            return {};
+    }
 };
 
 /**
@@ -50,10 +78,10 @@ export const installDependencies = async (
 ): Promise<void> => {
     let requiredDeps: ConfigDependencies;
 
-    if (configType === 'eslint' && projectType) {
-        requiredDeps = lintConfigDependencies[projectType];
+    if (configType === 'eslint') {
+        requiredDeps = await getESLintDependencies(projectType);
     } else {
-        requiredDeps = configDependencies[configType](projectType);
+        requiredDeps = await getConfigDependencies(configType);
     }
 
     if (!requiredDeps || Object.keys(requiredDeps).length === 0) {

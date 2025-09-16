@@ -1,16 +1,8 @@
 import globals from 'globals';
 
-import { baseConfig, dependencies as baseDependencies } from './base.config.js';
+import { baseConfig } from './base.config.js';
 
 import type { Linter } from 'eslint';
-
-/**
- * Dependencies required for the Node.js ESLint configuration
- */
-export const dependencies = {
-    ...baseDependencies,
-    globals: '^16.3',
-} as const;
 
 /**
  * Node project ESLint configuration.

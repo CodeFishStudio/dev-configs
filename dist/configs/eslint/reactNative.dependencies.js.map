@@ -1,0 +1,1 @@
+{"version":3,"file":"reactNative.dependencies.js","sourceRoot":"","sources":["../../../src/configs/eslint/reactNative.dependencies.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,IAAI,iBAAiB,EAAE,MAAM,yBAAyB,CAAC;AAE5E;;GAEG;AACH,MAAM,CAAC,MAAM,YAAY,GAAG;IACxB,GAAG,iBAAiB;IACpB,gBAAgB,EAAE,IAAI;IACtB,4BAA4B,EAAE,IAAI;CAC5B,CAAC"}

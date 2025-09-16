@@ -1,6 +1,6 @@
 # Change Log
 
-## Next
+## 0.0.6
 
 - Add .gitignore setup
 - Add package.json scripts setup

@@ -10,7 +10,7 @@ interface PackageJson {
 }
 
 // Get the directory of this script
-const rootDir = join(__dirname, '..', '..');
+const rootDir = join(__dirname, '..', '..', '..');
 
 // Read package.json to get current version
 const packageJson: PackageJson = JSON.parse(readFileSync(join(rootDir, 'package.json'), 'utf8'));
