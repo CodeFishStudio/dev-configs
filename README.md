@@ -85,7 +85,7 @@ This script will provide options to:
     ```javascript
     import { eslintConfigs } from 'cfs-dev-configs';
 
-    export default eslintConfigs.react;
+    export default eslintConfigs.reactNative;
     ```
 
     Or if you need to customise the configuration:
@@ -95,7 +95,7 @@ This script will provide options to:
     import { eslintConfigs } from 'cfs-dev-configs';
 
     export default defineConfig([
-        ...eslintConfigs.react,
+        ...eslintConfigs.reactNative,
         {
             // Your custom rules here
             rules: {
@@ -109,8 +109,8 @@ This script will provide options to:
 
     | Project Type                | Config                      |
     | --------------------------- | --------------------------- |
-    | React (Next.js)             | `eslintConfigs.react`       |
-    | React (Vite + React Router) | `eslintConfigs.react`       |
+    | React (Next.js)             | `eslintConfigs.reactNext`   |
+    | React (Vite + React Router) | `eslintConfigs.reactVite`   |
     | React Native (Expo)         | `eslintConfigs.reactNative` |
     | Node.js                     | `eslintConfigs.node`        |
 

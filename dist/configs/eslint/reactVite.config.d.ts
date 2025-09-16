@@ -1,5 +1,5 @@
 /**
- * Dependencies required for the web ESLint configuration
+ * Dependencies required for the React (Vite + React Router) ESLint configuration
  */
 export declare const dependencies: {
     readonly globals: "^16.3";
@@ -12,6 +12,6 @@ export declare const dependencies: {
     readonly 'typescript-eslint': "^8";
 };
 /**
- * Web project ESLint configuration.
+ * React (Vite + React Router) project ESLint configuration.
  */
-export declare const reactWebConfig: import("eslint").Linter.Config<import("eslint").Linter.RulesRecord>[];
+export declare const reactViteConfig: import("eslint").Linter.Config<import("eslint").Linter.RulesRecord>[];

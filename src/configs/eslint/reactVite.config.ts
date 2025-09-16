@@ -4,7 +4,7 @@ import globals from 'globals';
 import { reactConfig, dependencies as reactDependencies } from './react.config.js';
 
 /**
- * Dependencies required for the web ESLint configuration
+ * Dependencies required for the React (Vite + React Router) ESLint configuration
  */
 export const dependencies = {
     ...reactDependencies,
@@ -12,9 +12,9 @@ export const dependencies = {
 } as const;
 
 /**
- * Web project ESLint configuration.
+ * React (Vite + React Router) project ESLint configuration.
  */
-export const reactWebConfig = defineConfig([
+export const reactViteConfig = defineConfig([
     ...reactConfig,
 
     {

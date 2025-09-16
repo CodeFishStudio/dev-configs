@@ -1,7 +1,8 @@
 import prettierConfig from 'eslint-config-prettier/flat';
 import { nodeConfig } from './node.config.js';
 import { reactNativeConfig } from './reactNative.config.js';
-import { reactWebConfig } from './reactWeb.config.js';
+import { reactNextConfig } from './reactNext.config.js';
+import { reactViteConfig } from './reactVite.config.js';
 export const eslintConfigs = {
     /**
      * CodeFish Studio ESLint configuration for Node.js + TypeScript projects
@@ -15,7 +16,7 @@ export const eslintConfigs = {
      * CodeFish Studio ESLint configuration for React (Next.js) + TypeScript projects
      */
     reactNext: [
-        ...reactWebConfig,
+        ...reactNextConfig,
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],
@@ -23,7 +24,7 @@ export const eslintConfigs = {
      * CodeFish Studio ESLint configuration for React (Vite + React Router) + TypeScript projects
      */
     reactVite: [
-        ...reactWebConfig,
+        ...reactViteConfig,
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],

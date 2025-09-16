@@ -3,7 +3,8 @@ import readline from 'readline';
 
 import { dependencies as nodeDependencies } from '../../configs/eslint/node.config.js';
 import { dependencies as reactNativeDependencies } from '../../configs/eslint/reactNative.config.js';
-import { dependencies as reactWebDependencies } from '../../configs/eslint/reactWeb.config.js';
+import { dependencies as reactNextDependencies } from '../../configs/eslint/reactNext.config.js';
+import { dependencies as reactViteDependencies } from '../../configs/eslint/reactVite.config.js';
 import { prettierDependencies } from '../../configs/prettier/dependencies.js';
 import { typescriptDependencies } from '../../configs/typescript/dependencies.js';
 import { getPackageManager } from '../utils/getPackageManager.js';
@@ -18,8 +19,8 @@ interface ConfigDependencies {
 // Map project types to their ESLint dependencies
 const lintConfigDependencies: Record<ProjectType, ConfigDependencies> = {
     node: nodeDependencies,
-    reactNext: reactWebDependencies,
-    reactVite: reactWebDependencies,
+    reactNext: reactNextDependencies,
+    reactVite: reactViteDependencies,
     reactNative: reactNativeDependencies,
 };
 
