@@ -16,10 +16,10 @@ export declare const readGitignore: (directory: string) => string[] | null;
 /**
  * Write .gitignore to a directory
  * @param directory - Directory to write .gitignore to
- * @param patterns - Array of patterns to write
+ * @param lines - Array of lines to write (patterns, comments, empty lines)
  * @returns Result of the operation
  */
-export declare const writeGitignore: (directory: string, patterns: string[]) => GitignoreResult;
+export declare const writeGitignore: (directory: string, lines: string[]) => GitignoreResult;
 /**
  * Add new patterns to .gitignore without duplicates
  * @param directory - Directory containing .gitignore

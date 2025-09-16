@@ -27,10 +27,7 @@ export const readGitignore = (directory: string): string[] | null => {
 
     try {
         const content = readFileSync(gitignorePath, 'utf-8');
-        return content
-            .split('\n')
-            .map((line) => line.trim())
-            .filter((line) => line.length > 0 && !line.startsWith('#'));
+        return content.split('\n').map((line) => line.trim());
     } catch (error) {
         print(
             `Failed to read .gitignore: ${error instanceof Error ? error.message : String(error)}`,
@@ -43,20 +40,20 @@ export const readGitignore = (directory: string): string[] | null => {
 /**
  * Write .gitignore to a directory
  * @param directory - Directory to write .gitignore to
- * @param patterns - Array of patterns to write
+ * @param lines - Array of lines to write (patterns, comments, empty lines)
  * @returns Result of the operation
  */
-export const writeGitignore = (directory: string, patterns: string[]): GitignoreResult => {
+export const writeGitignore = (directory: string, lines: string[]): GitignoreResult => {
     const gitignorePath = join(directory, '.gitignore');
 
     try {
-        const content = `${patterns.join('\n')}\n`;
+        const content = `${lines.join('\n')}\n`;
         writeFileSync(gitignorePath, content, 'utf-8');
 
         return {
             success: true,
             message: '.gitignore updated successfully',
-            addedPatterns: patterns,
+            addedPatterns: lines.filter((line) => line.length > 0 && !line.startsWith('#')),
             skippedPatterns: [],
         };
     } catch (error) {
@@ -76,7 +73,12 @@ export const writeGitignore = (directory: string, patterns: string[]): Gitignore
  * @returns Result of the operation
  */
 export const addGitignorePatterns = (directory: string, newPatterns: string[]): GitignoreResult => {
-    const existingPatterns = readGitignore(directory) || [];
+    const existingLines = readGitignore(directory) || [];
+
+    // Extract only the actual patterns (non-comment, non-empty lines)
+    const existingPatterns = existingLines.filter(
+        (line) => line.length > 0 && !line.startsWith('#')
+    );
 
     // Find patterns that don't already exist
     const patternsToAdd = newPatterns.filter((pattern) => !existingPatterns.includes(pattern));
@@ -92,11 +94,11 @@ export const addGitignorePatterns = (directory: string, newPatterns: string[]): 
         };
     }
 
-    // Combine existing and new patterns
-    const allPatterns = [...existingPatterns, ...patternsToAdd];
+    // Combine existing lines with new patterns
+    const allLines = [...existingLines, ...patternsToAdd];
 
     // Write updated .gitignore
-    const writeResult = writeGitignore(directory, allPatterns);
+    const writeResult = writeGitignore(directory, allLines);
 
     if (!writeResult.success) {
         return writeResult;

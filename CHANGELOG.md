@@ -2,6 +2,7 @@
 
 ## 0.0.9
 
+- Fix: ensure gitignore utils persist comments
 - Update React Native ESLint config
 
 ## 0.0.8
