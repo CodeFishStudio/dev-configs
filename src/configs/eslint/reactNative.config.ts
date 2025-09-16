@@ -1,14 +1,24 @@
 import { fixupPluginRules } from '@eslint/compat';
-import { defineConfig } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import reactNativePlugin from 'eslint-plugin-react-native';
 
 import { reactConfig } from './react.config.js';
 
 /**
- * React Native project ESLint configuration.
+ * Expo React Native project ESLint configuration.
  */
 export const reactNativeConfig = defineConfig([
     ...reactConfig,
+
+    globalIgnores([
+        'android/**',
+        'ios/**',
+        '.expo/**',
+        '.expo-shared/**',
+        'plugins/**',
+        'metro.config.js',
+        'babel.config.js',
+    ]),
 
     /**
      * The 'eslint-plugin-react-native' plugin is a non-official plugin that is

@@ -116,5 +116,6 @@ This script will provide options to:
 
 ## 📝 Todo
 
+- Fix: current .gitignore update removes comments
 - Include setup instructions for IDEs
 - Include AI/Cursor rules for project type
