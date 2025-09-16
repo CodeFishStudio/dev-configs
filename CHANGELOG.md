@@ -2,6 +2,7 @@
 
 ## 0.0.10
 
+- Add "jsx": "react-jsx" to React web tsconfig
 - Fix: package.json write indent
 
 ## 0.0.9
