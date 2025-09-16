@@ -29,10 +29,9 @@ export const readPackageJson = (directory) => {
  */
 export const writePackageJson = (directory, packageJson) => {
     const packageJsonPath = join(directory, 'package.json');
-    const indent = 2;
     try {
         // Write the new package.json
-        const content = JSON.stringify(packageJson, null, indent);
+        const content = JSON.stringify(packageJson, null, 4);
         writeFileSync(packageJsonPath, content, 'utf-8');
         return {
             success: true,

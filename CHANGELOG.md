@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.10
+
+- Fix: package.json write indent
+
 ## 0.0.9
 
 - Fix: ensure gitignore utils persist comments
