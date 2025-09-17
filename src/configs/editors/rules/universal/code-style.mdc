@@ -1,0 +1,60 @@
+---
+description: Code writing style rules
+globs:
+alwaysApply: true
+---
+
+# Code Writing Style Rules
+
+## Function Definitions
+
+- Prefer arrow functions over function declarations for variable assignments
+- Always use const for function assignments (never let or var)
+
+## Control Flow
+
+- Prefer early returns over nested conditionals
+- Use guard clauses to exit functions early when validation fails or conditions aren't met
+- Structure functions with early returns: validate inputs first, then process logic
+- Avoid deep nesting by returning early on error conditions or invalid states
+
+## Documentation
+
+- Include JSDoc comments for all exported functions and complex internal functions
+- Document function parameters, return values, and any side effects
+- Update documentation when function signatures or behavior changes
+- Use @param, @returns, and @example tags for comprehensive documentation
+
+## Examples
+
+### Good Function Structure
+
+```javascript
+// Good: Arrow function with guard clauses
+const processUser = (user) => {
+    if (!user) return null;
+    if (!user.email) return null;
+
+    // Main logic here
+    return {
+        id: user.id,
+        email: user.email.toLowerCase(),
+        name: user.name?.trim(),
+    };
+};
+```
+
+### Avoid Deep Nesting
+
+```javascript
+// Avoid: Deep nesting
+const processUser = (user) => {
+    if (user) {
+        if (user.email) {
+            if (user.name) {
+                // Main logic buried deep
+            }
+        }
+    }
+};
+```
