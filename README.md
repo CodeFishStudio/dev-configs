@@ -16,7 +16,7 @@ pnpm add -D github:CodeFishStudio/cfs-dev-configs#v0.0.11
 npm i -D github:CodeFishStudio/cfs-dev-configs#v0.0.11
 ```
 
-## ⚡ Auto Setup (Recommended)
+## ⚡ Auto Setup
 
 Run the install script to automatically set up your project's dev configs:
 

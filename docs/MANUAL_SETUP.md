@@ -44,7 +44,7 @@ This document provides detailed instructions for manually setting up each config
 1. Install eslint dependencies by referring to the `dependencies` const exported
    from the relevant eslint config in `src/configs/eslint/[projectType].config.ts`
 
-    > **💡 Tip:** This is much easier to do via the Auto Setup detailed above.
+    > **💡 Tip:** This is much easier to do via the [Auto Setup](../README.md) tool.
 
 2. Create an `eslint.config.js` file in your project root that exports or
    extends our base eslint config:
