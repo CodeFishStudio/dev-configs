@@ -27,11 +27,11 @@ npx cfs-setup
 This script will provide options to:
 
 - Setup Prettier
+- Setup ESLint
 - Setup TypeScript
-- Setup ESLint and install dependencies
-- Setup Cursor settings
+- Setup Cursor rules/settings
 
-Also adds relevant package.json scripts and .gitignore patterns.
+Also installs relevant dependencies, adds package.json scripts and adds .gitignore patterns.
 
 ## 🔧 Manual Setup
 

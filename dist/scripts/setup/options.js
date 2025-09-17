@@ -5,9 +5,9 @@ export const projectTypeOptions = [
     { label: 'Node', value: 'node' },
 ];
 export const configTypeOptions = [
-    { label: 'TypeScript', value: 'typescript' },
     { label: 'Prettier', value: 'prettier' },
     { label: 'ESLint', value: 'eslint' },
+    { label: 'TypeScript', value: 'typescript' },
     { label: 'Cursor Settings/Rules', value: 'editor' },
 ];
 //# sourceMappingURL=options.js.map

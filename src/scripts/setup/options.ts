@@ -8,8 +8,8 @@ export const projectTypeOptions: SelectOption<ProjectType>[] = [
 ];
 
 export const configTypeOptions: SelectOption<ConfigType>[] = [
-    { label: 'TypeScript', value: 'typescript' },
     { label: 'Prettier', value: 'prettier' },
     { label: 'ESLint', value: 'eslint' },
+    { label: 'TypeScript', value: 'typescript' },
     { label: 'Cursor Settings/Rules', value: 'editor' },
 ];
