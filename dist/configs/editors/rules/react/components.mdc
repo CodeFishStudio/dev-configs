@@ -1,0 +1,147 @@
+---
+description: React component rules
+globs:
+alwaysApply: true
+---
+
+# React Component Rules
+
+## File Structure
+
+- Components must be placed in `src/components`
+- Each component must have its own directory with an index.ts file
+- Index files must use the format: `export * from './ComponentName';`
+- Component files must use PascalCase (e.g., `Button.tsx`)
+
+## Component Structure
+
+For React components, the order of a file should be
+
+1. Imports
+2. Type declarations
+3. Constants (if applicable)
+4. Internal helper functions (if applicable)
+5. Component definition
+    - Imported hooks
+    - State
+    - Derived state
+    - Callbacks
+    - useMemo memoised components
+    - Effects
+    - Render
+
+**Important:** Always follow this exact order to maintain consistency across the codebase.
+
+## Props
+
+- Never use React.forwardRef. React 19 now supports passing a ref as a prop.
+- Never destructure component props within the function parameter. Always accept
+  `props` as a single argument and destructure within the function body.
+- Add an empty line underneath the props destructuring line.
+- Must use TypeScript interfaces for props
+- Must document complex props with comments
+- Must use meaningful prop names
+- Must provide default values when appropriate
+
+**Example:**
+
+```tsx
+// Good: Props destructuring in function body
+export const Button = (props: ButtonProps) => {
+    const { label, onClick, disabled = false } = props;
+
+    return (
+        <button onClick={onClick} disabled={disabled}>
+            {label}
+        </button>
+    );
+};
+
+// Bad: Props destructuring in parameters
+export const Button = ({ label, onClick, disabled = false }: ButtonProps) => {
+    return (
+        <button onClick={onClick} disabled={disabled}>
+            {label}
+        </button>
+    );
+};
+```
+
+## State
+
+- Prefer derived state over separate `useState`. If a value can be computed from
+  existing state/props, compute it directly instead of storing it separately.
+- Avoid creating separate state for filtered arrays, lookups, or any value that can be derived from existing data.
+- Only use `useMemo` for expensive computations.
+
+**Examples:**
+
+```tsx
+// Good: Derived state
+const UserList = (props: Props) => {
+    const { users, searchTerm } = props;
+    const filteredUsers = users.filter((user) =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return <div>{/* render filtered users */}</div>;
+};
+
+// Bad: Separate state for derived data
+const UserList = (props: Props) => {
+    const { users, searchTerm } = props;
+    const [filteredUsers, setFilteredUsers] = useState([]);
+
+    useEffect(() => {
+        setFilteredUsers(
+            users.filter((user) => user.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+    }, [users, searchTerm]);
+
+    return <div>{/* render filtered users */}</div>;
+};
+```
+
+## Documentation
+
+- Must include JSDoc comments for complex components
+- Must keep documentation up to date with changes
+- Document component purpose, props, and any side effects
+
+**Example:**
+
+```tsx
+// Good: Has interface and JSDoc comments
+interface ButtonProps {
+    /**
+     * Text to display on the button
+     */
+    label: string;
+    /**
+     * Optional click handler
+     */
+    onClick?: () => void;
+    /**
+     * Whether the button is disabled
+     */
+    disabled?: boolean;
+}
+
+/**
+ * Button component for primary actions
+ */
+export const Button = (props: ButtonProps) => {
+    const { label, onClick, disabled = false } = props;
+
+    return (
+        <button onClick={onClick} disabled={disabled}>
+            {label}
+        </button>
+    );
+};
+
+// Bad: Missing interface and documentation
+export const button = ({ onClick, text }) => {
+    return <button onClick={onClick}>{text}</button>;
+};
+```

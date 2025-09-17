@@ -114,6 +114,18 @@ This script will provide options to:
     | React Native (Expo)         | `eslintConfigs.reactNative` |
     | Node.js                     | `eslintConfigs.node`        |
 
-## 📝 Todo
+### IDE Settings
 
-- Include setup instructions for IDEs
+1. #### Settings
+
+    Copy contents from `/src/configs/editors/settings` to your root project directory.
+
+2. #### Rules
+
+    Copy relevant `.mdc` rule files from the directories below to your project's
+    `.cursor/rules` directory.
+
+    | Project Type | Rules                                 |
+    | ------------ | ------------------------------------- |
+    | All          | `/src/config/editors/rules/universal` |
+    | React        | `/src/config/editors/rules/react`     |

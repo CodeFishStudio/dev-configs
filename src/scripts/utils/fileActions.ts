@@ -13,6 +13,10 @@ export const fileActions = {
         printAction('success', `Copied ${fileName}`);
     },
 
+    copySilent: (sourcePath: string, targetPath: string) => {
+        copyFileSync(sourcePath, targetPath);
+    },
+
     copyError: (error: unknown, targetPath: string) => {
         const fileName = fileActions.getFileName(targetPath);
         const errorMsg = error instanceof Error ? error.message : String(error);
@@ -40,5 +44,9 @@ export const fileActions = {
             return true;
         }
         return false;
+    },
+
+    skipIfExistsSilent: (targetPath: string) => {
+        return existsSync(targetPath);
     },
 };

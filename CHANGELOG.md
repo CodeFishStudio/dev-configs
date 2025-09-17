@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.11
+
+- Added copying of Cursor rules
+
 ## 0.0.10
 
 - Add "jsx": "react-jsx" to React web tsconfig

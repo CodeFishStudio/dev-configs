@@ -9,6 +9,9 @@ export const fileActions = {
         copyFileSync(sourcePath, targetPath);
         printAction('success', `Copied ${fileName}`);
     },
+    copySilent: (sourcePath, targetPath) => {
+        copyFileSync(sourcePath, targetPath);
+    },
     copyError: (error, targetPath) => {
         const fileName = fileActions.getFileName(targetPath);
         const errorMsg = error instanceof Error ? error.message : String(error);
@@ -32,6 +35,9 @@ export const fileActions = {
             return true;
         }
         return false;
+    },
+    skipIfExistsSilent: (targetPath) => {
+        return existsSync(targetPath);
     },
 };
 //# sourceMappingURL=fileActions.js.map
