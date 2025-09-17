@@ -8,6 +8,6 @@ export const configTypeOptions = [
     { label: 'TypeScript', value: 'typescript' },
     { label: 'Prettier', value: 'prettier' },
     { label: 'ESLint', value: 'eslint' },
-    { label: 'IDE Setup', value: 'editor' },
+    { label: 'Cursor Settings/Rules', value: 'editor' },
 ];
 //# sourceMappingURL=options.js.map

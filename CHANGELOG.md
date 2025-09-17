@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.12
+
+- Update docs and prompt text
+
 ## 0.0.11
 
 - Added copying of Cursor rules
