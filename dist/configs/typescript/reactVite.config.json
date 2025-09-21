@@ -1,5 +1,5 @@
 {
-    "extends": ["cfs-dev-configs/tsconfig.base", "cfs-dev-configs/tsconfig.reactWeb"],
+    "extends": ["@codefish/dev-configs/tsconfig.base", "@codefish/dev-configs/tsconfig.reactWeb"],
 
     /* --------------------------------------------------------
      * FROM THE `create vite` TOOL

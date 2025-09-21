@@ -21,8 +21,8 @@ const readmePath = join(rootDir, 'README.md');
 const readmeContent = readFileSync(readmePath, 'utf8');
 
 // Replace all instances of the GitHub URL with version tags
-const githubUrlPattern = /github:CodeFishStudio\/cfs-dev-configs#v\d+\.\d+\.\d+/g;
-const newUrl = `github:CodeFishStudio/cfs-dev-configs#v${currentVersion}`;
+const githubUrlPattern = /github:CodeFishStudio\/dev-configs#v\d+\.\d+\.\d+/g;
+const newUrl = `github:CodeFishStudio/dev-configs#v${currentVersion}`;
 
 const updatedContent = readmeContent.replace(githubUrlPattern, newUrl);
 

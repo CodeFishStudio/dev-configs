@@ -1,6 +1,6 @@
 import { reactNativeEslintTemplate } from './reactNative.template.js';
 import { reactNextEslintTemplate } from './reactNext.template.js';
-const defaultTemplate = `import { eslintConfigs } from 'cfs-dev-configs';
+const defaultTemplate = `import { eslintConfigs } from '@codefish/dev-configs';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([

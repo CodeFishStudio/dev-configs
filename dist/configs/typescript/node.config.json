@@ -1,5 +1,5 @@
 {
-    "extends": "cfs-dev-configs/tsconfig.base",
+    "extends": "@codefish/dev-configs/tsconfig.base",
     "compilerOptions": {
         "module": "NodeNext",
         "lib": ["es2022"],

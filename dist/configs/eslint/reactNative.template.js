@@ -1,4 +1,4 @@
-export const reactNativeEslintTemplate = `import { eslintConfigs } from 'cfs-dev-configs';
+export const reactNativeEslintTemplate = `import { eslintConfigs } from '@codefish/dev-configs';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([

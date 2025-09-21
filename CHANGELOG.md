@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.14
+
+- Update package name
+
 ## 0.0.13
 
 - Add 'eslint-import-resolver-typescript' to base dependencies

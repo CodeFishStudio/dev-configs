@@ -50,7 +50,7 @@ This document provides detailed instructions for manually setting up each config
    extends our base eslint config:
 
     ```javascript
-    import { eslintConfigs } from 'cfs-dev-configs';
+    import { eslintConfigs } from '@codefish/dev-configs';
 
     export default eslintConfigs.reactNative;
     ```
@@ -59,7 +59,7 @@ This document provides detailed instructions for manually setting up each config
 
     ```javascript
     import { defineConfig } from 'eslint/config';
-    import { eslintConfigs } from 'cfs-dev-configs';
+    import { eslintConfigs } from '@codefish/dev-configs';
 
     export default defineConfig([
         ...eslintConfigs.reactNative,

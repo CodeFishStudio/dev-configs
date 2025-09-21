@@ -1,5 +1,5 @@
 {
-    "name": "cfs-dev-configs",
+    "name": "@codefish/dev-configs",
     "version": "0.0.13",
     "description": "Shared configurations for dev tools across CodeFish Studio projects.",
     "type": "module",
