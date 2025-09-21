@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.13
+
+- Add 'eslint-import-resolver-typescript' to base dependencies
+- Add node types to node ESLint dependencies
+
 ## 0.0.12
 
 - Update docs and prompt text

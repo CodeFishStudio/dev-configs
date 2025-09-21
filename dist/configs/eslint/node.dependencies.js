@@ -4,6 +4,7 @@ import { dependencies as baseDependencies } from './base.dependencies.js';
  */
 export const dependencies = {
     ...baseDependencies,
+    '@types/node': '^24',
     globals: '^16.3',
 };
 //# sourceMappingURL=node.dependencies.js.map
