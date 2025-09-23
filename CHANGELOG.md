@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.16
+
+- Fix 'format' script
+
 ## 0.0.15
 
 - Add '@typescript-eslint/parser' base dependency for ESLint

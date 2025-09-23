@@ -29,7 +29,7 @@
         "version": "tsx src/scripts/updateReadmeVersion/index.ts && git add .",
         "lint": "eslint . --cache",
         "types": "tsc --noEmit",
-        "format": "prettier . --write",
+        "format": "npx prettier . --write",
         "check": "pnpm run lint && pnpm run types"
     },
     "dependencies": {
