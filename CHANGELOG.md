@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.15
+
+- Add '@typescript-eslint/parser' base dependency for ESLint
+
 ## 0.0.14
 
 - Update package name
