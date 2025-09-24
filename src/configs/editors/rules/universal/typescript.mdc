@@ -1,12 +1,42 @@
 ---
 description: TypeScript rules
-globs:
-    - '**/*.ts'
-    - '**/*.tsx'
-alwaysApply: true
+globs: *.tsx,*.ts
+alwaysApply: false
 ---
 
 # TypeScript Rules
+
+## Any Type
+
+- **NEVER use the `any` type** - This defeats the purpose of TypeScript's type safety
+- Instead of `any`, use proper typing, generics, or `unknown` for truly unknown data
+- If you must use `any`, add a TODO comment explaining why and plan to fix it
+
+### Examples:
+
+```typescript
+// ❌ Bad - Using any type
+const data: any = fetchData();
+const user: any = getUser();
+const items: any[] = getItems();
+
+// ✅ Good - Using proper types
+const data: UserData = fetchData();
+const user: User | null = getUser();
+const items: Item[] = getItems();
+
+// ✅ Good - Using unknown for truly unknown data
+const unknownData: unknown = fetchUnknownData();
+if (typeof unknownData === 'object' && unknownData !== null) {
+    // Type guard to safely use the data
+    const data = unknownData as Record<string, unknown>;
+}
+
+// ✅ Good - Using generics
+function processData<T>(data: T): T {
+    return data;
+}
+```
 
 ## Non-null Assertion Operator
 
@@ -36,11 +66,3 @@ if (user && user.name) {
 // ✅ Good - Using optional chaining
 const name = user?.name;
 ```
-
----
-
-description:
-globs:
-alwaysApply: true
-
----
