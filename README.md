@@ -7,13 +7,13 @@ Shared configurations for dev tools across CodeFish Studio projects.
 **Using pnpm**
 
 ```bash
-pnpm add -D @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.16
+pnpm add -D @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.17
 ```
 
 **Using npm**
 
 ```bash
-npm i -D @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.16
+npm i -D @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.17
 ```
 
 ## ⚡ Auto Setup
