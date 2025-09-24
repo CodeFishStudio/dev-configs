@@ -1,0 +1,46 @@
+---
+description: TypeScript rules
+globs:
+    - '**/*.ts'
+    - '**/*.tsx'
+alwaysApply: true
+---
+
+# TypeScript Rules
+
+## Non-null Assertion Operator
+
+- **NEVER use the non-null assertion operator (`!`)** - This operator tells TypeScript to ignore potential null/undefined values, which can lead to runtime errors
+- Instead of using `!`, use proper null checks, optional chaining (`?.`), or type guards
+- If you're certain a value exists, use type assertions with proper validation
+
+### Examples:
+
+```typescript
+// ❌ Bad - Using non-null assertion
+const user = getUser()!;
+const name = user.name!;
+
+// ✅ Good - Using optional chaining and null checks
+const user = getUser();
+if (user) {
+    const name = user.name;
+}
+
+// ✅ Good - Using type guards
+const user = getUser();
+if (user && user.name) {
+    const name = user.name;
+}
+
+// ✅ Good - Using optional chaining
+const name = user?.name;
+```
+
+---
+
+description:
+globs:
+alwaysApply: true
+
+---

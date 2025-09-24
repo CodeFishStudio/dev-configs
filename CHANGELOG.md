@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.17
+
+- Add Typescript rules
+
 ## 0.0.16
 
 - Fix 'format' script

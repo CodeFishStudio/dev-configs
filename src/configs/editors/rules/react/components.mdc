@@ -1,6 +1,10 @@
 ---
 description: React component rules
 globs:
+    - '**/*.js'
+    - '**/*.jsx'
+    - '**/*.ts'
+    - '**/*.tsx'
 alwaysApply: true
 ---
 
