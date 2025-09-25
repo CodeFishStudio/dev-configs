@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.18
+
+- Prevent use of non-null assertion
+
 ## 0.0.17
 
 - Add Typescript rules

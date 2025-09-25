@@ -24,6 +24,9 @@ export const baseConfig: Linter.Config[] = [
                 { allowInterfaces: 'with-single-extends' },
             ],
 
+            // Prevent use of non-null assertion (i.e. the TypeScript `!` operator)
+            '@typescript-eslint/no-non-null-assertion': 'error',
+
             // Is overly cautious, many packages have duplicated default/named exports
             'import/no-named-as-default-member': 'off',
 
