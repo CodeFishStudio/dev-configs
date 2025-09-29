@@ -6,5 +6,6 @@
     "editor.formatOnSave": true,
     "eslint.run": "onSave",
     "eslint.validate": ["html", "javascript", "javascriptreact", "typescript", "typescriptreact"],
-    "typescript.preferences.importModuleSpecifier": "shortest"
+    "typescript.preferences.importModuleSpecifier": "shortest",
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
