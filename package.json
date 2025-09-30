@@ -1,6 +1,6 @@
 {
     "name": "@codefish/dev-configs",
-    "version": "0.0.18",
+    "version": "0.0.19",
     "description": "Shared configurations for dev tools across CodeFish Studio projects.",
     "type": "module",
     "main": "./dist/index.js",
