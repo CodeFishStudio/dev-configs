@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.19
+
+- Update React Native TS config
+
 ## 0.0.18
 
 - Prevent use of non-null assertion
