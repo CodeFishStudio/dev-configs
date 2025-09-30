@@ -2,7 +2,7 @@
     "extends": ["expo/tsconfig.base", "@codefish/dev-configs/tsconfig.base"],
     "compilerOptions": {
         "lib": ["esnext"],
-        "types": ["react", "react-native"],
+        "types": ["react", "react-native", "node"],
         "jsx": "react-jsx",
         "baseUrl": ".",
         "paths": {
