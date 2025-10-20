@@ -20,17 +20,17 @@
         "cfs-setup": "./dist/scripts/setup/index.js"
     },
     "scripts": {
-        "build": "pnpm clean && tsc && pnpm copy-configs",
+        "build": "bun clean && tsc && bun copy-configs",
         "copy-configs": "cp -r src/configs/prettier dist/configs/ && cp -r src/configs/typescript dist/configs/ && cp -r src/configs/editors dist/configs/",
         "clean": "rm -rf dist",
-        "release:major": "pnpm version major && git push && git push --tags",
-        "release:minor": "pnpm version minor && git push && git push --tags",
-        "release:patch": "pnpm version patch && git push && git push --tags",
+        "release:major": "bun version major && git push && git push --tags",
+        "release:minor": "bun version minor && git push && git push --tags",
+        "release:patch": "bun version patch && git push && git push --tags",
         "version": "tsx src/scripts/updateReadmeVersion/index.ts && git add .",
         "lint": "eslint . --cache",
         "types": "tsc --noEmit",
-        "format": "npx prettier . --write",
-        "check": "pnpm run lint && pnpm run types"
+        "format": "bun prettier . --write",
+        "check": "bun run lint && bun run types"
     },
     "dependencies": {
         "@eslint/compat": ">= 1",
