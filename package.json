@@ -20,13 +20,13 @@
         "cfs-setup": "./dist/scripts/setup/index.js"
     },
     "scripts": {
-        "build": "bun clean && tsc && bun copy-configs",
+        "build": "bun run clean && tsc && bun run copy-configs",
         "copy-configs": "cp -r src/configs/prettier dist/configs/ && cp -r src/configs/typescript dist/configs/ && cp -r src/configs/editors dist/configs/",
         "clean": "rm -rf dist",
-        "release:major": "bun version major && git push && git push --tags",
-        "release:minor": "bun version minor && git push && git push --tags",
-        "release:patch": "bun version patch && git push && git push --tags",
-        "version": "tsx src/scripts/updateReadmeVersion/index.ts && git add .",
+        "release:major": "bun pm version major && git push && git push --tags",
+        "release:minor": "bun pm version minor && git push && git push --tags",
+        "release:patch": "bun pm version patch && git push && git push --tags",
+        "version": "sh -c 'tsx src/scripts/updateReadmeVersion/index.ts && git add README.md package.json'",
         "lint": "eslint . --cache",
         "types": "tsc --noEmit",
         "format": "bun prettier . --write",
