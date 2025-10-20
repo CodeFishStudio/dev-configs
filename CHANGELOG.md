@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.21
+
+- Update Bun support
+
 ## 0.0.20
 
 - Add Bun support
