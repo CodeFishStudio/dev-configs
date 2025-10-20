@@ -4,7 +4,7 @@ export type SelectOption<T> = {
     label: string;
     value: T;
 };
-export type PackageManager = 'pnpm' | 'npm' | 'yarn';
+export type PackageManager = 'bun' | 'npm' | 'pnpm' | 'yarn';
 export interface PackageJsonScriptDefinition {
     name: string;
     command: string;

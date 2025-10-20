@@ -4,10 +4,10 @@ Shared configurations for dev tools across CodeFish Studio projects.
 
 ## 📦 Installation
 
-**Using pnpm**
+**Using Bun**
 
 ```bash
-pnpm add -D @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.19
+bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.19
 ```
 
 **Using npm**

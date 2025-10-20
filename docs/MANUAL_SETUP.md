@@ -7,7 +7,7 @@ This document provides detailed instructions for manually setting up each config
 1. Install TypeScript as a dev dependency:
 
     ```bash
-    pnpm add -D typescript@^5.8
+    bun add -d typescript@^5.8
     ```
 
 2. Copy the relevant TypeScript config file from `/src/configs/typescript` to your
@@ -25,7 +25,7 @@ This document provides detailed instructions for manually setting up each config
 1. Install Prettier as a dev dependency:
 
     ```bash
-    pnpm add -D prettier
+    bun add -D prettier
     ```
 
 2. Create a `.prettierrc` file in your project root:

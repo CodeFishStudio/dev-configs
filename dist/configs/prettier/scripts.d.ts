@@ -3,5 +3,5 @@
  */
 export declare const prettierScripts: readonly [{
     readonly name: "format";
-    readonly command: "prettier . --write";
+    readonly command: "npx prettier . --write";
 }];

@@ -27,8 +27,6 @@ const configScripts: Record<ConfigType, readonly PackageJsonScriptDefinition[]> 
 
 /**
  * Get all scripts for a given config type
- * @param configType - Selected config type
- * @param packageManager - The package manager being used (pnpm, npm, yarn)
  * @returns Array of script definitions with package manager placeholders resolved
  */
 const getScriptsForConfigType = (

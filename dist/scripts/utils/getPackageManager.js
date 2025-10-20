@@ -5,7 +5,10 @@ export const getPackageManager = () => {
     if (packageManager)
         return packageManager;
     packageManager = 'npm';
-    if (existsSync(join(process.cwd(), 'pnpm-lock.yaml'))) {
+    if (existsSync(join(process.cwd(), 'bun.lockb'))) {
+        packageManager = 'bun';
+    }
+    else if (existsSync(join(process.cwd(), 'pnpm-lock.yaml'))) {
         packageManager = 'pnpm';
     }
     else if (existsSync(join(process.cwd(), 'yarn.lock'))) {

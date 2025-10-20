@@ -75,6 +75,9 @@ export const installDependencies = async (configType, projectType) => {
         .join(' ');
     let installCommand;
     switch (getPackageManager()) {
+        case 'bun':
+            installCommand = `bun add -d ${depsList}`;
+            break;
         case 'pnpm':
             installCommand = `pnpm add --save-dev ${depsList}`;
             break;

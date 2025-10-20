@@ -1,0 +1,68 @@
+---
+description: TypeScript rules
+globs: *.tsx,*.ts
+alwaysApply: false
+---
+
+# TypeScript Rules
+
+## Any Type
+
+- **NEVER use the `any` type** - This defeats the purpose of TypeScript's type safety
+- Instead of `any`, use proper typing, generics, or `unknown` for truly unknown data
+- If you must use `any`, add a TODO comment explaining why and plan to fix it
+
+### Examples:
+
+```typescript
+// ❌ Bad - Using any type
+const data: any = fetchData();
+const user: any = getUser();
+const items: any[] = getItems();
+
+// ✅ Good - Using proper types
+const data: UserData = fetchData();
+const user: User | null = getUser();
+const items: Item[] = getItems();
+
+// ✅ Good - Using unknown for truly unknown data
+const unknownData: unknown = fetchUnknownData();
+if (typeof unknownData === 'object' && unknownData !== null) {
+    // Type guard to safely use the data
+    const data = unknownData as Record<string, unknown>;
+}
+
+// ✅ Good - Using generics
+function processData<T>(data: T): T {
+    return data;
+}
+```
+
+## Non-null Assertion Operator
+
+- **NEVER use the non-null assertion operator (`!`)** - This operator tells TypeScript to ignore potential null/undefined values, which can lead to runtime errors
+- Instead of using `!`, use proper null checks, optional chaining (`?.`), or type guards
+- If you're certain a value exists, use type assertions with proper validation
+
+### Examples:
+
+```typescript
+// ❌ Bad - Using non-null assertion
+const user = getUser()!;
+const name = user.name!;
+
+// ✅ Good - Using optional chaining and null checks
+const user = getUser();
+if (user) {
+    const name = user.name;
+}
+
+// ✅ Good - Using type guards
+const user = getUser();
+if (user && user.name) {
+    const name = user.name;
+}
+
+// ✅ Good - Using optional chaining
+const name = user?.name;
+```

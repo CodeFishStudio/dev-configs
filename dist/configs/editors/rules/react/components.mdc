@@ -1,7 +1,7 @@
 ---
 description: React component rules
-globs:
-alwaysApply: true
+globs: *.tsx,*.ts,*.js,*.jsx
+alwaysApply: false
 ---
 
 # React Component Rules
