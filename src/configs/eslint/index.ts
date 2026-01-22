@@ -8,6 +8,13 @@ import { ProjectType } from '../../types/index.js';
 
 import type { Linter } from 'eslint';
 
+const filterOutPlugins = (configs: Linter.Config[], pluginNames: string[]) => {
+    return configs.filter((config) => {
+        if (!config.plugins) return true;
+        return !Object.keys(config.plugins).some((plugin) => pluginNames.includes(plugin));
+    });
+};
+
 export const eslintConfigs: Record<ProjectType, Linter.Config[]> = {
     /**
      * CodeFish Studio ESLint configuration for Node.js + TypeScript projects
@@ -23,7 +30,9 @@ export const eslintConfigs: Record<ProjectType, Linter.Config[]> = {
      * CodeFish Studio ESLint configuration for React (Next.js) + TypeScript projects
      */
     reactNext: [
-        ...reactConfig,
+        // Filter out configs that define plugins that will be included in
+        // 'eslint-config-next/core-web-vitals' (see reactNext.template.ts)
+        ...filterOutPlugins(reactConfig, ['import', 'react-hooks', 'react']),
 
         // Prettier must come last to override conflicting rules
         prettierConfig,

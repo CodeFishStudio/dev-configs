@@ -21,6 +21,7 @@ export const reactConfig = defineConfig([
 
     importPlugin.flatConfigs.react,
     reactPluginConfig,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     reactPlugin.configs.flat['jsx-runtime']!,
     reactHooks.configs.recommended,
     {

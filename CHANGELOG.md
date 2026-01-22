@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.23
+
+- Update Next.js ESLint config for v16
+
 ## 0.0.22
 
 - Fix Bun support

@@ -3,6 +3,13 @@ import { nodeConfig } from './node.config.js';
 import { reactConfig } from './react.config.js';
 import { reactNativeConfig } from './reactNative.config.js';
 import { reactViteConfig } from './reactVite.config.js';
+const filterOutPlugins = (configs, pluginNames) => {
+    return configs.filter((config) => {
+        if (!config.plugins)
+            return true;
+        return !Object.keys(config.plugins).some((plugin) => pluginNames.includes(plugin));
+    });
+};
 export const eslintConfigs = {
     /**
      * CodeFish Studio ESLint configuration for Node.js + TypeScript projects
@@ -16,7 +23,9 @@ export const eslintConfigs = {
      * CodeFish Studio ESLint configuration for React (Next.js) + TypeScript projects
      */
     reactNext: [
-        ...reactConfig,
+        // Filter out configs that define plugins that will be included in
+        // 'eslint-config-next/core-web-vitals' (see reactNext.template.ts)
+        ...filterOutPlugins(reactConfig, ['import', 'react-hooks', 'react']),
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],

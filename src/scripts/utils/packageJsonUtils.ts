@@ -89,12 +89,12 @@ export const addScripts = (
 ): PackageJson => {
     const updated = { ...packageJson };
 
-    if (!updated.scripts) {
-        updated.scripts = {};
-    }
-
     Object.entries(scripts).forEach(([name, command]) => {
-        updated.scripts![name] = command;
+        if (!updated.scripts) {
+            updated.scripts = {};
+        }
+
+        updated.scripts[name] = command;
     });
 
     return updated;
