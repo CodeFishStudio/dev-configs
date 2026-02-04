@@ -4,7 +4,7 @@
 export const prettierScripts = [
     {
         name: 'format',
-        command: 'npx prettier . --write',
+        command: 'bun prettier . --write',
     },
 ];
 //# sourceMappingURL=scripts.js.map

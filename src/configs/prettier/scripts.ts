@@ -4,6 +4,6 @@
 export const prettierScripts = [
     {
         name: 'format',
-        command: 'npx prettier . --write',
+        command: 'bun prettier . --write',
     },
 ] as const;

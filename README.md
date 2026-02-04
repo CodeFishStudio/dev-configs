@@ -21,7 +21,7 @@ npm i -D @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.26
 Run the install script to automatically set up your project's dev configs:
 
 ```bash
-npx cfs-setup
+bun cfs-setup
 ```
 
 This script will provide options to:
