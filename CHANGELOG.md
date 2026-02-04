@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.25
+
+- Fix TanStack Start typescript config
+
 ## 0.0.24
 
 - Update Cursor rules
