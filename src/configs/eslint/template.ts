@@ -1,5 +1,6 @@
 import { reactNativeEslintTemplate } from './reactNative.template.js';
 import { reactNextEslintTemplate } from './reactNext.template.js';
+import { reactTanStackStartEslintTemplate } from './reactTanStackStart.template.js';
 import { ProjectType } from '../../types/index.js';
 
 const defaultTemplate = `import { eslintConfigs } from '@codefish/dev-configs';
@@ -18,6 +19,8 @@ export const eslintConfigFileTemplate = (projectType: ProjectType) => {
             return reactNativeEslintTemplate;
         case 'reactNext':
             return reactNextEslintTemplate;
+        case 'reactTanStackStart':
+            return reactTanStackStartEslintTemplate;
         default:
             return defaultTemplate.replace('{{PROJECT_TYPE}}', projectType);
     }

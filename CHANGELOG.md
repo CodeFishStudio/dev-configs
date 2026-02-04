@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.24
+
+- Add TanStack Start configs
+
 ## 0.0.23
 
 - Update Next.js ESLint config for v16
@@ -94,3 +98,4 @@
 ## 0.0.2
 
 - Initial release
+

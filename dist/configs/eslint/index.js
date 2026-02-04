@@ -3,14 +3,9 @@ import { nodeConfig } from './node.config.js';
 import { reactConfig } from './react.config.js';
 import { reactNativeConfig } from './reactNative.config.js';
 import { reactViteConfig } from './reactVite.config.js';
-const filterOutPlugins = (configs, pluginNames) => {
-    return configs.filter((config) => {
-        if (!config.plugins)
-            return true;
-        return !Object.keys(config.plugins).some((plugin) => pluginNames.includes(plugin));
-    });
-};
-export const eslintConfigs = {
+import { filterOutPlugins } from './utils/filterOutPlugins.js';
+import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
+const eslintConfigs = {
     /**
      * CodeFish Studio ESLint configuration for Node.js + TypeScript projects
      */
@@ -26,6 +21,14 @@ export const eslintConfigs = {
         // Filter out configs that define plugins that will be included in
         // 'eslint-config-next/core-web-vitals' (see reactNext.template.ts)
         ...filterOutPlugins(reactConfig, ['import', 'react-hooks', 'react']),
+        // Prettier must come last to override conflicting rules
+        prettierConfig,
+    ],
+    /**
+     * CodeFish Studio ESLint configuration for React (TanStack Start) + TypeScript projects
+     */
+    reactTanStackStart: [
+        ...reactConfig,
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],
@@ -46,4 +49,5 @@ export const eslintConfigs = {
         prettierConfig,
     ],
 };
+export { eslintConfigs, mergeEslintConfigPlugins };
 //# sourceMappingURL=index.js.map

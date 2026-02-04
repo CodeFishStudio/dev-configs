@@ -1,0 +1,19 @@
+{
+    "extends": ["@codefish/dev-configs/tsconfig.base", "@codefish/dev-configs/tsconfig.reactWeb"],
+
+    /* --------------------------------------------------------
+     * FROM THE `create @tanstack/start@latest` TOOL
+     * -------------------------------------------------------- */
+    "compilerOptions": {
+        "module": "ESNext",
+        "types": ["vite/client"],
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "verbatimModuleSyntax": false,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    },
+    "include": ["**/*", "eslint.config.js", "vite.config.js"]
+}
