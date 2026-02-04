@@ -1,6 +1,7 @@
 import type { ConfigType, ProjectType, SelectOption } from '../../types/index.js';
 
 export const projectTypeOptions: SelectOption<ProjectType>[] = [
+    { label: 'React (TanStack Start)', value: 'reactTanStackStart' },
     { label: 'React (Next.js)', value: 'reactNext' },
     { label: 'React (Vite + React Router)', value: 'reactVite' },
     { label: 'React Native (Expo)', value: 'reactNative' },

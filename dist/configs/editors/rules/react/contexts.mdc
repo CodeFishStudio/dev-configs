@@ -1,0 +1,305 @@
+---
+description: React context rules
+globs: *.tsx,*.ts,*.js,*.jsx
+alwaysApply: false
+---
+
+# React Context Rules
+
+## File Structure
+
+- Project-wide contexts must be placed in `src/contexts`
+- Each context must have its own directory named `ContextName` (PascalCase)
+- Directory structure:
+    ```
+    src/contexts/ContextName/
+      ├── index.ts
+      ├── ContextNameProvider.tsx
+      ├── contexts.ts
+      ├── hooks.ts
+      ├── types.ts
+      └── utils/ (optional)
+    ```
+- `index.ts` exports all public APIs: `export * from './ContextNameProvider'; export * from './hooks'; export * from './types';`
+- `ContextNameProvider.tsx` contains the provider component
+- `contexts.ts` contains all `createContext` calls
+- `hooks.ts` contains custom hooks for consuming the context
+- `types.ts` contains all TypeScript types and interfaces
+- `utils/` contains helper functions used by the provider (if needed)
+
+**Example:**
+
+```
+src/contexts/MapAreas/
+  ├── index.ts
+  ├── MapAreasProvider.tsx
+  ├── contexts.ts
+  ├── hooks.ts
+  ├── types.ts
+  └── utils/
+      └── getNextLayerNumber.ts
+```
+
+## Context Separation
+
+- Only separate state and actions into different contexts if there are actions to perform
+- If there are actions: Create two contexts - one for state (`ContextNameContext`) and one for actions (`ContextNameActionsContext`)
+- If there are no actions: Use a single context (`ContextNameContext`) containing only state
+- This separation allows components to subscribe only to what they need, improving performance
+
+**Example with actions:**
+
+```typescript
+// contexts.ts
+export const MapAreasContext = createContext<MapAreasState | null>(null);
+export const MapAreaActionsContext = createContext<MapAreaActions | null>(null);
+```
+
+**Example without actions:**
+
+```typescript
+// contexts.ts
+export const AuthContext = createContext<AuthState | null>(null);
+```
+
+## Type Definitions
+
+- Define all types in `types.ts`
+- If state is a single value: The state type should be the direct type (e.g., `string`, `number`, `Array<Item>`)
+- If state is multiple values: Create a type for state (`ContextNameState`) as an object
+- Only create a separate type for actions (`ContextNameActions`) if there are actions to perform
+- If actions is a single action: The actions type should be the direct callback type (e.g., `(value: string) => void`)
+- If actions is multiple actions: Create a type for actions (`ContextNameActions`) as an object
+
+## Context Creation
+
+- Use `createContext` with `| null` type to indicate the context may not be provided
+- Export contexts from `contexts.ts`
+- Import types from `types.ts` for context typing
+- Only create an ActionsContext if there are actions to perform
+- If state is a single value: The context type should be the direct type (e.g., `createContext<string | null>(null)`)
+- If state is multiple values: The context type should be the state object type (e.g., `createContext<MapAreasState | null>(null)`)
+- If actions is a single action: The context type should be the direct callback type (e.g., `createContext<((value: string) => void) | null>(null)`)
+- If actions is multiple actions: The context type should be the actions object type (e.g., `createContext<MapAreaActions | null>(null)`)
+
+**Example:**
+
+```typescript
+// contexts.ts
+import { createContext } from 'react';
+import { MapAreaActions, MapAreasState, SetMarkersAction, AuthState } from './types';
+
+// With actions - multiple state/actions
+export const MapAreasContext = createContext<MapAreasState | null>(null);
+export const MapAreaActionsContext = createContext<MapAreaActions | null>(null);
+
+// With actions - single state/action
+export const MarkersContext = createContext<string[] | null>(null);
+export const MarkersActionsContext = createContext<SetMarkersAction | null>(null);
+
+// Without actions - single state value
+export const CountContext = createContext<number | null>(null);
+
+// Without actions - multiple state values
+export const AuthContext = createContext<AuthState | null>(null);
+```
+
+## Custom Hooks
+
+- Create custom hooks in `hooks.ts` for consuming contexts
+- ALWAYS throw an error if the context is null - this ensures the hook is used within a provider
+- Use descriptive error messages that include the hook and provider names
+- Export hooks with descriptive names: `useContextName` for state, `useContextNameActions` for actions (only if actions exist)
+
+**Example:**
+
+```typescript
+// hooks.ts
+import { useContext } from 'react';
+import { MapAreasContext, MapAreaActionsContext, AuthContext } from './contexts';
+
+// With actions
+export const useMapAreas = () => {
+    const mapareas = useContext(MapAreasContext);
+    if (mapareas === null) {
+        throw new Error('`useMapAreas` hook needs to be used within a MapAreasProvider.');
+    }
+    return mapareas;
+};
+
+export const useMapAreaActions = () => {
+    const actions = useContext(MapAreaActionsContext);
+    if (actions === null) {
+        throw new Error('`useMapAreaActions` hook needs to be used within a MapAreasProvider.');
+    }
+    return actions;
+};
+
+// Without actions
+export const useAuth = () => {
+    const auth = useContext(AuthContext);
+    if (auth === null) {
+        throw new Error('`useAuth` hook needs to be used within an AuthProvider.');
+    }
+    return auth;
+};
+```
+
+## Provider Component
+
+- Name the provider component `ContextNameProvider`
+- Accept `children: ReactNode` as props
+- Use `useState` or `useReducer` for managing state
+- **Single state value**: If state is a single value from `useState` or `useReducer`, pass it directly to the provider `value` prop without wrapping in an object or `useMemo`
+- **Multiple state values**: If multiple state values are being combined, wrap them in `useMemo` and pass the object to the provider
+- **Single action**: If actions context only has a single action, pass the callback directly to the provider `value` prop without wrapping in an object or `useMemo`
+- **Multiple actions**: If actions context has multiple actions, wrap them in `useMemo` with an empty dependency array and pass the object to the provider
+- If actions exist: Nest both context providers, with the state provider as the outer provider
+- If no actions exist: Use a single provider with just the state context
+
+**Example:**
+
+```typescript
+// ContextNameProvider.tsx
+import { ReactNode, useMemo, useState } from 'react';
+import { ContextNameContext, ContextNameActionsContext } from './contexts';
+import { ContextNameActions, ContextNameState } from './types';
+
+interface ContextNameProviderProps {
+    children: ReactNode;
+}
+
+// With actions - single state/action (simplest case)
+export const MarkersProvider = (props: ContextNameProviderProps) => {
+    const { children } = props;
+    const [markers, setMarkers] = useState<Marker[]>([]);
+    return (
+        <ContextNameContext.Provider value={markers}>
+            <ContextNameActionsContext.Provider value={setMarkers}>
+                {children}
+            </ContextNameActionsContext.Provider>
+        </ContextNameContext.Provider>
+    );
+};
+
+// With actions - multiple state values, multiple actions
+export const MapAreasProvider = (props: ContextNameProviderProps) => {
+    const { children } = props;
+    const [state1, setState1] = useState<StateType1>(initialState1);
+    const [state2, setState2] = useState<StateType2>(initialState2);
+
+    const actions = useMemo<ContextNameActions>(
+        () => ({
+            action1: (param) => setState1((prev) => newState),
+            action2: setState2, // Can directly assign setState if signature matches
+        }),
+        []
+    );
+
+    const value = useMemo<ContextNameState>(
+        () => ({ state1, state2 }),
+        [state1, state2]
+    );
+
+    return (
+        <ContextNameContext.Provider value={value}>
+            <ContextNameActionsContext.Provider value={actions}>
+                {children}
+            </ContextNameActionsContext.Provider>
+        </ContextNameContext.Provider>
+    );
+};
+
+// Without actions - single state value
+export const CountProvider = (props: ContextNameProviderProps) => {
+    const { children } = props;
+    const [count, setCount] = useState<number>(0);
+    return (
+        <ContextNameContext.Provider value={count}>
+            {children}
+        </ContextNameContext.Provider>
+    );
+};
+
+// Without actions - multiple state values
+export const AuthProvider = (props: ContextNameProviderProps) => {
+    const { children } = props;
+    const [state1, setState1] = useState<StateType1>(initialState1);
+    const [state2, setState2] = useState<StateType2>(initialState2);
+    const value = useMemo<ContextNameState>(
+        () => ({ state1, state2 }),
+        [state1, state2]
+    );
+    return (
+        <ContextNameContext.Provider value={value}>
+            {children}
+        </ContextNameContext.Provider>
+    );
+};
+```
+
+## Exports
+
+- Export the provider, hooks, and types from `index.ts`
+- Do NOT export internal implementation details (contexts, utils)
+- Consumers should only import from the context directory's `index.ts`
+
+**Example:**
+
+```typescript
+// index.ts
+export * from './ContextNameProvider';
+export * from './hooks';
+export * from './types';
+```
+
+## Usage
+
+- Import the provider and hooks from the context directory
+- Wrap the application (or relevant subtree) with the provider
+- Use hooks in components that need access to the context
+
+**Example:**
+
+```typescript
+// In root or layout component
+import { MapAreasProvider, MarkersProvider, AuthProvider } from '@/contexts';
+
+export const App = () => {
+    return (
+        <MapAreasProvider>
+            <MarkersProvider>
+                <AuthProvider>
+                    {/* App content */}
+                </AuthProvider>
+            </MarkersProvider>
+        </MapAreasProvider>
+    );
+};
+
+// In consuming component - with actions (multiple)
+import { useMapAreas, useMapAreaActions } from '@/contexts/MapAreas';
+
+export const MyComponent = () => {
+    const { areas, selectedId } = useMapAreas();
+    const { addMapArea, deleteMapArea } = useMapAreaActions();
+    // Use state and actions
+};
+
+// In consuming component - with actions (single)
+import { useMarkers, useMarkersActions } from '@/contexts/Markers';
+
+export const MyComponent = () => {
+    const markers = useMarkers(); // Direct array value
+    const setMarkers = useMarkersActions(); // Direct callback function
+    setMarkers([...markers, newMarker]);
+};
+
+// In consuming component - without actions
+import { useAuth } from '@/contexts/Auth';
+
+export const MyComponent = () => {
+    const { user, isAuthenticated } = useAuth();
+    // Use state
+};
+```

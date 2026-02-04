@@ -8,10 +8,52 @@ alwaysApply: false
 
 ## File Structure
 
-- Components must be placed in `src/components`
-- Each component must have its own directory with an index.ts file
-- Index files must use the format: `export * from './ComponentName';`
-- Component files must use PascalCase (e.g., `Button.tsx`)
+### Global Components
+
+- Components that are used in more than one context (i.e., globally) must be placed in `src/components`
+- Each global component must have its own directory named `ComponentName` (PascalCase)
+- Directory structure:
+    ```
+    src/components/ComponentName/
+      ├── index.ts
+      └── ComponentName.tsx
+    ```
+- `index.ts` contains just one line: `export * from './ComponentName';`
+- `ComponentName.tsx` contains the actual component definition
+- Component files must use PascalCase (e.g., `Button.tsx`, `UserProfile.tsx`)
+
+**Example:**
+
+```
+src/components/Button/
+  ├── index.ts          (contains: export * from './Button';)
+  └── Button.tsx         (contains: export const Button = ...)
+```
+
+### Sub-Components
+
+- Components that are sub-components of another component should be placed in the parent component's `components` directory
+- Sub-components do not need their own folder or `index.ts` file - they are just `.tsx` files directly
+- Directory structure:
+    ```
+    src/components/ParentComponent/
+      ├── index.ts
+      ├── ParentComponent.tsx
+      └── components/
+          └── SubComponentA.tsx
+          └── SubComponentB.tsx
+    ```
+
+**Example:**
+
+```
+src/components/UserProfile/
+  ├── index.ts                    (contains: export * from './UserProfile';)
+  ├── UserProfile.tsx             (contains: export const UserProfile = ...)
+  └── components/
+      ├── UserAvatar.tsx          (contains: export const UserAvatar = ...)
+      └── UserStats.tsx           (contains: export const UserStats = ...)
+```
 
 ## Component Structure
 

@@ -14,7 +14,7 @@ type RulesDirectory = {
 
 const ruleDirectories: RulesDirectory[] = [
     { directory: 'universal', projects: 'all' },
-    { directory: 'react', projects: ['reactNext', 'reactVite', 'reactNative'] },
+    { directory: 'react', projects: ['reactNext', 'reactTanStackStart', 'reactVite', 'reactNative'] },
 ];
 
 /**

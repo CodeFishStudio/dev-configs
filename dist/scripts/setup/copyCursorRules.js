@@ -5,7 +5,7 @@ import { fileActions } from '../utils/fileActions.js';
 import { print } from '../utils/print.js';
 const ruleDirectories = [
     { directory: 'universal', projects: 'all' },
-    { directory: 'react', projects: ['reactNext', 'reactVite', 'reactNative'] },
+    { directory: 'react', projects: ['reactNext', 'reactTanStackStart', 'reactVite', 'reactNative'] },
 ];
 /**
  * Helper function to check if a project type should get rules from a directory

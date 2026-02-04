@@ -18,6 +18,18 @@ alwaysApply: true
 - Structure functions with early returns: validate inputs first, then process logic
 - Avoid deep nesting by returning early on error conditions or invalid states
 
+## Array Iteration
+
+- Prefer `array.forEach((item) => { ... })` over `for (const item of array) { ... }`
+- Use forEach for side effects and iteration over arrays
+- Reserve for...of loops for cases where early break/continue is needed
+
+## Variable Naming
+
+- Avoid variable abbreviations - use full, descriptive words
+- Prefer clarity over brevity in variable names
+- Use complete words that clearly express the variable's purpose
+
 ## Documentation
 
 - Include JSDoc comments for all exported functions and complex internal functions
@@ -56,5 +68,51 @@ const processUser = (user) => {
             }
         }
     }
+};
+```
+
+### Array Iteration
+
+```javascript
+// Good: Prefer forEach for array iteration
+const processItems = (items) => {
+    items.forEach((item) => {
+        updateItem(item);
+    });
+};
+
+// Avoid: for...of loops (unless early break/continue is needed)
+const processItems = (items) => {
+    for (const item of items) {
+        updateItem(item);
+    }
+};
+```
+
+### Variable Abbreviations
+
+```javascript
+// Good: Use full words
+const variants = {
+    enter: (direction: 'left' | 'right') => ({
+        x: direction === 'left' ? 32 : -32,
+    }),
+};
+
+const handleUser = (user) => {
+    if (!user) return null;
+    return user.name;
+};
+
+// Avoid: Variable abbreviations
+const variants = {
+    enter: (dir: 'left' | 'right') => ({
+        x: dir === 'left' ? 32 : -32,
+    }),
+};
+
+const handleUser = (usr) => {
+    if (!usr) return null;
+    return usr.name;
 };
 ```
