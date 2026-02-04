@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.26
+
+- Fix TanStack Start ESLint config
+
 ## 0.0.25
 
 - Fix TanStack Start typescript config

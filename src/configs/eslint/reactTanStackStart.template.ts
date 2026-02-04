@@ -6,7 +6,7 @@ import { tanstackConfig } from '@tanstack/eslint-config';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-    ...mergeConfigPlugins([...tanstackConfig, ...eslintConfigs.reactTanStackStart]),
+    ...mergeEslintConfigPlugins([...tanstackConfig, ...eslintConfigs.reactTanStackStart]),
 
     // Add any overrides below
 ]);
