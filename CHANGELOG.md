@@ -2,6 +2,7 @@
 
 ## 0.0.24
 
+- Update Cursor rules
 - Add TanStack Start configs
 
 ## 0.0.23
