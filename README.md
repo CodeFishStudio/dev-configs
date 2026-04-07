@@ -7,13 +7,13 @@ Shared configurations for dev tools across CodeFish Studio projects.
 **Using Bun**
 
 ```bash
-bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.26
+bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.27
 ```
 
 **Using npm**
 
 ```bash
-npm i -D @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.26
+npm i -D @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.27
 ```
 
 ## ⚡ Auto Setup
