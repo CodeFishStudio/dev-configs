@@ -37,6 +37,12 @@ alwaysApply: true
 - Update documentation when function signatures or behavior changes
 - Use @param, @returns, and @example tags for comprehensive documentation
 
+## Preserve existing comments
+
+- Do not delete or strip existing comments as part of an unrelated edit (e.g. refactoring, logging changes, formatting). If the comment still describes the code correctly, keep it.
+- Only remove or rewrite a comment when the behavior it describes has actually changed, or when it is clearly wrong or redundant with adjacent code.
+- Restoring accidentally removed comments is preferred over leaving the code comment-free.
+
 ## Examples
 
 ### Good Function Structure

@@ -38,11 +38,34 @@ function processData<T>(data: T): T {
 }
 ```
 
+## Type Casting
+
+- **AVOID type casting at all costs** - Casting (for example, `as SomeType`) can hide real typing problems and bypass TypeScript safety checks
+- Prefer safer alternatives first: proper type definitions, narrowing with type guards, generics, and runtime validation
+- If there is absolutely no way around a type cast, include an inline comment explaining why the cast is necessary
+
+### Examples:
+
+```typescript
+// ❌ Bad - Type casting used to silence TypeScript
+const user = response as User;
+const id = (event.target as HTMLInputElement).value;
+
+// ✅ Good - Narrow using runtime checks
+if (typeof response === 'object' && response !== null && 'id' in response) {
+    const user = response;
+}
+
+// ✅ Acceptable only as a last resort - cast with explicit rationale
+// Last resort: third-party API returns untyped payload and cannot be changed
+const payload = externalResult as ExternalPayload;
+```
+
 ## Non-null Assertion Operator
 
 - **NEVER use the non-null assertion operator (`!`)** - This operator tells TypeScript to ignore potential null/undefined values, which can lead to runtime errors
 - Instead of using `!`, use proper null checks, optional chaining (`?.`), or type guards
-- If you're certain a value exists, use type assertions with proper validation
+- If you're certain a value exists, prove it with validation/type guards before usage
 
 ### Examples:
 
