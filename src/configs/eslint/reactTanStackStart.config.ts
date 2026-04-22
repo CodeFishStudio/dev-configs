@@ -10,7 +10,7 @@ export const reactTanStackStartConfig = defineConfig([
     ...reactConfig,
 
     {
-        files: ['**/*.{js,jsx,ts,tsx}'],
+        files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
             globals: {

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.29
+
+- Update TanStack Start and Vite ESLint configs
+
 ## 0.0.28
 
 - Update TanStack Start ESLint config
