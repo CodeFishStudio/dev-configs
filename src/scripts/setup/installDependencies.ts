@@ -19,9 +19,14 @@ const getESLintDependencies = async (projectType: ProjectType): Promise<ConfigDe
             const { dependencies } = await import('../../configs/eslint/node.dependencies.js');
             return dependencies;
         }
-        case 'reactNext':
-        case 'reactTanStackStart': {
+        case 'reactNext': {
             const { dependencies } = await import('../../configs/eslint/react.dependencies.js');
+            return dependencies;
+        }
+        case 'reactTanStackStart': {
+            const { dependencies } = await import(
+                '../../configs/eslint/reactTanStackStart.dependencies.js'
+            );
             return dependencies;
         }
         case 'reactVite': {

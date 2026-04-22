@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.28
+
+- Update TanStack Start ESLint config
+
 ## 0.0.27
 
 - Add Typescript type casting prevention rules

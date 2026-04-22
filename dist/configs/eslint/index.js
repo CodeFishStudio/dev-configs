@@ -2,6 +2,7 @@ import prettierConfig from 'eslint-config-prettier/flat';
 import { nodeConfig } from './node.config.js';
 import { reactConfig } from './react.config.js';
 import { reactNativeConfig } from './reactNative.config.js';
+import { reactTanStackStartConfig } from './reactTanStackStart.config.js';
 import { reactViteConfig } from './reactVite.config.js';
 import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
@@ -28,7 +29,7 @@ const eslintConfigs = {
      * CodeFish Studio ESLint configuration for React (TanStack Start) + TypeScript projects
      */
     reactTanStackStart: [
-        ...reactConfig,
+        ...reactTanStackStartConfig,
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],
