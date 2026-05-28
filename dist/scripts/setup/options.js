@@ -9,6 +9,7 @@ export const configTypeOptions = [
     { label: 'Prettier', value: 'prettier' },
     { label: 'ESLint', value: 'eslint' },
     { label: 'TypeScript', value: 'typescript' },
-    { label: 'Cursor Settings/Rules', value: 'editor' },
+    { label: 'Cursor Settings', value: 'cursorSettings' },
+    { label: 'Agent Rules & Skills', value: 'agentRulesAndSkills' },
 ];
 //# sourceMappingURL=options.js.map

@@ -62,8 +62,9 @@ const getConfigDependencies = async (configType: ConfigType): Promise<ConfigDepe
             );
             return typescriptDependencies;
         }
-        case 'editor':
-            return {}; // No dependencies required for editor config
+        case 'cursorSettings':
+        case 'agentRulesAndSkills':
+            return {};
         default:
             return {};
     }

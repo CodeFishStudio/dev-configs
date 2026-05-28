@@ -9,7 +9,8 @@ const configGitignorePatterns = {
     eslint: eslintGitignorePatterns,
     prettier: [], // No patterns for prettier
     typescript: [], // No patterns for typescript
-    editor: editorGitignorePatterns,
+    cursorSettings: editorGitignorePatterns,
+    agentRulesAndSkills: [],
 };
 /**
  * Function to add gitignore patterns for a specific config type

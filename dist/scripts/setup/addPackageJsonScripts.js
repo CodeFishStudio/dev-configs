@@ -13,7 +13,8 @@ const configScripts = {
     typescript: typescriptScripts,
     prettier: prettierScripts,
     eslint: eslintScripts,
-    editor: [],
+    cursorSettings: [],
+    agentRulesAndSkills: [],
 };
 /**
  * Get all scripts for a given config type

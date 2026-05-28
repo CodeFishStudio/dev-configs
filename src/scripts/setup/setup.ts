@@ -1,11 +1,13 @@
-import { cancel, group, intro, log, multiselect, outro, select } from '@clack/prompts';
+import { cancel, group, intro, isCancel, log, multiselect, outro, select } from '@clack/prompts';
 import { existsSync } from 'fs';
 import { styleText } from 'node:util';
 import { join } from 'path';
 
 import { addGitignores } from './addGitignores.js';
 import { addPackageJsonScripts } from './addPackageJsonScripts.js';
+import { agentSkillOptions } from './agentSkillOptions.js';
 import { copyCursorRules } from './copyCursorRules.js';
+import { copyCursorSkills } from './copyCursorSkills.js';
 import { copyEditorSettings } from './copyEditorSettings.js';
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
@@ -29,7 +31,7 @@ export const setup = async (): Promise<void> => {
     intro(styleText(['bgCyan', 'black'], ' cfs-setup '));
 
     // Prompt for project type and config types
-    const { projectType, selectedConfigs } = await await group(
+    const { projectType, selectedConfigs } = await group(
         {
             projectType: () =>
                 select({
@@ -38,7 +40,7 @@ export const setup = async (): Promise<void> => {
                 }),
             selectedConfigs: () =>
                 multiselect({
-                    message: 'Select configs to install',
+                    message: `Select configs to install${styleText(['gray'], ' (space to toggle)')}`,
                     options: configTypeOptions,
                     initialValues: configTypeOptions.map((option) => option.value),
                     required: true,
@@ -51,6 +53,23 @@ export const setup = async (): Promise<void> => {
             },
         }
     );
+
+    let selectedAgentSkills: string[] = [];
+
+    if (selectedConfigs.includes('agentRulesAndSkills')) {
+        const agentSkillsPrompt = await multiselect({
+            message: `Select agent skills to install${styleText(['gray'], ' (space to toggle)')}`,
+            options: agentSkillOptions,
+            required: false,
+        });
+
+        if (isCancel(agentSkillsPrompt)) {
+            cancel('Setup cancelled.');
+            process.exit(0);
+        }
+
+        selectedAgentSkills = agentSkillsPrompt;
+    }
 
     // Process each selected config
     for (const configType of selectedConfigs) {
@@ -68,9 +87,12 @@ export const setup = async (): Promise<void> => {
             case 'typescript':
                 copyTypeScriptConfig(projectType);
                 break;
-            case 'editor':
+            case 'cursorSettings':
                 copyEditorSettings();
+                break;
+            case 'agentRulesAndSkills':
                 copyCursorRules(projectType);
+                copyCursorSkills(selectedAgentSkills);
                 break;
         }
 

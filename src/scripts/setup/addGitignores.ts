@@ -12,7 +12,8 @@ const configGitignorePatterns: Record<ConfigType, readonly string[]> = {
     eslint: eslintGitignorePatterns,
     prettier: [], // No patterns for prettier
     typescript: [], // No patterns for typescript
-    editor: editorGitignorePatterns,
+    cursorSettings: editorGitignorePatterns,
+    agentRulesAndSkills: [],
 };
 
 /**

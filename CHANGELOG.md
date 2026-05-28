@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.30
+
+- Add agent skills setup, with '/build-api' skill
+- Migrate setup script to use @clack/prompts
+
 ## 0.0.29
 
 - Update TanStack Start and Vite ESLint configs
