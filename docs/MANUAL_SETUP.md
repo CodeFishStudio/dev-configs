@@ -94,5 +94,5 @@ This document provides detailed instructions for manually setting up each config
 
     | Project Type | Rules                                 |
     | ------------ | ------------------------------------- |
-    | All          | `/src/config/editors/rules/universal` |
-    | React        | `/src/config/editors/rules/react`     |
+    | All          | `/src/configs/agents/rules/universal` |
+    | React        | `/src/configs/agents/rules/react`     |

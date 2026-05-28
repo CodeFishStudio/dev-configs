@@ -1,9 +1,9 @@
 import { log, spinner } from '@clack/prompts';
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
+import { configTypeOptions } from './options.js';
 import { getPackageManager } from '../utils/getPackageManager.js';
 const execAsync = promisify(exec);
-import { configTypeOptions } from './options.js';
 /**
  * Dynamically load ESLint dependencies to avoid loading ESLint configs before dependencies are installed
  */

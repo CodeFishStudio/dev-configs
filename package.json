@@ -21,7 +21,7 @@
     },
     "scripts": {
         "build": "bun run clean && tsc && bun run copy-configs",
-        "copy-configs": "cp -r src/configs/prettier dist/configs/ && cp -r src/configs/typescript dist/configs/ && cp -r src/configs/editors dist/configs/",
+        "copy-configs": "cp -r src/configs/prettier dist/configs/ && cp -r src/configs/typescript dist/configs/ && cp -r src/configs/editors dist/configs/ && cp -r src/configs/agents dist/configs/",
         "clean": "rm -rf dist",
         "release:major": "bun run build && bun pm version major && git push && git push --tags",
         "release:minor": "bun run build && bun pm version minor && git push && git push --tags",

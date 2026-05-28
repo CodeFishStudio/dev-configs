@@ -71,7 +71,7 @@ const copyDirectoryFiles = (
  */
 export const copyCursorRules = (projectType: ProjectType): void => {
     const targetDir = join(process.cwd(), '.cursor', 'rules');
-    const rulesSourceDir = join(__dirname, '..', '..', 'configs', 'editors', 'rules');
+    const rulesSourceDir = join(__dirname, '..', '..', 'configs', 'agents', 'rules');
 
     try {
         // Create .cursor/rules directory if it doesn't exist

@@ -42,9 +42,6 @@ export const setup = async () => {
     });
     // Process each selected config
     for (const configType of selectedConfigs) {
-        // log.message(styleText('cyan', configLabel), {
-        //     symbol: styleText('cyan', '•'),
-        // });
         // Install dependencies for this config type
         await installDependencies(configType, projectType);
         // Copy/create config file for this config type
