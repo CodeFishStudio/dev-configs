@@ -1,6 +1,8 @@
-import type { ConfigType, ProjectType, SelectOption } from '../../types/index.js';
+import { Option } from '@clack/prompts';
 
-export const projectTypeOptions: SelectOption<ProjectType>[] = [
+import type { ConfigType, ProjectType } from '../../types/index.js';
+
+export const projectTypeOptions: Option<ProjectType>[] = [
     { label: 'React (TanStack Start)', value: 'reactTanStackStart' },
     { label: 'React (Next.js)', value: 'reactNext' },
     { label: 'React (Vite + React Router)', value: 'reactVite' },
@@ -8,7 +10,7 @@ export const projectTypeOptions: SelectOption<ProjectType>[] = [
     { label: 'Node', value: 'node' },
 ];
 
-export const configTypeOptions: SelectOption<ConfigType>[] = [
+export const configTypeOptions: Option<ConfigType>[] = [
     { label: 'Prettier', value: 'prettier' },
     { label: 'ESLint', value: 'eslint' },
     { label: 'TypeScript', value: 'typescript' },

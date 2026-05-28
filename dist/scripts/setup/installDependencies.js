@@ -1,7 +1,9 @@
-import { execSync } from 'child_process';
-import readline from 'readline';
+import { log, spinner } from '@clack/prompts';
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
 import { getPackageManager } from '../utils/getPackageManager.js';
-import { print } from '../utils/print.js';
+const execAsync = promisify(exec);
+import { configTypeOptions } from './options.js';
 /**
  * Dynamically load ESLint dependencies to avoid loading ESLint configs before dependencies are installed
  */
@@ -51,17 +53,17 @@ const getConfigDependencies = async (configType) => {
     }
 };
 /**
- * Helper function to clear the current line and move cursor to beginning
+ * Helper function to get the display label for a config type
  */
-const clearCurrentLine = () => {
-    readline.moveCursor(process.stdout, 0, -1);
-    readline.clearLine(process.stdout, 0);
-    readline.cursorTo(process.stdout, 0);
+const getConfigTypeLabel = (configType) => {
+    const option = configTypeOptions.find((opt) => opt.value === configType);
+    return option?.label || configType;
 };
 /**
  * Generic function to install dependencies for a config type
  */
 export const installDependencies = async (configType, projectType) => {
+    const configLabel = getConfigTypeLabel(configType);
     let requiredDeps;
     if (configType === 'eslint') {
         requiredDeps = await getESLintDependencies(projectType);
@@ -70,9 +72,9 @@ export const installDependencies = async (configType, projectType) => {
         requiredDeps = await getConfigDependencies(configType);
     }
     if (!requiredDeps || Object.keys(requiredDeps).length === 0) {
+        log.step(configLabel);
         return;
     }
-    print(`⏳ Installing dependencies...`, { indent: 1 });
     // Build install command with all dependencies
     const depsList = Object.entries(requiredDeps)
         .map(([name, version]) => `"${name}@${version}"`)
@@ -91,15 +93,15 @@ export const installDependencies = async (configType, projectType) => {
         default:
             installCommand = `npm install --save-dev ${depsList}`;
     }
+    const s = spinner();
     try {
-        execSync(installCommand, { stdio: 'pipe' });
-        clearCurrentLine();
-        print(`Installed dependencies`, { indent: 1, type: 'success' });
+        s.start(`Installing ${configLabel} dependencies`);
+        await execAsync(installCommand, { cwd: process.cwd() });
+        s.stop(configLabel);
     }
     catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        clearCurrentLine();
-        print(`Failed to install dependencies: ${errorMessage}`, { indent: 1, type: 'error' });
+        s.error(`Failed to install ${configLabel} dependencies: ${errorMessage}`);
     }
 };
 //# sourceMappingURL=installDependencies.js.map

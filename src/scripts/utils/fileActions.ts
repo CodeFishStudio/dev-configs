@@ -1,16 +1,12 @@
-import { existsSync, copyFileSync, writeFileSync } from 'fs';
+import { copyFileSync, existsSync, writeFileSync } from 'fs';
 
-import { print, PrintType } from './print.js';
-
-const printAction = (type: PrintType, message: string) => {
-    print(message, { indent: 1, type });
-};
+import { logStep } from '../setup/utils.js';
 
 export const fileActions = {
     copy: (sourcePath: string, targetPath: string) => {
         const fileName = fileActions.getFileName(targetPath);
         copyFileSync(sourcePath, targetPath);
-        printAction('success', `Copied ${fileName}`);
+        logStep(`Copied ${fileName}`, 'success');
     },
 
     copySilent: (sourcePath: string, targetPath: string) => {
@@ -20,19 +16,19 @@ export const fileActions = {
     copyError: (error: unknown, targetPath: string) => {
         const fileName = fileActions.getFileName(targetPath);
         const errorMsg = error instanceof Error ? error.message : String(error);
-        printAction('error', `Failed to copy ${fileName}: ${errorMsg}`);
+        logStep(`Failed to copy ${fileName}: ${errorMsg}`, 'error');
     },
 
     create: (targetPath: string, content: string) => {
         const fileName = fileActions.getFileName(targetPath);
         writeFileSync(targetPath, content);
-        printAction('success', `Created ${fileName}`);
+        logStep(`Created ${fileName}`, 'success');
     },
 
     createError: (error: unknown, targetPath: string) => {
         const fileName = fileActions.getFileName(targetPath);
         const errorMsg = error instanceof Error ? error.message : String(error);
-        printAction('error', `Failed to create ${fileName}: ${errorMsg}`);
+        logStep(`Failed to create ${fileName}: ${errorMsg}`, 'error');
     },
 
     getFileName: (path: string) => path.split('/').pop() || path,
@@ -40,7 +36,7 @@ export const fileActions = {
     skipIfExists: (targetPath: string) => {
         const fileName = fileActions.getFileName(targetPath);
         if (existsSync(targetPath)) {
-            printAction('skipped', `${fileName} already exists, skipping...`);
+            logStep(`${fileName} already exists, skipping...`, 'skipped');
             return true;
         }
         return false;

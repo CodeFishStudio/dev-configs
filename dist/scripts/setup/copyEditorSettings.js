@@ -1,8 +1,8 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
+import { logStep } from './utils.js';
 import { __dirname } from '../utils/constants.js';
 import { fileActions } from '../utils/fileActions.js';
-import { print } from '../utils/print.js';
 /**
  * Recursively copy directory contents, overwriting any existing files
  */
@@ -28,7 +28,7 @@ const copyDirectoryRecursive = (source, target) => {
         catch (error) {
             const fileName = fileActions.getFileName(targetPath);
             const errorMsg = error instanceof Error ? error.message : String(error);
-            print(`Failed to copy ${fileName}: ${errorMsg}`, { indent: 1, type: 'error' });
+            logStep(`Failed to copy ${fileName}: ${errorMsg}`, 'error');
             throw error; // Re-throw to be caught by parent function
         }
     }
@@ -42,17 +42,17 @@ export const copyEditorSettings = () => {
     try {
         // Check if source directory exists
         if (!existsSync(sourceDir)) {
-            print('Editor settings directory not found', { indent: 1, type: 'error' });
+            logStep('Editor settings directory not found', 'error');
             return;
         }
         // Copy all files and directories recursively
         copyDirectoryRecursive(sourceDir, targetDir);
         // Show single success message
-        print('Copied editor settings', { indent: 1, type: 'success' });
+        logStep('Copied editor settings', 'success');
     }
     catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        print(`Failed to copy editor settings: ${errorMessage}`, { indent: 1, type: 'error' });
+        logStep(`Failed to copy editor settings: ${errorMessage}`, 'error');
     }
 };
 //# sourceMappingURL=copyEditorSettings.js.map

@@ -1,6 +1,6 @@
+import { log } from '@clack/prompts';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { print } from './print.js';
 /**
  * Read and parse package.json from a directory
  * @param directory - Directory containing package.json
@@ -16,7 +16,7 @@ export const readPackageJson = (directory) => {
         return JSON.parse(content);
     }
     catch (error) {
-        print(`Failed to parse package.json: ${error instanceof Error ? error.message : String(error)}`, { type: 'error' });
+        log.error(`Failed to parse package.json: ${error instanceof Error ? error.message : String(error)}`);
         return null;
     }
 };

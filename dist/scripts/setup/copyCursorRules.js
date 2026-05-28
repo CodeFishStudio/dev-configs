@@ -1,11 +1,14 @@
 import { existsSync, mkdirSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
+import { logStep } from './utils.js';
 import { __dirname } from '../utils/constants.js';
 import { fileActions } from '../utils/fileActions.js';
-import { print } from '../utils/print.js';
 const ruleDirectories = [
     { directory: 'universal', projects: 'all' },
-    { directory: 'react', projects: ['reactNext', 'reactTanStackStart', 'reactVite', 'reactNative'] },
+    {
+        directory: 'react',
+        projects: ['reactNext', 'reactTanStackStart', 'reactVite', 'reactNative'],
+    },
 ];
 /**
  * Helper function to check if a project type should get rules from a directory
@@ -18,7 +21,7 @@ const shouldCopyDirectory = (projectType, directory) => {
  */
 const copyDirectoryFiles = (sourceDir, targetDir) => {
     if (!existsSync(sourceDir)) {
-        print(`Source directory not found: ${sourceDir}`, { indent: 1, type: 'error' });
+        logStep(`Source directory not found: ${sourceDir}`, 'error');
         return { copied: 0, skipped: 0 };
     }
     const files = readdirSync(sourceDir);
@@ -66,21 +69,15 @@ export const copyCursorRules = (projectType) => {
         }
         // Report summary
         if (totalSkipped > 0) {
-            print(`Skipped copying ${totalSkipped} Cursor rule${totalSkipped === 1 ? '' : 's'}`, {
-                indent: 1,
-                type: 'skipped',
-            });
+            logStep(`Skipped copying ${totalSkipped} Cursor rule${totalSkipped === 1 ? '' : 's'}`, 'skipped');
         }
         if (totalCopied > 0) {
-            print(`Copied ${totalCopied} Cursor rule${totalCopied === 1 ? '' : 's'}`, {
-                indent: 1,
-                type: 'success',
-            });
+            logStep(`Copied ${totalCopied} Cursor rule${totalCopied === 1 ? '' : 's'}`, 'success');
         }
     }
     catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        print(`Failed to copy Cursor rules: ${errorMessage}`, { indent: 1, type: 'error' });
+        logStep(`Failed to copy Cursor rules: ${errorMessage}`, 'error');
     }
 };
 //# sourceMappingURL=copyCursorRules.js.map

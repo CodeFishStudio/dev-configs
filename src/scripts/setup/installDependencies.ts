@@ -1,10 +1,13 @@
-import { execSync } from 'child_process';
-import readline from 'readline';
+import { log, spinner } from '@clack/prompts';
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
 
+import { configTypeOptions } from './options.js';
 import { getPackageManager } from '../utils/getPackageManager.js';
-import { print } from '../utils/print.js';
 
 import type { ConfigType, ProjectType } from '../../types/index.js';
+
+const execAsync = promisify(exec);
 
 interface ConfigDependencies {
     [key: string]: string;
@@ -67,12 +70,11 @@ const getConfigDependencies = async (configType: ConfigType): Promise<ConfigDepe
 };
 
 /**
- * Helper function to clear the current line and move cursor to beginning
+ * Helper function to get the display label for a config type
  */
-const clearCurrentLine = (): void => {
-    readline.moveCursor(process.stdout, 0, -1);
-    readline.clearLine(process.stdout, 0);
-    readline.cursorTo(process.stdout, 0);
+const getConfigTypeLabel = (configType: ConfigType): string => {
+    const option = configTypeOptions.find((opt) => opt.value === configType);
+    return option?.label || configType;
 };
 
 /**
@@ -82,6 +84,8 @@ export const installDependencies = async (
     configType: ConfigType,
     projectType: ProjectType
 ): Promise<void> => {
+    const configLabel = getConfigTypeLabel(configType);
+
     let requiredDeps: ConfigDependencies;
 
     if (configType === 'eslint') {
@@ -91,10 +95,9 @@ export const installDependencies = async (
     }
 
     if (!requiredDeps || Object.keys(requiredDeps).length === 0) {
+        log.step(configLabel);
         return;
     }
-
-    print(`⏳ Installing dependencies...`, { indent: 1 });
 
     // Build install command with all dependencies
     const depsList = Object.entries(requiredDeps)
@@ -116,13 +119,14 @@ export const installDependencies = async (
             installCommand = `npm install --save-dev ${depsList}`;
     }
 
+    const s = spinner();
+
     try {
-        execSync(installCommand, { stdio: 'pipe' });
-        clearCurrentLine();
-        print(`Installed dependencies`, { indent: 1, type: 'success' });
+        s.start(`Installing ${configLabel} dependencies`);
+        await execAsync(installCommand, { cwd: process.cwd() });
+        s.stop(configLabel);
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        clearCurrentLine();
-        print(`Failed to install dependencies: ${errorMessage}`, { indent: 1, type: 'error' });
+        s.error(`Failed to install ${configLabel} dependencies: ${errorMessage}`);
     }
 };

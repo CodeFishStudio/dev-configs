@@ -1,7 +1,7 @@
+import { logStep } from './utils.js';
 import { gitignorePatterns as editorGitignorePatterns } from '../../configs/editors/gitignore.js';
 import { gitignorePatterns as eslintGitignorePatterns } from '../../configs/eslint/gitignore.js';
 import { addGitignorePatterns } from '../utils/gitignoreUtils.js';
-import { print } from '../utils/print.js';
 
 import type { ConfigType } from '../../types/index.js';
 
@@ -34,7 +34,7 @@ export const addGitignores = async (configType: ConfigType): Promise<void> => {
         const result = addGitignorePatterns(directory, [...patternsToAdd]);
 
         if (!result.success) {
-            print(result.message, { indent: 1, type: 'error' });
+            logStep(result.message, 'error');
             return;
         }
 
@@ -42,20 +42,17 @@ export const addGitignores = async (configType: ConfigType): Promise<void> => {
         if (result.addedPatterns.length > 0) {
             const entryCount = result.addedPatterns.length;
             const entryText = entryCount === 1 ? 'entry' : 'entries';
-            print(`Added ${entryCount} ${entryText} to .gitignore`, { indent: 1, type: 'success' });
+            logStep(`Added ${entryCount} ${entryText} to .gitignore`, 'success');
         }
 
         // Log skipped patterns
         if (result.skippedPatterns.length > 0) {
             const skippedCount = result.skippedPatterns.length;
             const entryText = skippedCount === 1 ? 'entry' : 'entries';
-            print(`Skipped ${skippedCount} ${entryText} already in .gitignore`, {
-                indent: 1,
-                type: 'skipped',
-            });
+            logStep(`Skipped ${skippedCount} ${entryText} already in .gitignore`, 'skipped');
         }
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        print(`Failed to add gitignore patterns: ${errorMessage}`, { indent: 1, type: 'error' });
+        logStep(`Failed to add gitignore patterns: ${errorMessage}`, 'error');
     }
 };

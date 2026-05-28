@@ -13,7 +13,8 @@
         "dist",
         "**/*.test.ts",
         "**/*.spec.ts",
-        "src/scripts/updateReadmeVersion/index.ts"
+        "src/scripts/updateReadmeVersion/index.ts",
+        "src/scripts/testSetupSandbox/index.ts"
     ],
     "ts-node": {
         "esm": true

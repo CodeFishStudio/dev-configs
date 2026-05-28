@@ -1,6 +1,6 @@
+import { log } from '@clack/prompts';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { print } from './print.js';
 /**
  * Read and parse .gitignore from a directory
  * @param directory - Directory containing .gitignore
@@ -16,7 +16,7 @@ export const readGitignore = (directory) => {
         return content.split('\n').map((line) => line.trim());
     }
     catch (error) {
-        print(`Failed to read .gitignore: ${error instanceof Error ? error.message : String(error)}`, { type: 'error' });
+        log.error(`Failed to read .gitignore: ${error instanceof Error ? error.message : String(error)}`);
         return null;
     }
 };

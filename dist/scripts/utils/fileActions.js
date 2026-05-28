@@ -1,13 +1,10 @@
-import { existsSync, copyFileSync, writeFileSync } from 'fs';
-import { print } from './print.js';
-const printAction = (type, message) => {
-    print(message, { indent: 1, type });
-};
+import { copyFileSync, existsSync, writeFileSync } from 'fs';
+import { logStep } from '../setup/utils.js';
 export const fileActions = {
     copy: (sourcePath, targetPath) => {
         const fileName = fileActions.getFileName(targetPath);
         copyFileSync(sourcePath, targetPath);
-        printAction('success', `Copied ${fileName}`);
+        logStep(`Copied ${fileName}`, 'success');
     },
     copySilent: (sourcePath, targetPath) => {
         copyFileSync(sourcePath, targetPath);
@@ -15,23 +12,23 @@ export const fileActions = {
     copyError: (error, targetPath) => {
         const fileName = fileActions.getFileName(targetPath);
         const errorMsg = error instanceof Error ? error.message : String(error);
-        printAction('error', `Failed to copy ${fileName}: ${errorMsg}`);
+        logStep(`Failed to copy ${fileName}: ${errorMsg}`, 'error');
     },
     create: (targetPath, content) => {
         const fileName = fileActions.getFileName(targetPath);
         writeFileSync(targetPath, content);
-        printAction('success', `Created ${fileName}`);
+        logStep(`Created ${fileName}`, 'success');
     },
     createError: (error, targetPath) => {
         const fileName = fileActions.getFileName(targetPath);
         const errorMsg = error instanceof Error ? error.message : String(error);
-        printAction('error', `Failed to create ${fileName}: ${errorMsg}`);
+        logStep(`Failed to create ${fileName}: ${errorMsg}`, 'error');
     },
     getFileName: (path) => path.split('/').pop() || path,
     skipIfExists: (targetPath) => {
         const fileName = fileActions.getFileName(targetPath);
         if (existsSync(targetPath)) {
-            printAction('skipped', `${fileName} already exists, skipping...`);
+            logStep(`${fileName} already exists, skipping...`, 'skipped');
             return true;
         }
         return false;

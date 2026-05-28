@@ -1,11 +1,11 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
+import { logStep } from './utils.js';
 import { eslintScripts } from '../../configs/eslint/scripts.js';
 import { prettierScripts } from '../../configs/prettier/scripts.js';
 import { typescriptScripts } from '../../configs/typescript/scripts.js';
 import { getPackageManager } from '../utils/getPackageManager.js';
 import { addScripts, isValidPackageJson, readPackageJson, writePackageJson, } from '../utils/packageJsonUtils.js';
-import { print } from '../utils/print.js';
 /**
  * Map of config types to their script definitions
  */
@@ -35,13 +35,13 @@ export const addPackageJsonScripts = async (configType) => {
         // Check if package.json exists
         const packageJsonPath = join(directory, 'package.json');
         if (!existsSync(packageJsonPath)) {
-            print(`No package.json found in directory`, { indent: 1, type: 'error' });
+            logStep('No package.json found in directory', 'error');
             return;
         }
         // Read existing package.json
         const existingPackageJson = readPackageJson(directory);
         if (!existingPackageJson || !isValidPackageJson(existingPackageJson)) {
-            print(`Invalid or corrupted package.json`, { indent: 1, type: 'error' });
+            logStep('Invalid or corrupted package.json', 'error');
             return;
         }
         // Get scripts to add
@@ -51,17 +51,17 @@ export const addPackageJsonScripts = async (configType) => {
         const updatedPackageJson = addScripts(existingPackageJson, scriptsRecord);
         const writeResult = writePackageJson(directory, updatedPackageJson);
         if (!writeResult.success) {
-            print(writeResult.message, { indent: 1, type: 'error' });
+            logStep(writeResult.message, 'error');
             return;
         }
         // Log added scripts
         scriptsToAdd.forEach((script) => {
-            print(`Added '${script.name}' package.json script`, { indent: 1, type: 'success' });
+            logStep(`Added '${script.name}' package.json script`, 'success');
         });
     }
     catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        print(`Failed to add package.json scripts: ${errorMessage}`, { indent: 1, type: 'error' });
+        logStep(`Failed to add package.json scripts: ${errorMessage}`, 'error');
     }
 };
 //# sourceMappingURL=addPackageJsonScripts.js.map
