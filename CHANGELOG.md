@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.31
+
+- Update colors
+
 ## 0.0.30
 
 - Add agent skills setup, with '/build-api' skill

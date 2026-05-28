@@ -14,6 +14,7 @@ import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
 import { createESLintConfig } from './createESLintConfig.js';
 import { installDependencies } from './installDependencies.js';
 import { configTypeOptions, projectTypeOptions } from './options.js';
+import { styleHexText } from './utils.js';
 
 /**
  * Main execution
@@ -28,7 +29,7 @@ export const setup = async (): Promise<void> => {
         process.exit(1);
     }
 
-    intro(styleText(['bgCyan', 'black'], ' cfs-setup '));
+    intro(styleHexText(' cfs-setup ', '#2D030B', '#F22E3A'));
 
     // Prompt for project type and config types
     const { projectType, selectedConfigs } = await group(
