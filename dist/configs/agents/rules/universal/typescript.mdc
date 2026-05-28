@@ -13,18 +13,24 @@ alwaysApply: false
 - If you must use `any`, add a TODO comment explaining why and plan to fix it
 
 ```typescript
-// Bad
+//  Bad - Using any type
 const data: any = fetchData();
 const items: any[] = getItems();
 
-// Good
+//  Good - Using proper types
 const data: UserData = fetchData();
 const items: Item[] = getItems();
 
-// Good — unknown when shape is not known at compile time
+//  Good - Using unknown for truly unknown data
 const unknownData: unknown = fetchUnknownData();
 if (typeof unknownData === 'object' && unknownData !== null) {
+    // Type guard to safely use the data
     const data = unknownData as Record<string, unknown>;
+}
+
+//  Good - Using generics
+function processData<T>(data: T): T {
+    return data;
 }
 ```
 
@@ -35,16 +41,16 @@ if (typeof unknownData === 'object' && unknownData !== null) {
 - If there is absolutely no way around a type cast, include an inline comment explaining why the cast is necessary
 
 ```typescript
-// Bad
+// Bad - Type casting used to silence TypeScript
 const user = response as User;
 
-// Good
+// Good - Narrow using runtime checks
 if (typeof response === 'object' && response !== null && 'id' in response) {
     const user = response;
 }
 
-// Good — last resort only; comment why the cast is required
-// Third-party API returns untyped payload and cannot be changed
+// Acceptable only as a last resort - cast with explicit rationale
+// Last resort: third-party API returns untyped payload and cannot be changed
 const payload = externalResult as ExternalPayload;
 ```
 
@@ -55,13 +61,13 @@ const payload = externalResult as ExternalPayload;
 - If you're certain a value exists, prove it with validation/type guards before usage
 
 ```typescript
-// Bad
+// Bad - Using non-null assertion
 const user = getUser()!;
 const name = user.name!;
 
-// Good
+// Good - Using optional chaining and null checks
 const user = getUser();
-if (user?.name) {
+if (user) {
     const name = user.name;
 }
 ```

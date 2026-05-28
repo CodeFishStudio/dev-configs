@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.34
+
+- Update rules
+
 ## 0.0.33
 
 - Update rules

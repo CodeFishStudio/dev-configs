@@ -80,11 +80,12 @@ Always follow this exact order to maintain consistency across the codebase.
 - Must document complex props with comments
 - Must use meaningful prop names
 - Must provide default values when appropriate
+- For default prop values, assign them inline in the props destructuring (e.g. `size = 'small'`)
 
 ```tsx
 // Good: Props destructuring in function body
 export const Button = (props: ButtonProps) => {
-    const { label, onClick, disabled = false } = props;
+    const { label, onClick, disabled = false, size = 'small' } = props;
 
     return (
         <button onClick={onClick} disabled={disabled}>
@@ -93,8 +94,9 @@ export const Button = (props: ButtonProps) => {
     );
 };
 
-// Bad: Props destructuring in parameters
-export const Button = ({ label, onClick, disabled = false }: ButtonProps) => {
+// Bad: Props destructuring in parameters, default values not set inline
+export const Button = ({ label, onClick, disabled, size: sizeProp }: ButtonProps) => {
+    const size = sizeProp ?? 'small';
     return (
         <button onClick={onClick} disabled={disabled}>
             {label}
@@ -135,6 +137,25 @@ const UserList = (props: Props) => {
     return <div>{/* render filtered users */}</div>;
 };
 ```
+
+## Conditional rendering
+
+- When a branch renders nothing, prefer `condition && (…)` over ternary to `null`.
+- Avoid: `condition ? <Component /> : null` — use: `condition && <Component />`
+
+```tsx
+// Good: Logical AND when the false branch is nothing
+{
+    !!actions && <div>{actions}</div>;
+}
+
+// Bad: Ternary with null for optional UI
+{
+    actions != null ? <div>{actions}</div> : null;
+}
+```
+
+- Keep using a ternary when both branches render real content (e.g. `a ? <A /> : <B />`).
 
 ## Documentation
 
