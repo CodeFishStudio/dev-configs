@@ -6,8 +6,8 @@ import { join } from 'path';
 import { addGitignores } from './addGitignores.js';
 import { addPackageJsonScripts } from './addPackageJsonScripts.js';
 import { agentSkillOptions } from './agentSkillOptions.js';
-import { copyCursorRules } from './copyCursorRules.js';
-import { copyCursorSkills } from './copyCursorSkills.js';
+import { copyAgentRules } from './copyAgentRules.js';
+import { copyAgentSkills } from './copyAgentSkills.js';
 import { copyEditorSettings } from './copyEditorSettings.js';
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
@@ -92,8 +92,8 @@ export const setup = async (): Promise<void> => {
                 copyEditorSettings();
                 break;
             case 'agentRulesAndSkills':
-                copyCursorRules(projectType);
-                copyCursorSkills(selectedAgentSkills);
+                copyAgentRules(projectType);
+                copyAgentSkills(selectedAgentSkills);
                 break;
         }
 

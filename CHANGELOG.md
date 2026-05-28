@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.32
+
+- Overwrite any existing agent skills and rules on installation
+
 ## 0.0.31
 
 - Update colors

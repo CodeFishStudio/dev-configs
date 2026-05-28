@@ -30,18 +30,14 @@ const shouldCopyDirectory = (projectType: ProjectType, directory: RulesDirectory
 /**
  * Function to copy all files from a source directory to target directory
  */
-const copyDirectoryFiles = (
-    sourceDir: string,
-    targetDir: string
-): { copied: number; skipped: number } => {
+const copyDirectoryFiles = (sourceDir: string, targetDir: string): number => {
     if (!existsSync(sourceDir)) {
         logStep(`Source directory not found: ${sourceDir}`, 'error');
-        return { copied: 0, skipped: 0 };
+        return 0;
     }
 
     const files = readdirSync(sourceDir);
     let copied = 0;
-    let skipped = 0;
 
     for (const file of files) {
         const sourcePath = join(sourceDir, file);
@@ -52,58 +48,40 @@ const copyDirectoryFiles = (
             continue;
         }
 
-        // Skip if file already exists
-        if (fileActions.skipIfExistsSilent(targetPath)) {
-            skipped++;
-            continue;
-        }
-
-        // Copy the file
         fileActions.copySilent(sourcePath, targetPath);
         copied++;
     }
 
-    return { copied, skipped };
+    return copied;
 };
 
 /**
- * Function to copy Cursor rules files to .cursor/rules/ directory
+ * Copy agent rule files to `.cursor/rules/`.
+ * Overwrites any existing rule files at the same path; other files in the directory are left unchanged.
  */
-export const copyCursorRules = (projectType: ProjectType): void => {
+export const copyAgentRules = (projectType: ProjectType): void => {
     const targetDir = join(process.cwd(), '.cursor', 'rules');
     const rulesSourceDir = join(__dirname, '..', '..', 'configs', 'agents', 'rules');
 
     try {
-        // Create .cursor/rules directory if it doesn't exist
         if (!existsSync(targetDir)) {
             mkdirSync(targetDir, { recursive: true });
         }
 
         let totalCopied = 0;
-        let totalSkipped = 0;
 
-        // Loop through each rule directory and copy files if applicable
         for (const ruleDir of ruleDirectories) {
             if (shouldCopyDirectory(projectType, ruleDir)) {
                 const sourceDir = join(rulesSourceDir, ruleDir.directory);
-                const { copied, skipped } = copyDirectoryFiles(sourceDir, targetDir);
-                totalCopied += copied;
-                totalSkipped += skipped;
+                totalCopied += copyDirectoryFiles(sourceDir, targetDir);
             }
         }
 
-        // Report summary
-        if (totalSkipped > 0) {
-            logStep(
-                `Skipped copying ${totalSkipped} Cursor rule${totalSkipped === 1 ? '' : 's'}`,
-                'skipped'
-            );
-        }
         if (totalCopied > 0) {
-            logStep(`Copied ${totalCopied} Cursor rule${totalCopied === 1 ? '' : 's'}`, 'success');
+            logStep(`Installed ${totalCopied} agent rule${totalCopied === 1 ? '' : 's'}`, 'success');
         }
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        logStep(`Failed to copy Cursor rules: ${errorMessage}`, 'error');
+        logStep(`Failed to copy agent rules: ${errorMessage}`, 'error');
     }
 };
