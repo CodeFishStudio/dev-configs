@@ -12,29 +12,19 @@ alwaysApply: false
 - Instead of `any`, use proper typing, generics, or `unknown` for truly unknown data
 - If you must use `any`, add a TODO comment explaining why and plan to fix it
 
-### Examples:
-
 ```typescript
-// ❌ Bad - Using any type
+// Bad
 const data: any = fetchData();
-const user: any = getUser();
 const items: any[] = getItems();
 
-// ✅ Good - Using proper types
+// Good
 const data: UserData = fetchData();
-const user: User | null = getUser();
 const items: Item[] = getItems();
 
-// ✅ Good - Using unknown for truly unknown data
+// Good — unknown when shape is not known at compile time
 const unknownData: unknown = fetchUnknownData();
 if (typeof unknownData === 'object' && unknownData !== null) {
-    // Type guard to safely use the data
     const data = unknownData as Record<string, unknown>;
-}
-
-// ✅ Good - Using generics
-function processData<T>(data: T): T {
-    return data;
 }
 ```
 
@@ -44,20 +34,17 @@ function processData<T>(data: T): T {
 - Prefer safer alternatives first: proper type definitions, narrowing with type guards, generics, and runtime validation
 - If there is absolutely no way around a type cast, include an inline comment explaining why the cast is necessary
 
-### Examples:
-
 ```typescript
-// ❌ Bad - Type casting used to silence TypeScript
+// Bad
 const user = response as User;
-const id = (event.target as HTMLInputElement).value;
 
-// ✅ Good - Narrow using runtime checks
+// Good
 if (typeof response === 'object' && response !== null && 'id' in response) {
     const user = response;
 }
 
-// ✅ Acceptable only as a last resort - cast with explicit rationale
-// Last resort: third-party API returns untyped payload and cannot be changed
+// Good — last resort only; comment why the cast is required
+// Third-party API returns untyped payload and cannot be changed
 const payload = externalResult as ExternalPayload;
 ```
 
@@ -67,25 +54,14 @@ const payload = externalResult as ExternalPayload;
 - Instead of using `!`, use proper null checks, optional chaining (`?.`), or type guards
 - If you're certain a value exists, prove it with validation/type guards before usage
 
-### Examples:
-
 ```typescript
-// ❌ Bad - Using non-null assertion
+// Bad
 const user = getUser()!;
 const name = user.name!;
 
-// ✅ Good - Using optional chaining and null checks
+// Good
 const user = getUser();
-if (user) {
+if (user?.name) {
     const name = user.name;
 }
-
-// ✅ Good - Using type guards
-const user = getUser();
-if (user && user.name) {
-    const name = user.name;
-}
-
-// ✅ Good - Using optional chaining
-const name = user?.name;
 ```

@@ -10,6 +10,25 @@ alwaysApply: true
 
 - Prefer arrow functions over function declarations for variable assignments
 - Always use const for function assignments (never let or var)
+- For a **single-expression** body (including one JSX tree), use an **implicit return** — `(expr)` when the expression spans multiple lines — not `{ return expr; }`. Use a block body only for multiple statements or locals before the value.
+
+```tsx
+// Good
+items.map((item) => (
+    <SelectItem key={item.value} value={item.value}>
+        {item.label}
+    </SelectItem>
+));
+
+// Bad
+items.map((item) => {
+    return (
+        <SelectItem key={item.value} value={item.value}>
+            {item.label}
+        </SelectItem>
+    );
+});
+```
 
 ## Control Flow
 
@@ -18,11 +37,56 @@ alwaysApply: true
 - Structure functions with early returns: validate inputs first, then process logic
 - Avoid deep nesting by returning early on error conditions or invalid states
 
+```javascript
+// Good
+const processUser = (user) => {
+    if (!user) return null;
+    if (!user.email) return null;
+    return { id: user.id, email: user.email.toLowerCase() };
+};
+
+// Bad
+const processUser = (user) => {
+    if (user) {
+        if (user.email) {
+            return { id: user.id, email: user.email.toLowerCase() };
+        }
+    }
+    return null;
+};
+```
+
+## Conditionals and booleans
+
+- Branch on **truthiness** (`if (x)`, `x ? a : b`, `!x`) when you only care whether a value is usable — not `x != null` or explicit null/undefined checks unless `0`, `''`, or `false` must be treated separately from missing (then use `??` or explicit null/undefined checks).
+- When you need a **`boolean` primitive** (props, return types), use **`!!value`** — not `Boolean(value)`. In `if` / ternaries that only branch on "has a value", you usually need neither `!!` nor `Boolean`.
+
+```javascript
+// Good
+if (user.email) send(user.email);
+const label = lead.source ? map[lead.source] : '—';
+const hasErrors = !!errors.length;
+
+// Bad (unless falsy values are valid data)
+if (user.email != null) send(user.email);
+const hasErrors = Boolean(errors.length);
+```
+
 ## Array Iteration
 
 - Prefer `array.forEach((item) => { ... })` over `for (const item of array) { ... }`
 - Use forEach for side effects and iteration over arrays
 - Reserve for...of loops for cases where early break/continue is needed
+
+```javascript
+// Good
+items.forEach((item) => updateItem(item));
+
+// Bad (unless you need break/continue)
+for (const item of items) {
+    updateItem(item);
+}
+```
 
 ## Variable Naming
 
@@ -30,95 +94,47 @@ alwaysApply: true
 - Prefer clarity over brevity in variable names
 - Use complete words that clearly express the variable's purpose
 
+```javascript
+// Good
+const handleUser = (user) => {
+    if (!user) return null;
+    return user.name;
+};
+
+// Bad
+const handleUser = (usr) => {
+    if (!usr) return null;
+    return usr.name;
+};
+```
+
 ## Documentation
 
 - Include JSDoc comments for all exported functions and complex internal functions
 - Document function parameters, return values, and any side effects
 - Update documentation when function signatures or behavior changes
 - Use @param, @returns, and @example tags for comprehensive documentation
+- **Always** use a multi-line JSDoc block — never a single-line `/** … */` comment, even for short descriptions
+
+```javascript
+// Good
+/**
+ * Returns the display label for a lead source.
+ */
+const getSourceLabel = (source) => { ... };
+
+// Bad
+/** Returns the display label for a lead source. */
+const getSourceLabel = (source) => { ... };
+```
+
+## ESLint
+
+- **Never** add ESLint suppressions: no `eslint-disable`, `eslint-disable-next-line`, `eslint-disable-line`, or file-level `/* eslint-disable … */` comments.
+- If a rule fires, **fix the code** (refactor, types, imports, hook deps, etc.) or adjust project config in an agreed change — do not silence the linter in source.
 
 ## Preserve existing comments
 
 - Do not delete or strip existing comments as part of an unrelated edit (e.g. refactoring, logging changes, formatting). If the comment still describes the code correctly, keep it.
 - Only remove or rewrite a comment when the behavior it describes has actually changed, or when it is clearly wrong or redundant with adjacent code.
 - Restoring accidentally removed comments is preferred over leaving the code comment-free.
-
-## Examples
-
-### Good Function Structure
-
-```javascript
-// Good: Arrow function with guard clauses
-const processUser = (user) => {
-    if (!user) return null;
-    if (!user.email) return null;
-
-    // Main logic here
-    return {
-        id: user.id,
-        email: user.email.toLowerCase(),
-        name: user.name?.trim(),
-    };
-};
-```
-
-### Avoid Deep Nesting
-
-```javascript
-// Avoid: Deep nesting
-const processUser = (user) => {
-    if (user) {
-        if (user.email) {
-            if (user.name) {
-                // Main logic buried deep
-            }
-        }
-    }
-};
-```
-
-### Array Iteration
-
-```javascript
-// Good: Prefer forEach for array iteration
-const processItems = (items) => {
-    items.forEach((item) => {
-        updateItem(item);
-    });
-};
-
-// Avoid: for...of loops (unless early break/continue is needed)
-const processItems = (items) => {
-    for (const item of items) {
-        updateItem(item);
-    }
-};
-```
-
-### Variable Abbreviations
-
-```javascript
-// Good: Use full words
-const variants = {
-    enter: (direction: 'left' | 'right') => ({
-        x: direction === 'left' ? 32 : -32,
-    }),
-};
-
-const handleUser = (user) => {
-    if (!user) return null;
-    return user.name;
-};
-
-// Avoid: Variable abbreviations
-const variants = {
-    enter: (dir: 'left' | 'right') => ({
-        x: dir === 'left' ? 32 : -32,
-    }),
-};
-
-const handleUser = (usr) => {
-    if (!usr) return null;
-    return usr.name;
-};
-```

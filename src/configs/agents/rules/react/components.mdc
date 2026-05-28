@@ -22,8 +22,6 @@ alwaysApply: false
 - `ComponentName.tsx` contains the actual component definition
 - Component files must use PascalCase (e.g., `Button.tsx`, `UserProfile.tsx`)
 
-**Example:**
-
 ```
 src/components/Button/
   ├── index.ts          (contains: export * from './Button';)
@@ -43,8 +41,6 @@ src/components/Button/
           └── SubComponentA.tsx
           └── SubComponentB.tsx
     ```
-
-**Example:**
 
 ```
 src/components/UserProfile/
@@ -72,7 +68,7 @@ For React components, the order of a file should be
     - Effects
     - Render
 
-**Important:** Always follow this exact order to maintain consistency across the codebase.
+Always follow this exact order to maintain consistency across the codebase.
 
 ## Props
 
@@ -84,8 +80,6 @@ For React components, the order of a file should be
 - Must document complex props with comments
 - Must use meaningful prop names
 - Must provide default values when appropriate
-
-**Example:**
 
 ```tsx
 // Good: Props destructuring in function body
@@ -115,8 +109,6 @@ export const Button = ({ label, onClick, disabled = false }: ButtonProps) => {
   existing state/props, compute it directly instead of storing it separately.
 - Avoid creating separate state for filtered arrays, lookups, or any value that can be derived from existing data.
 - Only use `useMemo` for expensive computations.
-
-**Examples:**
 
 ```tsx
 // Good: Derived state
@@ -149,8 +141,6 @@ const UserList = (props: Props) => {
 - Must include JSDoc comments for complex components
 - Must keep documentation up to date with changes
 - Document component purpose, props, and any side effects
-
-**Example:**
 
 ```tsx
 // Good: Has interface and JSDoc comments
