@@ -6,7 +6,12 @@ import { Option } from '@clack/prompts';
 export const agentSkillOptions = [
     {
         value: 'build-api',
-        label: 'build-api',
-        hint: 'TanStack Query API layer `/lib/api/`',
+        label: '/build-api',
+        hint: 'Front end: Build a TanStack Query API layer `/lib/api/`',
+    },
+    {
+        value: 'maintenance-report',
+        label: '/maintenance-report',
+        hint: 'Produce a client-facing maintenance report vs base branch',
     },
 ] as const satisfies Option<string>[];

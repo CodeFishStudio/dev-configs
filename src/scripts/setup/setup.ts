@@ -5,7 +5,11 @@ import { join } from 'path';
 
 import { addGitignores } from './addGitignores.js';
 import { addPackageJsonScripts } from './addPackageJsonScripts.js';
-import { type AgentRuleGroup, getAgentRuleGroupOptions } from './agentRuleGroupOptions.js';
+import {
+    type AgentRuleGroup,
+    getAgentRuleGroupOptions,
+    getInitialAgentRuleGroups,
+} from './agentRuleGroupOptions.js';
 import { agentSkillOptions } from './agentSkillOptions.js';
 import { copyAgentRules } from './copyAgentRules.js';
 import { copyAgentSkills } from './copyAgentSkills.js';
@@ -64,7 +68,7 @@ export const setup = async (): Promise<void> => {
         const agentRuleGroupsPrompt = await multiselect<AgentRuleGroup>({
             message: `Select agent rule groups to install${styleText(['gray'], ' (space to toggle)')}`,
             options: ruleGroupOptions,
-            initialValues: ['universal'],
+            initialValues: getInitialAgentRuleGroups(projectType),
             required: true,
         });
 

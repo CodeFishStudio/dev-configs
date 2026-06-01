@@ -50,3 +50,16 @@ export const getAgentRuleGroupOptions = (projectType: ProjectType): Option<Agent
 
     return options;
 };
+
+/**
+ * Rule groups pre-selected in cfs-setup for the given project type.
+ */
+export const getInitialAgentRuleGroups = (projectType: ProjectType): AgentRuleGroup[] => {
+    const initialGroups: AgentRuleGroup[] = ['universal'];
+
+    if (isReactProjectType(projectType)) {
+        initialGroups.push('react');
+    }
+
+    return initialGroups;
+};

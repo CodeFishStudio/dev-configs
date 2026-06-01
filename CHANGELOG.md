@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.36
+
+- Add /maintenance-report skill
+
 ## 0.0.35
 
 - Add agent rule groups
