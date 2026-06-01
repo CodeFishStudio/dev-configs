@@ -5,27 +5,7 @@ import { logStep } from './utils.js';
 import { __dirname } from '../utils/constants.js';
 import { fileActions } from '../utils/fileActions.js';
 
-import type { ProjectType } from '../../types/index.js';
-
-type RulesDirectory = {
-    directory: string;
-    projects: ProjectType[] | 'all';
-};
-
-const ruleDirectories: RulesDirectory[] = [
-    { directory: 'universal', projects: 'all' },
-    {
-        directory: 'react',
-        projects: ['reactNext', 'reactTanStackStart', 'reactVite', 'reactNative'],
-    },
-];
-
-/**
- * Helper function to check if a project type should get rules from a directory
- */
-const shouldCopyDirectory = (projectType: ProjectType, directory: RulesDirectory): boolean => {
-    return directory.projects === 'all' || directory.projects.includes(projectType);
-};
+import type { AgentRuleGroup } from './agentRuleGroupOptions.js';
 
 /**
  * Function to copy all files from a source directory to target directory
@@ -59,7 +39,7 @@ const copyDirectoryFiles = (sourceDir: string, targetDir: string): number => {
  * Copy agent rule files to `.cursor/rules/`.
  * Overwrites any existing rule files at the same path; other files in the directory are left unchanged.
  */
-export const copyAgentRules = (projectType: ProjectType): void => {
+export const copyAgentRules = (selectedRuleGroups: AgentRuleGroup[]): void => {
     const targetDir = join(process.cwd(), '.cursor', 'rules');
     const rulesSourceDir = join(__dirname, '..', '..', 'configs', 'agents', 'rules');
 
@@ -70,12 +50,10 @@ export const copyAgentRules = (projectType: ProjectType): void => {
 
         let totalCopied = 0;
 
-        for (const ruleDir of ruleDirectories) {
-            if (shouldCopyDirectory(projectType, ruleDir)) {
-                const sourceDir = join(rulesSourceDir, ruleDir.directory);
-                totalCopied += copyDirectoryFiles(sourceDir, targetDir);
-            }
-        }
+        selectedRuleGroups.forEach((ruleGroup) => {
+            const sourceDir = join(rulesSourceDir, ruleGroup);
+            totalCopied += copyDirectoryFiles(sourceDir, targetDir);
+        });
 
         if (totalCopied > 0) {
             logStep(`Installed ${totalCopied} agent rule${totalCopied === 1 ? '' : 's'}`, 'success');

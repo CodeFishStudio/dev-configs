@@ -1,0 +1,111 @@
+---
+description: Supabase migrations, RLS on new public tables, updated_at triggers
+globs: supabase/migrations/*.sql
+alwaysApply: false
+---
+
+# Supabase migrations
+
+## Migration file names
+
+New migration files under **`supabase/migrations/`** must use Supabase’s **`YYYYMMDDHHmmss_description.sql`** prefix: **14 digits** for the timestamp, then an underscore and a short snake_case description.
+
+- Include the **full time** — **`HH`**, **`mm`**, and **`ss`** (e.g. `20260507130542`), in **UTC**.
+- **Do not** zero out minutes and seconds (or use a coarse synthetic time like `…120000`) when naming a **new** migration. Use the real time from **`supabase migration new`** or the current clock so same-day migrations sort and merge predictably.
+
+Older migrations in the project may use round timestamps; leave them as-is unless you are renaming for a deliberate reason.
+
+---
+
+## New `public` tables
+
+### Row-level security
+
+Migrations that **`CREATE TABLE`** in **`public`** (or add a new **`public`** table another way) must **enable row-level security** and define **policies** before the table is usable from the API.
+
+1. **`ALTER TABLE … ENABLE ROW LEVEL SECURITY`** on the new table (and on a **partitioned parent** if you use partitioning; leaf partitions follow the parent).
+2. **`CREATE POLICY`** (or policies) that match **how this project already restricts access** — search existing migrations under **`supabase/migrations/`** for policy names, roles (`authenticated`, `anon`, `service_role`), and expressions (`auth.uid()`, tenant ids, etc.).
+
+Do **not** ship a new **`public`** table with RLS enabled but **no** policies (nothing is accessible) or with policies that contradict the rest of the schema.
+
+### Example patterns
+
+**Per-user rows** (common for user-owned data):
+
+```sql
+alter table public.your_table enable row level security;
+
+create policy your_table_select_own on public.your_table
+    for select
+    to authenticated
+    using (auth.uid() = user_id);
+
+create policy your_table_insert_own on public.your_table
+    for insert
+    to authenticated
+    with check (auth.uid() = user_id);
+
+-- add update/delete policies with the same ownership check as appropriate
+```
+
+**Authenticated clients, project-wide access** (only when the app intentionally treats all signed-in users as trusted for that table):
+
+```sql
+alter table public.your_table enable row level security;
+
+create policy your_table_authenticated_all on public.your_table
+    for all
+    to authenticated
+    using (true)
+    with check (true);
+```
+
+### Notes
+
+- Add RLS and policies in the **same migration** that creates the table (or a follow-up migration before deploy).
+- Grant **`anon`** only when the product requires public reads/writes; default to **no `anon` policies** unless existing migrations establish otherwise.
+- Reuse **consistent policy names** within a project so idempotent migrations can **`DROP POLICY IF EXISTS`** before **`CREATE POLICY`**.
+
+---
+
+## `updated_at` trigger
+
+PostgreSQL **`DEFAULT now()`** on **`updated_at`** only applies on **INSERT**. To keep **`updated_at`** current on **UPDATE**, attach a **`BEFORE UPDATE`** trigger whenever a **`public`** table has an **`updated_at`** column.
+
+### Shared trigger function
+
+If the project already defines a trigger function (search migrations for e.g. **`set_updated_at`**, **`moddatetime`**, or **`handle_updated_at`**), **reuse it**. Otherwise create one once (in the same migration or an earlier one):
+
+```sql
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+    new.updated_at = now();
+    return new;
+end;
+$$;
+```
+
+### When to attach
+
+Whenever a migration **`CREATE TABLE … updated_at`** in **`public`** (or **`ALTER TABLE … ADD COLUMN updated_at`**), add a **`BEFORE UPDATE`** trigger on that table **in the same migration** (unless **`updated_at`** is intentionally unmanaged).
+
+Prefer **idempotent** DDL: **`DROP TRIGGER IF EXISTS … ON public.your_table`** then **`CREATE TRIGGER …`**. Use the **same trigger and function names** as elsewhere in the project when they exist.
+
+### Example (replace names to match the project)
+
+```sql
+drop trigger if exists set_updated_at on public.your_table;
+
+create trigger set_updated_at
+    before update on public.your_table
+    for each row
+    execute function public.set_updated_at();
+```
+
+### Notes
+
+- A one-time backfill migration may have attached triggers to **existing** tables; **new** tables still need the trigger when they are created later.
+- For **partitioned** tables, confirm trigger behavior for your Postgres version (parent vs partitions — follow Postgres docs for your version).

@@ -4,6 +4,7 @@ import { styleText } from 'node:util';
 import { join } from 'path';
 import { addGitignores } from './addGitignores.js';
 import { addPackageJsonScripts } from './addPackageJsonScripts.js';
+import { getAgentRuleGroupOptions } from './agentRuleGroupOptions.js';
 import { agentSkillOptions } from './agentSkillOptions.js';
 import { copyAgentRules } from './copyAgentRules.js';
 import { copyAgentSkills } from './copyAgentSkills.js';
@@ -13,7 +14,6 @@ import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
 import { createESLintConfig } from './createESLintConfig.js';
 import { installDependencies } from './installDependencies.js';
 import { configTypeOptions, projectTypeOptions } from './options.js';
-import { styleHexText } from './utils.js';
 /**
  * Main execution
  */
@@ -24,7 +24,7 @@ export const setup = async () => {
         log.error('No package.json found in current directory. Please run this command from your project root.');
         process.exit(1);
     }
-    intro(styleHexText(' cfs-setup ', '#2D030B', '#F22E3A'));
+    intro(styleText(['bgCyan', 'black'], ' cfs-setup '));
     // Prompt for project type and config types
     const { projectType, selectedConfigs } = await group({
         projectType: () => select({
@@ -43,8 +43,21 @@ export const setup = async () => {
             process.exit(0);
         },
     });
+    let selectedAgentRuleGroups = [];
     let selectedAgentSkills = [];
     if (selectedConfigs.includes('agentRulesAndSkills')) {
+        const ruleGroupOptions = getAgentRuleGroupOptions(projectType);
+        const agentRuleGroupsPrompt = await multiselect({
+            message: `Select agent rule groups to install${styleText(['gray'], ' (space to toggle)')}`,
+            options: ruleGroupOptions,
+            initialValues: ['universal'],
+            required: true,
+        });
+        if (isCancel(agentRuleGroupsPrompt)) {
+            cancel('Setup cancelled.');
+            process.exit(0);
+        }
+        selectedAgentRuleGroups = agentRuleGroupsPrompt;
         const agentSkillsPrompt = await multiselect({
             message: `Select agent skills to install${styleText(['gray'], ' (space to toggle)')}`,
             options: agentSkillOptions,
@@ -75,7 +88,7 @@ export const setup = async () => {
                 copyEditorSettings();
                 break;
             case 'agentRulesAndSkills':
-                copyAgentRules(projectType);
+                copyAgentRules(selectedAgentRuleGroups);
                 copyAgentSkills(selectedAgentSkills);
                 break;
         }

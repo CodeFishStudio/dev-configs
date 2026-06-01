@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.35
+
+- Add agent rule groups
+
 ## 0.0.34
 
 - Update rules
