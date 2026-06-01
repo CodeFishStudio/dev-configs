@@ -8,9 +8,9 @@ Shared configurations for dev tools across CodeFish Studio projects.
 bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.0.36
 ```
 
-## ⚡ Auto Setup
+## ⚡ Setup Tool
 
-Run the install script to automatically set up your project's dev configs:
+Run the setup tool to automatically set up your project's dev configs:
 
 ```bash
 bun cfs-setup
