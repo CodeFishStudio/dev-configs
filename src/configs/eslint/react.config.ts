@@ -1,8 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
-import * as reactHooks from 'eslint-plugin-react-hooks';
-import { baseConfig } from './base.config.js';
+import reactHooks from 'eslint-plugin-react-hooks';
 
 const reactPluginConfig = {
     ...reactPlugin.configs.flat.recommended,
@@ -10,6 +9,7 @@ const reactPluginConfig = {
         react: { version: 'detect' },
     },
 };
+import { baseConfig } from './base.config.js';
 
 /**
  * React project ESLint configuration. Used across web and React Native
@@ -19,9 +19,8 @@ export const reactConfig = defineConfig([
     ...baseConfig,
 
     importPlugin.flatConfigs.react,
-    reactPluginConfig,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    reactPlugin.configs.flat['jsx-runtime']!,
+    reactPlugin.configs.flat.recommended,
+    reactPlugin.configs.flat['jsx-runtime'],
     reactHooks.configs.recommended,
     {
         rules: {
@@ -33,6 +32,9 @@ export const reactConfig = defineConfig([
 
             // Using Typescript for prop typing
             'react/prop-types': 'off',
+        },
+        settings: {
+            react: { version: 'detect' },
         },
     },
 ]);

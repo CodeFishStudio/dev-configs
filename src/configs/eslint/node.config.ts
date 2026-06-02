@@ -1,18 +1,18 @@
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import { baseConfig } from './base.config.js';
-import type { Linter } from 'eslint';
 
 /**
  * Node project ESLint configuration.
  */
-export const nodeConfig: Linter.Config[] = [
+export const nodeConfig = defineConfig([
     ...baseConfig,
 
     {
         files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
         languageOptions: {
-            ecmaVersion: 2020,
+            ecmaVersion: 2022,
             globals: globals.node,
         },
     },
-];
+]);

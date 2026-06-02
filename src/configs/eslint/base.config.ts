@@ -1,14 +1,13 @@
 import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
-import type { Linter } from 'eslint';
 
 /**
  * Base ESLint configuration with our fundamental rules for TypeScript projects
  */
-export const baseConfig: Linter.Config[] = [
+export const baseConfig = defineConfig([
     eslint.configs.recommended,
-    // @ts-expect-error: typescript-eslint is not typed in a friendly way
     tseslint.configs.recommended,
     importPlugin.flatConfigs.recommended,
     importPlugin.flatConfigs.typescript,
@@ -68,4 +67,4 @@ export const baseConfig: Linter.Config[] = [
             'prefer-template': 'warn',
         },
     },
-];
+]);

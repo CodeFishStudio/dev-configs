@@ -2,7 +2,7 @@
  * Dependencies required for the base ESLint configuration
  */
 export const dependencies = {
-    '@eslint/js': '^9',
+    '@eslint/js': '^10',
     '@typescript-eslint/parser': '^8',
     eslint: '>=9 <10',
     'eslint-config-prettier': '^10',

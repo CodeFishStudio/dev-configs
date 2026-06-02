@@ -11,7 +11,7 @@ export const viteConfig = defineConfig([
     {
         files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
         languageOptions: {
-            ecmaVersion: 2020,
+            ecmaVersion: 2022,
             globals: globals.browser,
         },
     },
