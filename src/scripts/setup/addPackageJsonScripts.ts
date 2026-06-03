@@ -23,7 +23,6 @@ const configScripts: Record<ConfigType, readonly PackageJsonScriptDefinition[]> 
     prettier: prettierScripts,
     eslint: eslintScripts,
     cursorSettings: [],
-    agentRulesAndSkills: [],
 };
 
 /**

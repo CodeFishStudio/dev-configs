@@ -88,13 +88,3 @@ This document provides detailed instructions for manually setting up each config
 1. #### Settings
 
     Copy contents from `/src/configs/editors/settings` to your root project directory.
-
-2. #### Rules
-
-    Copy relevant `.mdc` rule files from the directories below to your project's
-    `.cursor/rules` directory.
-
-    | Project Type | Rules                                 |
-    | ------------ | ------------------------------------- |
-    | All          | `/src/configs/agents/rules/universal` |
-    | React        | `/src/configs/agents/rules/react`     |

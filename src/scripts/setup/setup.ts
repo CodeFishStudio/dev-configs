@@ -1,18 +1,10 @@
-import { cancel, group, intro, isCancel, log, multiselect, outro, select } from '@clack/prompts';
+import { cancel, group, intro, log, multiselect, outro, select } from '@clack/prompts';
 import { existsSync } from 'fs';
 import { styleText } from 'node:util';
 import { join } from 'path';
 
 import { addGitignores } from './addGitignores.js';
 import { addPackageJsonScripts } from './addPackageJsonScripts.js';
-import {
-    type AgentRuleGroup,
-    getAgentRuleGroupOptions,
-    getInitialAgentRuleGroups,
-} from './agentRuleGroupOptions.js';
-import { agentSkillOptions } from './agentSkillOptions.js';
-import { copyAgentRules } from './copyAgentRules.js';
-import { copyAgentSkills } from './copyAgentSkills.js';
 import { copyEditorSettings } from './copyEditorSettings.js';
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
@@ -59,40 +51,6 @@ export const setup = async (): Promise<void> => {
         }
     );
 
-    let selectedAgentRuleGroups: AgentRuleGroup[] = [];
-    let selectedAgentSkills: string[] = [];
-
-    if (selectedConfigs.includes('agentRulesAndSkills')) {
-        const ruleGroupOptions = getAgentRuleGroupOptions(projectType);
-
-        const agentRuleGroupsPrompt = await multiselect<AgentRuleGroup>({
-            message: `Select agent rule groups to install${styleText(['gray'], ' (space to toggle)')}`,
-            options: ruleGroupOptions,
-            initialValues: getInitialAgentRuleGroups(projectType),
-            required: true,
-        });
-
-        if (isCancel(agentRuleGroupsPrompt)) {
-            cancel('Setup cancelled.');
-            process.exit(0);
-        }
-
-        selectedAgentRuleGroups = agentRuleGroupsPrompt;
-
-        const agentSkillsPrompt = await multiselect({
-            message: `Select agent skills to install${styleText(['gray'], ' (space to toggle)')}`,
-            options: agentSkillOptions,
-            required: false,
-        });
-
-        if (isCancel(agentSkillsPrompt)) {
-            cancel('Setup cancelled.');
-            process.exit(0);
-        }
-
-        selectedAgentSkills = agentSkillsPrompt;
-    }
-
     // Process each selected config
     for (const configType of selectedConfigs) {
         // Install dependencies for this config type
@@ -111,10 +69,6 @@ export const setup = async (): Promise<void> => {
                 break;
             case 'cursorSettings':
                 copyEditorSettings();
-                break;
-            case 'agentRulesAndSkills':
-                copyAgentRules(selectedAgentRuleGroups);
-                copyAgentSkills(selectedAgentSkills);
                 break;
         }
 

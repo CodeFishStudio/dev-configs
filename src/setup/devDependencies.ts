@@ -57,7 +57,6 @@ const getDependencies = async (
             return getESLintDependencies(projectType);
         }
         case 'cursorSettings':
-        case 'agentRulesAndSkills':
         default:
             return {};
     }

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.2
+
+- Deprecate agent rules/skills
+
 ## 0.1.1
 
 - Export installDevDependencies()

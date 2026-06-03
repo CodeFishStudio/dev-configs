@@ -1,1 +1,0 @@
-{"version":3,"file":"agentSkillOptions.js","sourceRoot":"","sources":["../../../src/scripts/setup/agentSkillOptions.ts"],"names":[],"mappings":"AAEA;;GAEG;AACH,MAAM,CAAC,MAAM,iBAAiB,GAAG;IAC7B;QACI,KAAK,EAAE,WAAW;QAClB,KAAK,EAAE,YAAY;QACnB,IAAI,EAAE,yDAAyD;KAClE;IACD;QACI,KAAK,EAAE,oBAAoB;QAC3B,KAAK,EAAE,qBAAqB;QAC5B,IAAI,EAAE,2DAA2D;KACpE;CACgC,CAAC"}

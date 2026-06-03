@@ -14,7 +14,6 @@ const configScripts = {
     prettier: prettierScripts,
     eslint: eslintScripts,
     cursorSettings: [],
-    agentRulesAndSkills: [],
 };
 /**
  * Get all scripts for a given config type

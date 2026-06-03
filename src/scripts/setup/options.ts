@@ -15,5 +15,4 @@ export const configTypeOptions: Option<ConfigType>[] = [
     { label: 'ESLint', value: 'eslint' },
     { label: 'TypeScript', value: 'typescript' },
     { label: 'Cursor Settings', value: 'cursorSettings' },
-    { label: 'Agent Rules & Skills', value: 'agentRulesAndSkills' },
 ];

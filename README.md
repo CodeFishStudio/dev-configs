@@ -21,7 +21,7 @@ This script will provide options to:
 - Setup Prettier
 - Setup ESLint
 - Setup TypeScript
-- Setup Cursor rules/settings
+- Setup Cursor settings
 
 Also installs relevant dependencies, adds package.json scripts and adds .gitignore patterns.
 
