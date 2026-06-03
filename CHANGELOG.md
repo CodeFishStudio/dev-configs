@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.1
+
+- Export installDevDependencies()
+
 ## 0.1.0
 
 - Update project types
