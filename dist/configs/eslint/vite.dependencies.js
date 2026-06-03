@@ -6,4 +6,4 @@ export const dependencies = {
     ...reactDependencies,
     globals: '^16.3',
 };
-//# sourceMappingURL=reactVite.dependencies.js.map
+//# sourceMappingURL=vite.dependencies.js.map

@@ -13,12 +13,13 @@ This document provides detailed instructions for manually setting up each config
 2. Copy the relevant TypeScript config file from `/src/configs/typescript` to your
    project and rename as `tsconfig.json`.
 
-    | Project Type                | Config                                            |
-    | --------------------------- | ------------------------------------------------- |
-    | React (Next.js)             | `/src/configs/typescript/reactNext.config.json`   |
-    | React (Vite + React Router) | `/src/configs/typescript/reactVite.config.json`   |
-    | React Native (Expo)         | `/src/configs/typescript/reactNative.config.json` |
-    | Node.js                     | `/src/configs/typescript/node.config.json`        |
+    | Project Type    | Config                                                  |
+    | --------------- | ------------------------------------------------------- |
+    | Next.js         | `/src/configs/typescript/nextjs.config.json`            |
+    | TanStack Start  | `/src/configs/typescript/tanstackStart.config.json`       |
+    | Vite            | `/src/configs/typescript/vite.config.json`              |
+    | Expo            | `/src/configs/typescript/expo.config.json`              |
+    | Node            | `/src/configs/typescript/node.config.json`              |
 
 ## 🎨 Prettier
 
@@ -52,7 +53,7 @@ This document provides detailed instructions for manually setting up each config
     ```javascript
     import { eslintConfigs } from '@codefish/dev-configs';
 
-    export default eslintConfigs.reactNative;
+    export default eslintConfigs.expo;
     ```
 
     Or if you need to customise the configuration:
@@ -62,7 +63,7 @@ This document provides detailed instructions for manually setting up each config
     import { eslintConfigs } from '@codefish/dev-configs';
 
     export default defineConfig([
-        ...eslintConfigs.reactNative,
+        ...eslintConfigs.expo,
         {
             // Your custom rules here
             rules: {
@@ -74,12 +75,13 @@ This document provides detailed instructions for manually setting up each config
 
     #### Available Configs
 
-    | Project Type                | Config                      |
-    | --------------------------- | --------------------------- |
-    | React (Next.js)             | `eslintConfigs.reactNext`   |
-    | React (Vite + React Router) | `eslintConfigs.reactVite`   |
-    | React Native (Expo)         | `eslintConfigs.reactNative` |
-    | Node.js                     | `eslintConfigs.node`        |
+    | Project Type   | Config                            |
+    | -------------- | --------------------------------- |
+    | Next.js        | `eslintConfigs.nextjs`            |
+    | TanStack Start | `eslintConfigs.tanstackStart`       |
+    | Vite           | `eslintConfigs.vite`              |
+    | Expo           | `eslintConfigs.expo`              |
+    | Node           | `eslintConfigs.node`              |
 
 ## ⚙️ IDE Settings
 

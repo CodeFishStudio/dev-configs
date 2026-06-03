@@ -1,12 +1,15 @@
 import { fixupPluginRules } from '@eslint/compat';
 import { defineConfig } from 'eslint/config';
 import reactNativePlugin from 'eslint-plugin-react-native';
+
 import { reactConfig } from './react.config.js';
+
 /**
  * Expo React Native project ESLint configuration.
  */
-export const reactNativeConfig = defineConfig([
+export const expoConfig = defineConfig([
     ...reactConfig,
+
     /**
      * The 'eslint-plugin-react-native' plugin is a non-official plugin that is
      * no longer updated. It doesn't have a ESLint flat config supported
@@ -31,15 +34,17 @@ export const reactNativeConfig = defineConfig([
             }),
         },
     },
+
     {
         rules: {
             // `require` imports are fine in React Native
             '@typescript-eslint/no-require-imports': 'off',
+
             // Not integral. Is violated by packages like 'expo-constants'
             'import/no-named-as-default': 'off',
+
             // Warn about console.X usage in React Native
             'no-console': 'warn',
         },
     },
 ]);
-//# sourceMappingURL=reactNative.config.js.map

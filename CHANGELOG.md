@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.0
+
+- Update project types
+
 ## 0.0.36
 
 - Add /maintenance-report skill

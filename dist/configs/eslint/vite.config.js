@@ -2,9 +2,9 @@ import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import { reactConfig } from './react.config.js';
 /**
- * React (Vite + React Router) project ESLint configuration.
+ * Vite + React Router project ESLint configuration.
  */
-export const reactViteConfig = defineConfig([
+export const viteConfig = defineConfig([
     ...reactConfig,
     {
         files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
@@ -14,4 +14,4 @@ export const reactViteConfig = defineConfig([
         },
     },
 ]);
-//# sourceMappingURL=reactVite.config.js.map
+//# sourceMappingURL=vite.config.js.map

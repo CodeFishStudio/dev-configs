@@ -22,24 +22,22 @@ const getESLintDependencies = async (projectType: ProjectType): Promise<ConfigDe
             const { dependencies } = await import('../../configs/eslint/node.dependencies.js');
             return dependencies;
         }
-        case 'reactNext': {
+        case 'nextjs': {
             const { dependencies } = await import('../../configs/eslint/react.dependencies.js');
             return dependencies;
         }
-        case 'reactTanStackStart': {
+        case 'tanstackStart': {
             const { dependencies } = await import(
-                '../../configs/eslint/reactTanStackStart.dependencies.js'
+                '../../configs/eslint/tanstackStart.dependencies.js'
             );
             return dependencies;
         }
-        case 'reactVite': {
-            const { dependencies } = await import('../../configs/eslint/reactVite.dependencies.js');
+        case 'vite': {
+            const { dependencies } = await import('../../configs/eslint/vite.dependencies.js');
             return dependencies;
         }
-        case 'reactNative': {
-            const { dependencies } = await import(
-                '../../configs/eslint/reactNative.dependencies.js'
-            );
+        case 'expo': {
+            const { dependencies } = await import('../../configs/eslint/expo.dependencies.js');
             return dependencies;
         }
         default:

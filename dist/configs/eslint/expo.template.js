@@ -1,8 +1,8 @@
-export const reactNativeEslintTemplate = `import { eslintConfigs } from '@codefish/dev-configs';
+export const expoEslintTemplate = `import { eslintConfigs } from '@codefish/dev-configs';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-    ...eslintConfigs.reactNative,
+    ...eslintConfigs.expo,
 
     globalIgnores([
         'android/**',
@@ -15,3 +15,4 @@ export default defineConfig([
     ]),
 ]);
 `;
+//# sourceMappingURL=expo.template.js.map

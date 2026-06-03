@@ -1,9 +1,4 @@
-const reactProjectTypes = [
-    'reactNext',
-    'reactTanStackStart',
-    'reactVite',
-    'reactNative',
-];
+const reactProjectTypes = ['nextjs', 'tanstack-start', 'vite', 'expo'];
 /**
  * Whether the selected project type is a React stack (web or native).
  */

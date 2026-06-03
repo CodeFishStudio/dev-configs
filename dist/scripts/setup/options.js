@@ -1,8 +1,8 @@
 export const projectTypeOptions = [
-    { label: 'React (TanStack Start)', value: 'reactTanStackStart' },
-    { label: 'React (Next.js)', value: 'reactNext' },
-    { label: 'React (Vite + React Router)', value: 'reactVite' },
-    { label: 'React Native (Expo)', value: 'reactNative' },
+    { label: 'TanStack Start', value: 'tanstack-start' },
+    { label: 'Next.js', value: 'nextjs' },
+    { label: 'Vite', value: 'vite' },
+    { label: 'Expo (React Native)', value: 'expo' },
     { label: 'Node', value: 'node' },
 ];
 export const configTypeOptions = [

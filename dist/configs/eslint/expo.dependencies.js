@@ -7,4 +7,4 @@ export const dependencies = {
     '@eslint/compat': '^1',
     'eslint-plugin-react-native': '^5',
 };
-//# sourceMappingURL=reactNative.dependencies.js.map
+//# sourceMappingURL=expo.dependencies.js.map

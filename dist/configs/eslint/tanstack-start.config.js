@@ -1,14 +1,11 @@
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
-
 import { reactConfig } from './react.config.js';
-
 /**
- * React (TanStack Start) project ESLint configuration.
+ * TanStack Start project ESLint configuration.
  */
-export const reactTanStackStartConfig = defineConfig([
+export const tanstackStartConfig = defineConfig([
     ...reactConfig,
-
     {
         files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
         languageOptions: {
@@ -19,3 +16,4 @@ export const reactTanStackStartConfig = defineConfig([
         },
     },
 ]);
+//# sourceMappingURL=tanstack-start.config.js.map

@@ -1,19 +1,19 @@
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
+
 import { reactConfig } from './react.config.js';
+
 /**
- * React (TanStack Start) project ESLint configuration.
+ * Vite + React Router project ESLint configuration.
  */
-export const reactTanStackStartConfig = defineConfig([
+export const viteConfig = defineConfig([
     ...reactConfig,
+
     {
         files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
-            globals: {
-                ...globals.node,
-            },
+            globals: globals.browser,
         },
     },
 ]);
-//# sourceMappingURL=reactTanStackStart.config.js.map

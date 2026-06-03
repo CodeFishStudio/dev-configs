@@ -1,4 +1,4 @@
-export type ProjectType = 'node' | 'reactNative' | 'reactNext' | 'reactTanStackStart' | 'reactVite';
+export type ProjectType = 'expo' | 'tanstackStart' | 'nextjs' | 'vite' | 'node';
 export type ConfigType =
     | 'eslint'
     | 'prettier'

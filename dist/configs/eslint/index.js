@@ -1,9 +1,9 @@
 import prettierConfig from 'eslint-config-prettier/flat';
+import { expoConfig } from './expo.config.js';
 import { nodeConfig } from './node.config.js';
 import { reactConfig } from './react.config.js';
-import { reactNativeConfig } from './reactNative.config.js';
-import { reactTanStackStartConfig } from './reactTanStackStart.config.js';
-import { reactViteConfig } from './reactVite.config.js';
+import { tanstackStartConfig } from './tanstack-start.config.js';
+import { viteConfig } from './vite.config.js';
 import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
 const eslintConfigs = {
@@ -16,36 +16,36 @@ const eslintConfigs = {
         prettierConfig,
     ],
     /**
-     * CodeFish Studio ESLint configuration for React (Next.js) + TypeScript projects
+     * CodeFish Studio ESLint configuration for Next.js + TypeScript projects
      */
-    reactNext: [
+    nextjs: [
         // Filter out configs that define plugins that will be included in
-        // 'eslint-config-next/core-web-vitals' (see reactNext.template.ts)
+        // 'eslint-config-next/core-web-vitals' (see nextjs.template.ts)
         ...filterOutPlugins(reactConfig, ['import', 'react-hooks', 'react']),
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],
     /**
-     * CodeFish Studio ESLint configuration for React (TanStack Start) + TypeScript projects
+     * CodeFish Studio ESLint configuration for TanStack Start + TypeScript projects
      */
-    reactTanStackStart: [
-        ...reactTanStackStartConfig,
+    'tanstack-start': [
+        ...tanstackStartConfig,
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],
     /**
-     * CodeFish Studio ESLint configuration for React (Vite + React Router) + TypeScript projects
+     * CodeFish Studio ESLint configuration for Vite + React Router + TypeScript projects
      */
-    reactVite: [
-        ...reactViteConfig,
+    vite: [
+        ...viteConfig,
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],
     /**
-     * CodeFish Studio ESLint configuration for React Native + TypeScript projects
+     * CodeFish Studio ESLint configuration for Expo React Native + TypeScript projects
      */
-    reactNative: [
-        ...reactNativeConfig,
+    expo: [
+        ...expoConfig,
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],
