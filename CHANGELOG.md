@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.3
+
+- Remove gitignore additions
+
 ## 0.1.2
 
 - Deprecate Cursor settings installation

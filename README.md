@@ -22,7 +22,7 @@ This script will provide options to:
 - Setup ESLint
 - Setup TypeScript
 
-Also installs relevant dependencies, adds package.json scripts and adds .gitignore patterns.
+Also installs relevant dependencies and adds package.json scripts.
 
 ## 💪 Manual Setup
 

@@ -2,7 +2,6 @@ import { cancel, group, intro, log, multiselect, outro, select } from '@clack/pr
 import { existsSync } from 'fs';
 import { styleText } from 'node:util';
 import { join } from 'path';
-import { addGitignores } from './addGitignores.js';
 import { addPackageJsonScripts } from './addPackageJsonScripts.js';
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
@@ -54,8 +53,6 @@ export const setup = async () => {
                 copyTypeScriptConfig(projectType);
                 break;
         }
-        // Add gitignore patterns for this config type
-        await addGitignores(configType);
         // Add scripts for this config type
         await addPackageJsonScripts(configType);
     }
