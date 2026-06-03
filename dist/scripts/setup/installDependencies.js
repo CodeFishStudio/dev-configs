@@ -17,8 +17,8 @@ const getESLintDependencies = async (projectType) => {
             const { dependencies } = await import('../../configs/eslint/react.dependencies.js');
             return dependencies;
         }
-        case 'tanstack-start': {
-            const { dependencies } = await import('../../configs/eslint/tanstack-start.dependencies.js');
+        case 'tanstackStart': {
+            const { dependencies } = await import('../../configs/eslint/tanstackStart.dependencies.js');
             return dependencies;
         }
         case 'vite': {

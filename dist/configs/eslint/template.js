@@ -1,6 +1,6 @@
 import { expoEslintTemplate } from './expo.template.js';
 import { nextjsEslintTemplate } from './nextjs.template.js';
-import { tanstackStartEslintTemplate } from './tanstack-start.template.js';
+import { tanstackStartEslintTemplate } from './tanstackStart.template.js';
 const defaultTemplate = `import { eslintConfigs } from '@codefish/dev-configs';
 import { defineConfig } from 'eslint/config';
 
@@ -16,7 +16,7 @@ export const eslintConfigFileTemplate = (projectType) => {
             return expoEslintTemplate;
         case 'nextjs':
             return nextjsEslintTemplate;
-        case 'tanstack-start':
+        case 'tanstackStart':
             return tanstackStartEslintTemplate;
         default:
             return defaultTemplate.replace('{{PROJECT_TYPE}}', projectType);

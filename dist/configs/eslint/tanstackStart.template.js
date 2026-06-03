@@ -6,9 +6,9 @@ import { tanstackConfig } from '@tanstack/eslint-config';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-    ...mergeEslintConfigPlugins([...tanstackConfig, ...eslintConfigs['tanstack-start']]),
+    ...mergeEslintConfigPlugins([...tanstackConfig, ...eslintConfigs.tanstackStart]),
 
     // Add any overrides below
 ]);
 `;
-//# sourceMappingURL=tanstack-start.template.js.map
+//# sourceMappingURL=tanstackStart.template.js.map

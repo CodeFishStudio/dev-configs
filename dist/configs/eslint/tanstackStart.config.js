@@ -16,4 +16,4 @@ export const tanstackStartConfig = defineConfig([
         },
     },
 ]);
-//# sourceMappingURL=tanstack-start.config.js.map
+//# sourceMappingURL=tanstackStart.config.js.map

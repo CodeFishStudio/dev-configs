@@ -1,4 +1,0 @@
-/**
- * Mimics the ESLint config file that comes from the `create @tanstack/start@latest` tool.
- */
-export declare const tanstackStartEslintTemplate = "import { eslintConfigs, mergeEslintConfigPlugins } from '@codefish/dev-configs';\nimport { tanstackConfig } from '@tanstack/eslint-config';\nimport { defineConfig } from 'eslint/config';\n\nexport default defineConfig([\n    ...mergeEslintConfigPlugins([...tanstackConfig, ...eslintConfigs['tanstack-start']]),\n\n    // Add any overrides below\n]);\n";

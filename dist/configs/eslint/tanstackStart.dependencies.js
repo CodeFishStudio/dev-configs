@@ -6,4 +6,4 @@ export const dependencies = {
     ...reactDependencies,
     globals: '^16.3',
 };
-//# sourceMappingURL=tanstack-start.dependencies.js.map
+//# sourceMappingURL=tanstackStart.dependencies.js.map

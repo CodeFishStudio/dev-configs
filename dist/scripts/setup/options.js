@@ -1,5 +1,5 @@
 export const projectTypeOptions = [
-    { label: 'TanStack Start', value: 'tanstack-start' },
+    { label: 'TanStack Start', value: 'tanstackStart' },
     { label: 'Next.js', value: 'nextjs' },
     { label: 'Vite', value: 'vite' },
     { label: 'Expo (React Native)', value: 'expo' },
