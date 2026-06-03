@@ -5,7 +5,7 @@ Shared configurations for dev tools across CodeFish Studio projects.
 ## 📦 Installation
 
 ```bash
-bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.1.0
+bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.1.1
 ```
 
 ## ⚡ Setup Tool
