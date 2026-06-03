@@ -22,7 +22,6 @@ const configScripts: Record<ConfigType, readonly PackageJsonScriptDefinition[]> 
     typescript: typescriptScripts,
     prettier: prettierScripts,
     eslint: eslintScripts,
-    cursorSettings: [],
 };
 
 /**

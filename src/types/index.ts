@@ -1,5 +1,5 @@
 export type ProjectType = 'expo' | 'tanstackStart' | 'nextjs' | 'vite' | 'node';
-export type ConfigType = 'eslint' | 'prettier' | 'typescript' | 'cursorSettings';
+export type ConfigType = 'eslint' | 'prettier' | 'typescript';
 
 export type PackageManager = 'bun' | 'npm' | 'pnpm' | 'yarn';
 

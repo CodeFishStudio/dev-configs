@@ -14,5 +14,4 @@ export const configTypeOptions: Option<ConfigType>[] = [
     { label: 'Prettier', value: 'prettier' },
     { label: 'ESLint', value: 'eslint' },
     { label: 'TypeScript', value: 'typescript' },
-    { label: 'Cursor Settings', value: 'cursorSettings' },
 ];

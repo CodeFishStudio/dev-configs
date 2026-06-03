@@ -5,7 +5,6 @@ import { join } from 'path';
 
 import { addGitignores } from './addGitignores.js';
 import { addPackageJsonScripts } from './addPackageJsonScripts.js';
-import { copyEditorSettings } from './copyEditorSettings.js';
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
 import { createESLintConfig } from './createESLintConfig.js';
@@ -66,9 +65,6 @@ export const setup = async (): Promise<void> => {
                 break;
             case 'typescript':
                 copyTypeScriptConfig(projectType);
-                break;
-            case 'cursorSettings':
-                copyEditorSettings();
                 break;
         }
 

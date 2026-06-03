@@ -1,5 +1,4 @@
 import { logStep } from './utils.js';
-import { gitignorePatterns as editorGitignorePatterns } from '../../configs/editors/gitignore.js';
 import { gitignorePatterns as eslintGitignorePatterns } from '../../configs/eslint/gitignore.js';
 import { addGitignorePatterns } from '../utils/gitignoreUtils.js';
 /**
@@ -9,7 +8,6 @@ const configGitignorePatterns = {
     eslint: eslintGitignorePatterns,
     prettier: [], // No patterns for prettier
     typescript: [], // No patterns for typescript
-    cursorSettings: editorGitignorePatterns,
 };
 /**
  * Function to add gitignore patterns for a specific config type

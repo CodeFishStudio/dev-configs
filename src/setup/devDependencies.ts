@@ -56,7 +56,6 @@ const getDependencies = async (
         case 'eslint': {
             return getESLintDependencies(projectType);
         }
-        case 'cursorSettings':
         default:
             return {};
     }

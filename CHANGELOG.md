@@ -2,6 +2,7 @@
 
 ## 0.1.2
 
+- Deprecate Cursor settings installation
 - Deprecate agent rules/skills
 
 ## 0.1.1

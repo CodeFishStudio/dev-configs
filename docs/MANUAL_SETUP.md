@@ -82,9 +82,3 @@ This document provides detailed instructions for manually setting up each config
     | Vite           | `eslintConfigs.vite`              |
     | Expo           | `eslintConfigs.expo`              |
     | Node           | `eslintConfigs.node`              |
-
-## ⚙️ IDE Settings
-
-1. #### Settings
-
-    Copy contents from `/src/configs/editors/settings` to your root project directory.
