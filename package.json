@@ -11,6 +11,7 @@
             "import": "./dist/index.js"
         },
         "./tsconfig.base": "./dist/configs/typescript/base.config.json",
+        "./tsconfig.reactWeb": "./dist/configs/typescript/reactWeb.config.json",
         "./tsconfig.expo": "./dist/configs/typescript/expo.config.json",
         "./tsconfig.tanstackStart": "./dist/configs/typescript/tanstackStart.config.json",
         "./tsconfig.nextjs": "./dist/configs/typescript/nextjs.config.json",

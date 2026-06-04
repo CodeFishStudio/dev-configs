@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.6
+
+- Fix: tsconfig exports
+
 ## 0.1.5
 
 - Update 'newlines-between' to be 'never'
