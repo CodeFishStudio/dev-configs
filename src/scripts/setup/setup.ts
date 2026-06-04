@@ -3,12 +3,13 @@ import { existsSync } from 'fs';
 import { styleText } from 'node:util';
 import { join } from 'path';
 
-import { addPackageJsonScripts } from './addPackageJsonScripts.js';
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
 import { createESLintConfig } from './createESLintConfig.js';
 import { installDependencies } from './installDependencies.js';
 import { configTypeOptions, projectTypeOptions } from './options.js';
+import { addPackageJsonScripts } from '../../setup/packageJsonScripts.js';
+import { getPackageManager } from '../utils/getPackageManager.js';
 
 /**
  * Main execution
@@ -66,10 +67,13 @@ export const setup = async (): Promise<void> => {
                 copyTypeScriptConfig(projectType);
                 break;
         }
-
-        // Add scripts for this config type
-        await addPackageJsonScripts(configType);
     }
+
+    await addPackageJsonScripts({
+        cwd: process.cwd(),
+        packageManager: getPackageManager(),
+        configTypes: selectedConfigs,
+    });
 
     outro('⚡️ Project setup complete!');
 };

@@ -1,19 +1,18 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
 
-import { logStep } from './utils.js';
-import { eslintScripts } from '../../configs/eslint/scripts.js';
-import { prettierScripts } from '../../configs/prettier/scripts.js';
-import { typescriptScripts } from '../../configs/typescript/scripts.js';
-import { getPackageManager } from '../utils/getPackageManager.js';
+import { eslintScripts } from '../configs/eslint/scripts.js';
+import { prettierScripts } from '../configs/prettier/scripts.js';
+import { typescriptScripts } from '../configs/typescript/scripts.js';
+import { logStep } from '../scripts/setup/utils.js';
 import {
     addScripts,
     isValidPackageJson,
     readPackageJson,
     writePackageJson,
-} from '../utils/packageJsonUtils.js';
+} from '../scripts/utils/packageJsonUtils.js';
 
-import type { ConfigType, PackageJsonScriptDefinition, PackageManager } from '../../types/index.js';
+import type { ConfigType, PackageJsonScriptDefinition, PackageManager } from '../types/index.js';
 
 /**
  * Map of config types to their script definitions
@@ -39,44 +38,44 @@ const getScriptsForConfigType = (
 };
 
 /**
- * Function to add package.json scripts for a specific config type
+ * Add package.json scripts for one or more config types
  */
-export const addPackageJsonScripts = async (configType: ConfigType): Promise<void> => {
-    const packageManager = getPackageManager();
-    const directory = process.cwd();
+export const addPackageJsonScripts = async (options: {
+    cwd: string;
+    packageManager: PackageManager;
+    configTypes: ConfigType[];
+}): Promise<void> => {
+    const { cwd, packageManager, configTypes } = options;
 
     try {
-        // Check if package.json exists
-        const packageJsonPath = join(directory, 'package.json');
+        const packageJsonPath = join(cwd, 'package.json');
         if (!existsSync(packageJsonPath)) {
             logStep('No package.json found in directory', 'error');
             return;
         }
 
-        // Read existing package.json
-        const existingPackageJson = readPackageJson(directory);
+        const existingPackageJson = readPackageJson(cwd);
         if (!existingPackageJson || !isValidPackageJson(existingPackageJson)) {
             logStep('Invalid or corrupted package.json', 'error');
             return;
         }
 
-        // Get scripts to add
-        const scriptsToAdd = getScriptsForConfigType(configType, packageManager);
+        const scriptsToAdd = configTypes.flatMap((configType) =>
+            getScriptsForConfigType(configType, packageManager)
+        );
 
         const scriptsRecord = Object.fromEntries(
             scriptsToAdd.map((script) => [script.name, script.command])
         );
 
-        // Add scripts to package.json
         const updatedPackageJson = addScripts(existingPackageJson, scriptsRecord);
-        const writeResult = writePackageJson(directory, updatedPackageJson);
+        const writeResult = writePackageJson(cwd, updatedPackageJson);
 
         if (!writeResult.success) {
             logStep(writeResult.message, 'error');
             return;
         }
 
-        // Log added scripts
         scriptsToAdd.forEach((script) => {
             logStep(`Added '${script.name}' package.json script`, 'success');
         });

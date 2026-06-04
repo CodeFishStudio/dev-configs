@@ -2,6 +2,7 @@
 
 ## 0.1.3
 
+- Export addPackageJsonScripts()
 - Remove gitignore additions
 
 ## 0.1.2
