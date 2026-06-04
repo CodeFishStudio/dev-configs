@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.4
+
+- Made addPackageJsonScripts() silent
+
 ## 0.1.3
 
 - Export addPackageJsonScripts()
