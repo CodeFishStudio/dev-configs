@@ -52,7 +52,7 @@ export const baseConfig = [
                         },
                     ],
                     pathGroupsExcludedImportTypes: ['react', 'react-native'],
-                    'newlines-between': 'always',
+                    'newlines-between': 'never',
                 },
             ],
             // Prevent { key: key } in object declarations

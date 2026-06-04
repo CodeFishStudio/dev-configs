@@ -58,7 +58,7 @@ export const baseConfig: Linter.Config[] = [
                         },
                     ],
                     pathGroupsExcludedImportTypes: ['react', 'react-native'],
-                    'newlines-between': 'always',
+                    'newlines-between': 'never',
                 },
             ],
 
