@@ -13,13 +13,13 @@ This document provides detailed instructions for manually setting up each config
 2. Copy the relevant TypeScript config file from `/src/configs/typescript` to your
    project and rename as `tsconfig.json`.
 
-    | Project Type    | Config                                                  |
-    | --------------- | ------------------------------------------------------- |
-    | Next.js         | `/src/configs/typescript/nextjs.config.json`            |
-    | TanStack Start  | `/src/configs/typescript/tanstackStart.config.json`       |
-    | Vite            | `/src/configs/typescript/vite.config.json`              |
-    | Expo            | `/src/configs/typescript/expo.config.json`              |
-    | Node            | `/src/configs/typescript/node.config.json`              |
+    | Project Type   | Config                                              |
+    | -------------- | --------------------------------------------------- |
+    | Next.js        | `/src/configs/typescript/nextjs.config.json`        |
+    | TanStack Start | `/src/configs/typescript/tanstackStart.config.json` |
+    | Vite           | `/src/configs/typescript/vite.config.json`          |
+    | Expo           | `/src/configs/typescript/expo.config.json`          |
+    | Node           | `/src/configs/typescript/node.config.json`          |
 
 ## 🎨 Prettier
 
@@ -75,10 +75,10 @@ This document provides detailed instructions for manually setting up each config
 
     #### Available Configs
 
-    | Project Type   | Config                            |
-    | -------------- | --------------------------------- |
-    | Next.js        | `eslintConfigs.nextjs`            |
-    | TanStack Start | `eslintConfigs.tanstackStart`       |
-    | Vite           | `eslintConfigs.vite`              |
-    | Expo           | `eslintConfigs.expo`              |
-    | Node           | `eslintConfigs.node`              |
+    | Project Type   | Config                        |
+    | -------------- | ----------------------------- |
+    | Next.js        | `eslintConfigs.nextjs`        |
+    | TanStack Start | `eslintConfigs.tanstackStart` |
+    | Vite           | `eslintConfigs.vite`          |
+    | Expo           | `eslintConfigs.expo`          |
+    | Node           | `eslintConfigs.node`          |
