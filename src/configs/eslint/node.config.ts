@@ -1,7 +1,5 @@
 import globals from 'globals';
-
 import { baseConfig } from './base.config.js';
-
 import type { Linter } from 'eslint';
 
 /**

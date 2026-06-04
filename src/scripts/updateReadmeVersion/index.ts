@@ -2,7 +2,6 @@
 
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-
 import { __dirname } from '../utils/constants.js';
 
 interface PackageJson {

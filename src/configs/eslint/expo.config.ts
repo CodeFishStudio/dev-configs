@@ -1,7 +1,6 @@
 import { fixupPluginRules } from '@eslint/compat';
 import { defineConfig } from 'eslint/config';
 import reactNativePlugin from 'eslint-plugin-react-native';
-
 import { reactConfig } from './react.config.js';
 
 /**

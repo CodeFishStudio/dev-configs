@@ -1,5 +1,4 @@
 import { copyFileSync, existsSync, writeFileSync } from 'fs';
-
 import { logStep } from '../setup/utils.js';
 
 export const fileActions = {

@@ -1,8 +1,6 @@
 import { join } from 'path/posix';
-
 import { __dirname } from '../utils/constants.js';
 import { fileActions } from '../utils/fileActions.js';
-
 import type { ProjectType } from '../../types/index.js';
 
 /**

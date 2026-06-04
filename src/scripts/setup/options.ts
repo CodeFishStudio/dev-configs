@@ -1,5 +1,4 @@
 import { Option } from '@clack/prompts';
-
 import type { ConfigType, ProjectType } from '../../types/index.js';
 
 export const projectTypeOptions: Option<ProjectType>[] = [

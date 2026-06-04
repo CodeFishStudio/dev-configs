@@ -1,7 +1,6 @@
 import eslint from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
-
 import type { Linter } from 'eslint';
 
 /**

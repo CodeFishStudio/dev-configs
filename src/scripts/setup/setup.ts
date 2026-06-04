@@ -2,7 +2,6 @@ import { cancel, group, intro, log, multiselect, outro, select } from '@clack/pr
 import { existsSync } from 'fs';
 import { styleText } from 'node:util';
 import { join } from 'path';
-
 import { copyPrettierConfig } from './copyPrettierConfig.js';
 import { copyTypeScriptConfig } from './copyTypeScriptConfig.js';
 import { createESLintConfig } from './createESLintConfig.js';

@@ -1,9 +1,7 @@
 import { spinner } from '@clack/prompts';
-
 import { configTypeOptions } from './options.js';
 import { installDevDependencies } from '../../setup/devDependencies.js';
 import { getPackageManager } from '../utils/getPackageManager.js';
-
 import type { ConfigType, ProjectType } from '../../types/index.js';
 
 const getConfigTypeLabel = (configType: ConfigType): string => {

@@ -1,5 +1,4 @@
 import prettierConfig from 'eslint-config-prettier/flat';
-
 import { expoConfig } from './expo.config.js';
 import { nodeConfig } from './node.config.js';
 import { reactConfig } from './react.config.js';
@@ -8,7 +7,6 @@ import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
 import { viteConfig } from './vite.config.js';
 import { ProjectType } from '../../types/index.js';
-
 import type { Linter } from 'eslint';
 
 const eslintConfigs: Record<ProjectType, Linter.Config[]> = {

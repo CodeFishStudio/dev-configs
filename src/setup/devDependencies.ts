@@ -1,6 +1,5 @@
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
-
 import type { ConfigType, PackageManager, ProjectType } from '../types/index.js';
 
 const execAsync = promisify(exec);

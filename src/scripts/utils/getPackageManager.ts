@@ -1,6 +1,5 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
-
 import { PackageManager } from '../../types/index.js';
 
 // Cache the package manager to avoid multiple checks

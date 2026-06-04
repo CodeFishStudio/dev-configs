@@ -1,6 +1,5 @@
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
-
 import { reactConfig } from './react.config.js';
 
 /**

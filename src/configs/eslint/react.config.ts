@@ -2,7 +2,6 @@ import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
 import * as reactHooks from 'eslint-plugin-react-hooks';
-
 import { baseConfig } from './base.config.js';
 
 const reactPluginConfig = {
