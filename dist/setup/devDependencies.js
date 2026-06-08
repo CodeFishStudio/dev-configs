@@ -1,5 +1,6 @@
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
+import { runShellCommand } from '../utils/runShellCommand.js';
 const execAsync = promisify(exec);
 const DEFAULT_DEV_TOOL_CONFIGS = ['eslint', 'prettier', 'typescript'];
 const getESLintDependencies = async (projectType) => {
@@ -72,12 +73,16 @@ const formatDevInstallCommand = (deps, packageManager) => {
  * Install devDependencies for the given project type in the target directory.
  */
 export const installDevDependencies = async (options) => {
-    const { projectType, cwd, packageManager, configTypes = DEFAULT_DEV_TOOL_CONFIGS } = options;
+    const { projectType, cwd, packageManager, configTypes = DEFAULT_DEV_TOOL_CONFIGS, onOutputLine, } = options;
     const deps = await resolveDevToolDependencies(projectType, configTypes);
     if (Object.keys(deps).length === 0) {
         return;
     }
     const installCommand = formatDevInstallCommand(deps, packageManager);
+    if (onOutputLine) {
+        await runShellCommand({ command: installCommand, cwd, onOutputLine });
+        return;
+    }
     await execAsync(installCommand, { cwd });
 };
 //# sourceMappingURL=devDependencies.js.map

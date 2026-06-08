@@ -1,5 +1,6 @@
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
+import { runShellCommand } from '../utils/runShellCommand.js';
 import type { ConfigType, PackageManager, ProjectType } from '../types/index.js';
 
 const execAsync = promisify(exec);
@@ -94,16 +95,27 @@ const formatDevInstallCommand = (
     }
 };
 
-/**
- * Install devDependencies for the given project type in the target directory.
- */
-export const installDevDependencies = async (options: {
+export interface InstallDevDependenciesOptions {
     projectType: ProjectType;
     cwd: string;
     packageManager: PackageManager;
     configTypes?: ConfigType[];
-}): Promise<void> => {
-    const { projectType, cwd, packageManager, configTypes = DEFAULT_DEV_TOOL_CONFIGS } = options;
+    onOutputLine?: (line: string) => void;
+}
+
+/**
+ * Install devDependencies for the given project type in the target directory.
+ */
+export const installDevDependencies = async (
+    options: InstallDevDependenciesOptions
+): Promise<void> => {
+    const {
+        projectType,
+        cwd,
+        packageManager,
+        configTypes = DEFAULT_DEV_TOOL_CONFIGS,
+        onOutputLine,
+    } = options;
 
     const deps = await resolveDevToolDependencies(projectType, configTypes);
 
@@ -112,5 +124,11 @@ export const installDevDependencies = async (options: {
     }
 
     const installCommand = formatDevInstallCommand(deps, packageManager);
+
+    if (onOutputLine) {
+        await runShellCommand({ command: installCommand, cwd, onOutputLine });
+        return;
+    }
+
     await execAsync(installCommand, { cwd });
 };

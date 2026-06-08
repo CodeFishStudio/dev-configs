@@ -3,6 +3,7 @@
 ## 0.1.8
 
 - Update lint packages
+- Add `onOutputLine` to install dev dependencies
 
 ## 0.1.7
 
