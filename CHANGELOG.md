@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.7
+
+- Fix: eslint dependency range
+
 ## 0.1.6
 
 - Fix: tsconfig exports
