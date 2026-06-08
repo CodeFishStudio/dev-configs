@@ -1,14 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
-import reactPlugin from 'eslint-plugin-react';
+import reactPlugin, { ReactFlatConfig } from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
-
-const reactPluginConfig = {
-    ...reactPlugin.configs.flat.recommended,
-    settings: {
-        react: { version: 'detect' },
-    },
-};
 import { baseConfig } from './base.config.js';
 
 /**
@@ -19,9 +12,9 @@ export const reactConfig = defineConfig([
     ...baseConfig,
 
     importPlugin.flatConfigs.react,
-    reactPlugin.configs.flat.recommended,
-    reactPlugin.configs.flat['jsx-runtime'],
-    reactHooks.configs.recommended,
+    reactPlugin.configs.flat.recommended as ReactFlatConfig,
+    reactPlugin.configs.flat['jsx-runtime'] as ReactFlatConfig,
+    reactHooks.configs.flat.recommended,
     {
         rules: {
             // Turns prop={'value'} into prop="value"

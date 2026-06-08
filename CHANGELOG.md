@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.8
+
+- Update lint packages
+
 ## 0.1.7
 
 - Fix: eslint dependency range
