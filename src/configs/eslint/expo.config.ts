@@ -1,6 +1,5 @@
-import { fixupPluginRules } from '@eslint/compat';
+import reactNativeConfig from '@react-native/eslint-config/flat';
 import { defineConfig } from 'eslint/config';
-import reactNativePlugin from 'eslint-plugin-react-native';
 import { reactConfig } from './react.config.js';
 
 /**
@@ -8,31 +7,7 @@ import { reactConfig } from './react.config.js';
  */
 export const expoConfig = defineConfig([
     ...reactConfig,
-
-    /**
-     * The 'eslint-plugin-react-native' plugin is a non-official plugin that is
-     * no longer updated. It doesn't have a ESLint flat config supported
-     * version, so need to use a compatibility wrapper
-     *
-     * React Native has an official ESLint plugin, but it doesn't yet support
-     * ESLint's flat config format:
-     * https://github.com/facebook/react-native/issues/42996
-     *
-     * Expo also has an official ESLint plugin, but it seemed too opinionated
-     * and didn't work as a drop-in config - it introduced conflicts with our
-     * own configuration.
-     *
-     * Hence, sticking with the non-official plugin until the official plugin
-     * supports ESLint's flat config format.
-     */
-    {
-        name: 'eslint-plugin-react-native',
-        plugins: {
-            'react-native': fixupPluginRules({
-                rules: reactNativePlugin.rules,
-            }),
-        },
-    },
+    ...reactNativeConfig,
 
     {
         rules: {

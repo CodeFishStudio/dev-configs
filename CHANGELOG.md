@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.9
+
+- Update React Native ESLint plugin
+
 ## 0.1.8
 
 - Update lint packages
