@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.10
+
+- Fix Expo dependencies
+
 ## 0.1.9
 
 - Update React Native ESLint plugin
