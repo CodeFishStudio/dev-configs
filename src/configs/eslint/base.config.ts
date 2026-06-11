@@ -1,5 +1,5 @@
 import eslint from '@eslint/js';
-import { defineConfig } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
 
@@ -67,4 +67,5 @@ export const baseConfig = defineConfig([
             'prefer-template': 'warn',
         },
     },
+    globalIgnores(['docs/**']),
 ]);
