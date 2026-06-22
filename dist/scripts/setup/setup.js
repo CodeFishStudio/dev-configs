@@ -48,7 +48,7 @@ export const setup = async () => {
                 createESLintConfig(projectType);
                 break;
             case 'prettier':
-                copyPrettierConfig();
+                copyPrettierConfig(projectType);
                 break;
             case 'typescript':
                 copyTypeScriptConfig(projectType);

@@ -1,5 +1,16 @@
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
+import { dependencies as expoEslintDependencies } from '../configs/eslint/expo.dependencies.js';
+import { dependencies as nodeEslintDependencies } from '../configs/eslint/node.dependencies.js';
+import { dependencies as reactEslintDependencies } from '../configs/eslint/react.dependencies.js';
+import { dependencies as tanstackStartEslintDependencies } from '../configs/eslint/tanstackStart.dependencies.js';
+import { dependencies as viteEslintDependencies } from '../configs/eslint/vite.dependencies.js';
+import {
+    prettierDependencies,
+    prettierTailwindDependencies,
+    usesTailwindCss,
+} from '../configs/prettier/dependencies.js';
+import { typescriptDependencies } from '../configs/typescript/dependencies.js';
 import { runShellCommand } from '../utils/runShellCommand.js';
 import type { ConfigType, PackageManager, ProjectType } from '../types/index.js';
 
@@ -9,66 +20,51 @@ type ConfigDependencies = Record<string, string>;
 
 const DEFAULT_DEV_TOOL_CONFIGS: ConfigType[] = ['eslint', 'prettier', 'typescript'];
 
-const getESLintDependencies = async (projectType: ProjectType): Promise<ConfigDependencies> => {
+const getESLintDependencies = (projectType: ProjectType): ConfigDependencies => {
     switch (projectType) {
-        case 'node': {
-            const { dependencies } = await import('../configs/eslint/node.dependencies.js');
-            return { ...dependencies };
-        }
-        case 'nextjs': {
-            const { dependencies } = await import('../configs/eslint/react.dependencies.js');
-            return { ...dependencies };
-        }
-        case 'tanstackStart': {
-            const { dependencies } = await import(
-                '../configs/eslint/tanstackStart.dependencies.js'
-            );
-            return { ...dependencies };
-        }
-        case 'vite': {
-            const { dependencies } = await import('../configs/eslint/vite.dependencies.js');
-            return { ...dependencies };
-        }
-        case 'expo': {
-            const { dependencies } = await import('../configs/eslint/expo.dependencies.js');
-            return { ...dependencies };
-        }
+        case 'node':
+            return { ...nodeEslintDependencies };
+        case 'nextjs':
+            return { ...reactEslintDependencies };
+        case 'tanstackStart':
+            return { ...tanstackStartEslintDependencies };
+        case 'vite':
+            return { ...viteEslintDependencies };
+        case 'expo':
+            return { ...expoEslintDependencies };
         default:
             return {};
     }
 };
 
-const getDependencies = async (
+const getDependencies = (
     configType: ConfigType,
     projectType: ProjectType
-): Promise<ConfigDependencies> => {
+): ConfigDependencies => {
     switch (configType) {
-        case 'prettier': {
-            const { prettierDependencies } = await import('../configs/prettier/dependencies.js');
+        case 'prettier':
+            if (usesTailwindCss(projectType)) {
+                return { ...prettierDependencies, ...prettierTailwindDependencies };
+            }
+
             return { ...prettierDependencies };
-        }
-        case 'typescript': {
-            const { typescriptDependencies } = await import(
-                '../configs/typescript/dependencies.js'
-            );
+        case 'typescript':
             return { ...typescriptDependencies };
-        }
-        case 'eslint': {
+        case 'eslint':
             return getESLintDependencies(projectType);
-        }
         default:
             return {};
     }
 };
 
-const resolveDevToolDependencies = async (
+const resolveDevToolDependencies = (
     projectType: ProjectType,
     configTypes: ConfigType[]
-): Promise<ConfigDependencies> => {
+): ConfigDependencies => {
     let output: ConfigDependencies = {};
 
     for (const configType of configTypes) {
-        const deps = await getDependencies(configType, projectType);
+        const deps = getDependencies(configType, projectType);
         output = { ...output, ...deps };
     }
 
@@ -117,7 +113,7 @@ export const installDevDependencies = async (
         onOutputLine,
     } = options;
 
-    const deps = await resolveDevToolDependencies(projectType, configTypes);
+    const deps = resolveDevToolDependencies(projectType, configTypes);
 
     if (Object.keys(deps).length === 0) {
         return;

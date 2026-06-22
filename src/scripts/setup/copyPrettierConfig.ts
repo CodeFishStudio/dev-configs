@@ -1,19 +1,18 @@
+import { writeFileSync } from 'node:fs';
 import { join } from 'path/posix';
-import { __dirname } from '../utils/constants.js';
+import { prettierRcFileTemplate } from '../../configs/prettier/template.js';
 import { fileActions } from '../utils/fileActions.js';
+import type { ProjectType } from '../../types/index.js';
 
 /**
  * Function to copy Prettier config
  */
-export const copyPrettierConfig = (): void => {
+export const copyPrettierConfig = (projectType: ProjectType): void => {
     const targetPath = join(process.cwd(), '.prettierrc');
-
-    // Path to config files in the dist directory
-    const sourcePath = join(__dirname, '..', '..', 'configs', 'prettier', '.prettierrc');
 
     // Copy Prettier config, overwriting any existing file
     try {
-        fileActions.copy(sourcePath, targetPath);
+        writeFileSync(targetPath, prettierRcFileTemplate(projectType));
     } catch (error) {
         fileActions.copyError(error, targetPath);
     }
