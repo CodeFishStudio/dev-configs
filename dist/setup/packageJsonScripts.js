@@ -3,7 +3,7 @@ import { join } from 'path';
 import { eslintScripts } from '../configs/eslint/scripts.js';
 import { prettierScripts } from '../configs/prettier/scripts.js';
 import { typescriptScripts } from '../configs/typescript/scripts.js';
-import { addScripts, isValidPackageJson, readPackageJson, writePackageJson, } from '../scripts/utils/packageJsonUtils.js';
+import { addScripts, isValidPackageJson, readPackageJson, writePackageJson, } from '../utils/packageJsonUtils.js';
 /**
  * Map of config types to their script definitions
  */

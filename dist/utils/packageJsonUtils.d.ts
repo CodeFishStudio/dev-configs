@@ -26,7 +26,6 @@ export declare const readPackageJson: (directory: string) => PackageJson | null;
  * Write package.json to a directory
  * @param directory - Directory to write package.json to
  * @param packageJson - Package.json object to write
- * @param options - Options for writing
  * @returns Result of the operation
  */
 export declare const writePackageJson: (directory: string, packageJson: PackageJson) => PackageJsonResult;

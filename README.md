@@ -8,38 +8,8 @@ Shared configurations for dev tools across CodeFish Studio projects.
 bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.1.12
 ```
 
-## ⚡ Setup Tool
-
-Run the setup tool to automatically set up your project's dev configs:
-
-```bash
-bun cfs-setup
-```
-
-This script will provide options to:
-
-- Setup Prettier
-- Setup ESLint
-- Setup TypeScript
-
-Also installs relevant dependencies and adds package.json scripts.
+New projects are set up automatically via [create-cfs-app](https://github.com/CodeFishStudio/create-cfs-app).
 
 ## 💪 Manual Setup
 
 Refer to the [Manual Setup](./docs/MANUAL_SETUP.md) instructions.
-
-## 🛠 Local Development
-
-### Testing `cfs-setup` locally
-
-From this repo, run the interactive setup wizard against a throwaway project in `.sandbox/`:
-
-```bash
-bun run test:setup
-```
-
-The script creates `.sandbox/` if needed, scaffolds a minimal `package.json`
-when the sandbox is new, builds `dist/` when the compiled setup entry is
-missing, then runs `cfs-setup` with that directory as the working directory.
-Re-running reuses the existing sandbox so you can test skip behavior and
-incremental runs. Delete `.sandbox/` for a clean slate.

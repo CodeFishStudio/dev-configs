@@ -8,7 +8,7 @@ import {
     isValidPackageJson,
     readPackageJson,
     writePackageJson,
-} from '../scripts/utils/packageJsonUtils.js';
+} from '../utils/packageJsonUtils.js';
 import type { ConfigType, PackageJsonScriptDefinition, PackageManager } from '../types/index.js';
 
 /**
