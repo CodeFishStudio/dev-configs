@@ -2,5 +2,6 @@
  * Dependencies required for TypeScript
  */
 export declare const typescriptDependencies: {
-    readonly typescript: "^5.8";
+    readonly 'ts-plugin-sort-import-suggestions': "^1";
+    readonly typescript: "^6";
 };

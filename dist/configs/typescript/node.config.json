@@ -3,9 +3,16 @@
     "compilerOptions": {
         "module": "NodeNext",
         "lib": ["es2022"],
-        "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
-        }
+            "@/*": ["./src/*"]
+        },
+        "plugins": [
+            {
+                "name": "ts-plugin-sort-import-suggestions",
+                // Prioritise `@/`, `../`, and `./`
+                "moveUpPatterns": ["@/", "\\.{1,2}/"],
+                "moveDownPatterns": ["dist"]
+            }
+        ]
     }
 }

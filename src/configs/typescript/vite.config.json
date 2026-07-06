@@ -9,10 +9,17 @@
         "module": "ES2022",
         "moduleResolution": "bundler",
         "rootDirs": [".", "./.react-router/types"],
-        "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
-        }
+            "@/*": ["./src/*"]
+        },
+        "plugins": [
+            {
+                "name": "ts-plugin-sort-import-suggestions",
+                // Prioritise `@/`, `../`, `./`, and `react`
+                "moveUpPatterns": ["@/", "\\.{1,2}/", "^react"],
+                "moveDownPatterns": ["dist"]
+            }
+        ]
     },
     "include": ["**/*", "**/.server/**/*", "**/.client/**/*", ".react-router/types/**/*"]
 }

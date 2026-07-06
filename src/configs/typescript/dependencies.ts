@@ -2,5 +2,6 @@
  * Dependencies required for TypeScript
  */
 export const typescriptDependencies = {
-    typescript: '^5.8',
+    'ts-plugin-sort-import-suggestions': '^1',
+    typescript: '^6',
 } as const;

@@ -4,10 +4,17 @@
         "lib": ["esnext"],
         "types": ["react", "react-native", "node"],
         "jsx": "react-jsx",
-        "baseUrl": ".",
         "paths": {
-            "@/assets/*": ["assets/*"],
-            "@/*": ["src/*"]
-        }
+            "@/assets/*": ["./assets/*"],
+            "@/*": ["./src/*"]
+        },
+        "plugins": [
+            {
+                "name": "ts-plugin-sort-import-suggestions",
+                // Prioritise `@/`, `../`, `./`, and `react-native`
+                "moveUpPatterns": ["@/", "\\.{1,2}/", "^react-native$"],
+                "moveDownPatterns": ["dist"]
+            }
+        ]
     }
 }

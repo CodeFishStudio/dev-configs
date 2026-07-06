@@ -10,10 +10,17 @@
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
         "verbatimModuleSyntax": false,
-        "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
+        "plugins": [
+            {
+                "name": "ts-plugin-sort-import-suggestions",
+                // Prioritise `@/`, `../`, `./`, and `react`
+                "moveUpPatterns": ["@/", "\\.{1,2}/", "^react"],
+                "moveDownPatterns": ["dist"]
+            }
+        ]
     },
     "include": ["**/*", "eslint.config.js", "vite.config.js"]
 }
