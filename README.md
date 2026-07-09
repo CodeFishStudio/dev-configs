@@ -5,7 +5,7 @@ Shared configurations for dev tools across CodeFish Studio projects.
 ## 📦 Installation
 
 ```bash
-bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.1.16
+bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.1.17
 ```
 
 New projects are set up automatically via [create-cfs-app](https://github.com/CodeFishStudio/create-cfs-app).
