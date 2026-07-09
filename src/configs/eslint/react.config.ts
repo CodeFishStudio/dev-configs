@@ -23,6 +23,9 @@ export const reactConfig = defineConfig([
             // Prevent useless fragments
             'react/jsx-no-useless-fragment': 'warn',
 
+            // Allow unstable nested components to be used as props
+            'react/no-unstable-nested-components': ['warn', { allowAsProps: true }],
+
             // Using Typescript for prop typing
             'react/prop-types': 'off',
         },
