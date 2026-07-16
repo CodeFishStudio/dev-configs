@@ -19,6 +19,10 @@ export const expoConfig = defineConfig([
 
             // Warn about console.X usage in React Native
             'no-console': 'warn',
+
+            // React Native enables this, but `void promise()` is a common
+            // fire-and-forget pattern when floating promises are not enforced
+            'no-void': 'off',
         },
     },
 ]);
