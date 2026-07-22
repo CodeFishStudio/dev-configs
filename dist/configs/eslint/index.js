@@ -6,6 +6,7 @@ import { tanstackStartConfig } from './tanstackStart.config.js';
 import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
 import { viteConfig } from './vite.config.js';
+import { webGlobalIgnores } from './webIgnores.js';
 const eslintConfigs = {
     /**
      * CodeFish Studio ESLint configuration for Node.js + TypeScript projects
@@ -22,6 +23,7 @@ const eslintConfigs = {
         // Filter out configs that define plugins that will be included in
         // 'eslint-config-next/core-web-vitals' (see nextjs.template.ts)
         ...filterOutPlugins(reactConfig, ['import', 'react-hooks', 'react']),
+        webGlobalIgnores,
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],

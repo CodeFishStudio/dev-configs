@@ -1,11 +1,13 @@
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import { reactConfig } from './react.config.js';
+import { webGlobalIgnores } from './webIgnores.js';
 /**
  * Vite + React Router project ESLint configuration.
  */
 export const viteConfig = defineConfig([
     ...reactConfig,
+    webGlobalIgnores,
     {
         files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
         languageOptions: {
