@@ -1,6 +1,6 @@
 {
     "name": "@codefish/dev-configs",
-    "version": "0.1.21",
+    "version": "0.1.22",
     "description": "Shared configurations for dev tools across CodeFish Studio projects.",
     "type": "module",
     "main": "./dist/index.js",
@@ -53,4 +53,3 @@
         "typescript": "^5.9.2"
     }
 }
-
