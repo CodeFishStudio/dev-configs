@@ -11,6 +11,8 @@ import {
 } from '../utils/packageJsonUtils.js';
 import type { ConfigType, PackageJsonScriptDefinition, PackageManager } from '../types/index.js';
 
+const OBSOLETE_SCRIPT_NAMES = ['typecheck'] as const;
+
 /**
  * Map of config types to their script definitions
  */
@@ -63,9 +65,17 @@ export const addPackageJsonScripts = async (options: {
     );
 
     const updatedPackageJson = addScripts(existingPackageJson, scriptsRecord);
+
+    OBSOLETE_SCRIPT_NAMES.forEach((scriptName) => {
+        if (updatedPackageJson.scripts) {
+            delete updatedPackageJson.scripts[scriptName];
+        }
+    });
+
     const writeResult = writePackageJson(cwd, updatedPackageJson);
 
     if (!writeResult.success) {
         throw new Error(writeResult.message);
     }
 };
+

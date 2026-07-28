@@ -26,10 +26,12 @@
         "release:minor": "bun run build && bun pm version minor && git push && git push --tags",
         "release:patch": "bun run build && bun pm version patch && git push && git push --tags",
         "version": "sh -c 'tsx src/scripts/updateReadmeVersion.ts && git add README.md package.json'",
-        "lint": "eslint . --cache --fix",
+        "lint": "eslint . --fix",
+        "lint:check": "eslint .",
         "types": "tsc --noEmit",
         "format": "bun prettier . --write",
-        "check": "bun run lint && bun run types"
+        "prettier:check": "bun prettier . --check",
+        "check": "bun run lint:check && bun run types && bun run prettier:check"
     },
     "dependencies": {
         "@eslint/compat": ">= 1",
@@ -51,3 +53,4 @@
         "typescript": "^5.9.2"
     }
 }
+

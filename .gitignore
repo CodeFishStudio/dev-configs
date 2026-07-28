@@ -9,3 +9,4 @@ node_modules/
 
 # Local test sandbox
 .sandbox/
+.idea/

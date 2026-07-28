@@ -4,11 +4,15 @@
 export const eslintScripts = [
     {
         name: 'lint',
-        command: 'eslint . --cache',
+        command: 'eslint . --fix',
+    },
+    {
+        name: 'lint:check',
+        command: 'eslint .',
     },
     {
         name: 'check',
-        command: '{{PACKAGE_MANAGER}} run lint && {{PACKAGE_MANAGER}} run types',
+        command: '{{PACKAGE_MANAGER}} run lint:check && {{PACKAGE_MANAGER}} run types && {{PACKAGE_MANAGER}} run prettier:check',
     },
 ];
 //# sourceMappingURL=scripts.js.map

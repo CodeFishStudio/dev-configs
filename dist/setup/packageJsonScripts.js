@@ -4,6 +4,7 @@ import { eslintScripts } from '../configs/eslint/scripts.js';
 import { prettierScripts } from '../configs/prettier/scripts.js';
 import { typescriptScripts } from '../configs/typescript/scripts.js';
 import { addScripts, isValidPackageJson, readPackageJson, writePackageJson, } from '../utils/packageJsonUtils.js';
+const OBSOLETE_SCRIPT_NAMES = ['typecheck'];
 /**
  * Map of config types to their script definitions
  */
@@ -38,6 +39,11 @@ export const addPackageJsonScripts = async (options) => {
     const scriptsToAdd = configTypes.flatMap((configType) => getScriptsForConfigType(configType, packageManager));
     const scriptsRecord = Object.fromEntries(scriptsToAdd.map((script) => [script.name, script.command]));
     const updatedPackageJson = addScripts(existingPackageJson, scriptsRecord);
+    OBSOLETE_SCRIPT_NAMES.forEach((scriptName) => {
+        if (updatedPackageJson.scripts) {
+            delete updatedPackageJson.scripts[scriptName];
+        }
+    });
     const writeResult = writePackageJson(cwd, updatedPackageJson);
     if (!writeResult.success) {
         throw new Error(writeResult.message);
