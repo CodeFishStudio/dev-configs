@@ -25,9 +25,9 @@ const eslintConfigs: Record<ProjectType, Linter.Config[]> = {
      * CodeFish Studio ESLint configuration for Next.js + TypeScript projects
      */
     nextjs: [
-        // Filter out configs that define plugins that will be included in
-        // 'eslint-config-next/core-web-vitals' (see nextjs.template.ts)
-        ...filterOutPlugins(reactConfig, ['import', 'react-hooks', 'react']),
+        // Filter out configs that define plugins already included by
+        // eslint-config-next (see nextjs.template.ts): core-web-vitals and typescript
+        ...filterOutPlugins(reactConfig, ['import', 'react-hooks', 'react', '@typescript-eslint']),
         webGlobalIgnores,
 
         // Prettier must come last to override conflicting rules
