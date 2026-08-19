@@ -3,8 +3,8 @@
  */
 export declare const prettierScripts: readonly [{
     readonly name: "format";
-    readonly command: "bun prettier . --write";
+    readonly command: "{{PACKAGE_MANAGER}} prettier . --write --cache --log-level=error";
 }, {
-    readonly name: "prettier:check";
-    readonly command: "bun prettier . --check";
+    readonly name: "format:check";
+    readonly command: "{{PACKAGE_MANAGER}} prettier . --check";
 }];

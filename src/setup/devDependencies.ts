@@ -37,10 +37,7 @@ const getESLintDependencies = (projectType: ProjectType): ConfigDependencies => 
     }
 };
 
-const getDependencies = (
-    configType: ConfigType,
-    projectType: ProjectType
-): ConfigDependencies => {
+const getDependencies = (configType: ConfigType, projectType: ProjectType): ConfigDependencies => {
     switch (configType) {
         case 'prettier':
             if (usesTailwindCss(projectType)) {

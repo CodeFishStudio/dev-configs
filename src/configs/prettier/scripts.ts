@@ -4,11 +4,10 @@
 export const prettierScripts = [
     {
         name: 'format',
-        command: 'bun prettier . --write',
+        command: '{{PACKAGE_MANAGER}} prettier . --write --cache --log-level=error',
     },
     {
-        name: 'prettier:check',
-        command: 'bun prettier . --check',
+        name: 'format:check',
+        command: '{{PACKAGE_MANAGER}} prettier . --check',
     },
 ] as const;
-

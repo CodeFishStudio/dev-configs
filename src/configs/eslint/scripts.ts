@@ -4,16 +4,20 @@
 export const eslintScripts = [
     {
         name: 'lint',
-        command: 'eslint . --fix',
+        command: 'eslint . --cache --fix',
     },
     {
         name: 'lint:check',
         command: 'eslint .',
     },
     {
+        name: 'fix',
+        command:
+            '{{PACKAGE_MANAGER}} run lint && {{PACKAGE_MANAGER}} run types && {{PACKAGE_MANAGER}} run format',
+    },
+    {
         name: 'check',
         command:
-            '{{PACKAGE_MANAGER}} run lint:check && {{PACKAGE_MANAGER}} run types && {{PACKAGE_MANAGER}} run prettier:check',
+            '{{PACKAGE_MANAGER}} run lint:check && {{PACKAGE_MANAGER}} run types && {{PACKAGE_MANAGER}} run format:check',
     },
 ] as const;
-

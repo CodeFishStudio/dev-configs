@@ -78,4 +78,3 @@ export const addPackageJsonScripts = async (options: {
         throw new Error(writeResult.message);
     }
 };
-

@@ -1,1 +1,1 @@
-{"version":3,"file":"scripts.js","sourceRoot":"","sources":["../../../src/configs/prettier/scripts.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,MAAM,CAAC,MAAM,eAAe,GAAG;IAC3B;QACI,IAAI,EAAE,QAAQ;QACd,OAAO,EAAE,wBAAwB;KACpC;IACD;QACI,IAAI,EAAE,gBAAgB;QACtB,OAAO,EAAE,wBAAwB;KACpC;CACK,CAAC"}
+{"version":3,"file":"scripts.js","sourceRoot":"","sources":["../../../src/configs/prettier/scripts.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,MAAM,CAAC,MAAM,eAAe,GAAG;IAC3B;QACI,IAAI,EAAE,QAAQ;QACd,OAAO,EAAE,kEAAkE;KAC9E;IACD;QACI,IAAI,EAAE,cAAc;QACpB,OAAO,EAAE,wCAAwC;KACpD;CACK,CAAC"}
