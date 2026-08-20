@@ -67,5 +67,5 @@ export const baseConfig = defineConfig([
             'prefer-template': 'warn',
         },
     },
-    globalIgnores(['docs/**']),
+    globalIgnores(['docs/**', '.agents/**']),
 ]);
