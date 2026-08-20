@@ -2,13 +2,19 @@ import reactNativeConfig from '@react-native/eslint-config/flat';
 import { defineConfig } from 'eslint/config';
 import { reactConfig } from './react.config.js';
 import { filterOutPlugins } from './utils/filterOutPlugins.js';
+import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
 /**
  * Expo React Native project ESLint configuration.
  */
-export const expoConfig = defineConfig([
-    // `@react-native/eslint-config/flat` registers 'react', 'react-hooks' and '@typescript-eslint';
+export const expoConfig = defineConfig(
+// Merge plugins once up front so reactConfig and
+// @react-native/eslint-config/flat can share @typescript-eslint (and other
+// plugins) without ESLint 9 redefinition errors or orphaned
+// @typescript-eslint/* rules.
+mergeEslintConfigPlugins([
+    // `@react-native/eslint-config/flat` registers 'react' and 'react-hooks';
     // filter them from reactConfig to avoid ESLint 9 plugin redefinition errors.
-    ...filterOutPlugins(reactConfig, ['react', 'react-hooks', '@typescript-eslint']),
+    ...filterOutPlugins(reactConfig, ['react', 'react-hooks']),
     ...reactNativeConfig,
     {
         rules: {
@@ -23,5 +29,5 @@ export const expoConfig = defineConfig([
             'no-void': 'off',
         },
     },
-]);
+]));
 //# sourceMappingURL=expo.config.js.map
