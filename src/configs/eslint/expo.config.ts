@@ -7,9 +7,9 @@ import { filterOutPlugins } from './utils/filterOutPlugins.js';
  * Expo React Native project ESLint configuration.
  */
 export const expoConfig = defineConfig([
-    // `@react-native/eslint-config/flat` registers react and react-hooks;
+    // `@react-native/eslint-config/flat` registers 'react', 'react-hooks' and '@typescript-eslint';
     // filter them from reactConfig to avoid ESLint 9 plugin redefinition errors.
-    ...filterOutPlugins(reactConfig, ['react', 'react-hooks']),
+    ...filterOutPlugins(reactConfig, ['react', 'react-hooks', '@typescript-eslint']),
     ...reactNativeConfig,
 
     {
