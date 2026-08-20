@@ -4,6 +4,6 @@ import { dependencies as reactDependencies } from './react.dependencies.js';
  */
 export const dependencies = {
     ...reactDependencies,
-    '@react-native/eslint-config': '^0.85',
+    '@react-native/eslint-config': '^0.87',
 };
 //# sourceMappingURL=expo.dependencies.js.map
