@@ -5,7 +5,7 @@ Shared configurations for dev tools across CodeFish Studio projects.
 ## 📦 Installation
 
 ```bash
-bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.1.31
+bun add -d @codefish/dev-configs@github:CodeFishStudio/dev-configs#v0.1.32
 ```
 
 New projects are set up automatically via [CodeFish CLI](https://github.com/CodeFishStudio/codefish-cli).
