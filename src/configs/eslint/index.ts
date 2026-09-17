@@ -7,7 +7,7 @@ import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
 import { viteConfig } from './vite.config.js';
 import { webGlobalIgnores } from './webIgnores.js';
-import { ProjectType } from '../../types/index.js';
+import type { ProjectType } from '../../types/index.js';
 import type { Linter } from 'eslint';
 
 const eslintConfigs: Record<ProjectType, Linter.Config[]> = {

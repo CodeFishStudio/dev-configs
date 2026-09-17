@@ -25,6 +25,15 @@ export const baseConfig = defineConfig([
             // Prevent use of non-null assertion (i.e. the TypeScript `!` operator)
             '@typescript-eslint/no-non-null-assertion': 'error',
 
+            // Require type imports to use `import type` syntax
+            '@typescript-eslint/consistent-type-imports': [
+                'warn',
+                {
+                    prefer: 'type-imports',
+                    fixStyle: 'separate-type-imports',
+                },
+            ],
+
             // Is overly cautious, many packages have duplicated default/named exports
             'import/no-named-as-default-member': 'off',
 

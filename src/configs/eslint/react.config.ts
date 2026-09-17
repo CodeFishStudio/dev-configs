@@ -1,8 +1,9 @@
 import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
-import reactPlugin, { ReactFlatConfig } from 'eslint-plugin-react';
+import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import { baseConfig } from './base.config.js';
+import type { ReactFlatConfig } from 'eslint-plugin-react';
 
 /**
  * React project ESLint configuration. Used across web and React Native
