@@ -91,33 +91,3 @@ alongside the project config:
 ```javascript
 export default defineConfig([...eslintConfigs.nextjs, ...eslintConfigs.shadcn]);
 ```
-
-| Rule                            | What it enforces                                                               |
-| ------------------------------- | ------------------------------------------------------------------------------ |
-| `shadcn/no-restyle`             | Callers may only place components (layout); appearance belongs in a variant    |
-| `shadcn/no-raw-colors`          | Colours come from theme tokens, not the Tailwind palette                       |
-| `shadcn/no-arbitrary-values`    | No arbitrary appearance values such as `p-[13px]`; arbitrary layout is allowed |
-| `shadcn/no-inline-styles`       | No `style` props or `<style>` elements; use classes and CSS custom properties  |
-| `shadcn/require-static-classes` | Class values on components must be readable, e.g. no `` `bg-${color}` ``       |
-| `shadcn/no-unknown-classes`     | Classes must be ones the project's Tailwind can generate                       |
-
-`no-restyle` also accepts spacing on every Card element and on `…Content`, `…Header`,
-`…Footer`, `…Group`, and `…Panel` slots, and shape on `Skeleton`.
-`src/components/ui/**` itself is not linted.
-
-Run `eslint .` without `--cache` after changing a component, variant, or theme: the cache
-can skip files that use the changed code.
-
-To relax a rule for a project, override it after the shared config:
-
-```javascript
-export default defineConfig([
-    ...eslintConfigs.tanstackStart,
-    ...eslintConfigs.shadcn,
-    {
-        rules: {
-            'shadcn/no-unknown-classes': 'warn',
-        },
-    },
-]);
-```

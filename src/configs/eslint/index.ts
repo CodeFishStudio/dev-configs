@@ -8,8 +8,8 @@ import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
 import { viteConfig } from './vite.config.js';
 import { webGlobalIgnores } from './webIgnores.js';
-import type { ProjectType } from '../../types/index.js';
 import type { Linter } from 'eslint';
+import type { ProjectType } from '../../types/index.js';
 
 const eslintConfigs: Record<ProjectType | 'shadcn', Linter.Config[]> = {
     /**
