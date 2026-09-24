@@ -2,6 +2,7 @@ import prettierConfig from 'eslint-config-prettier/flat';
 import { expoConfig } from './expo.config.js';
 import { nodeConfig } from './node.config.js';
 import { reactConfig } from './react.config.js';
+import { shadcnConfig } from './shadcn.config.js';
 import { tanstackStartConfig } from './tanstackStart.config.js';
 import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
@@ -51,6 +52,11 @@ const eslintConfigs = {
         // Prettier must come last to override conflicting rules
         prettierConfig,
     ],
+    /**
+     * CodeFish Studio shadcn/ui design-system ESLint configuration. Extend alongside a web
+     * project config, e.g. `[...eslintConfigs.nextjs, ...eslintConfigs.shadcn]`.
+     */
+    shadcn: shadcnConfig,
 };
 export { eslintConfigs, mergeEslintConfigPlugins };
 //# sourceMappingURL=index.js.map
