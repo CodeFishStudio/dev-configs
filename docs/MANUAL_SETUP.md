@@ -42,10 +42,10 @@ This document provides detailed instructions for manually setting up each config
 
 ## 🔍 ESLint
 
-1. Install `@codefish/dev-configs` as a dev dependency.
+1.  Install `@codefish/dev-configs` as a dev dependency.
 
-2. Create an `eslint.config.js` file in your project root that exports or
-   extends our base eslint config:
+2.  Create an `eslint.config.js` file in your project root that exports or
+    extends our base eslint config:
 
     ```javascript
     import { eslintConfigs } from '@codefish/dev-configs';
@@ -81,17 +81,29 @@ This document provides detailed instructions for manually setting up each config
     | Node           | `eslintConfigs.node`          |
     | shadcn/ui      | `eslintConfigs.shadcn`        |
 
-    Type-aware rules are included in the project presets. In a monorepo, append
-    `monorepoTsconfigRoot` so TypeScript resolves `tsconfig.json` from the
-    package that owns the ESLint config, even when ESLint is started from the
-    repo root:
+### Monorepo setup
 
-    ```javascript
-    import { defineConfig } from 'eslint/config';
-    import { eslintConfigs, monorepoTsconfigRoot } from '@codefish/dev-configs';
+Type-aware rules are included in the project presets. In a monorepo, add the
+language options block below so TypeScript resolves `tsconfig.json` from the
+package that owns the ESLint config, even when ESLint is started from the repo
+root:
 
-    export default defineConfig([...eslintConfigs.vite, monorepoTsconfigRoot(import.meta.dirname)]);
-    ```
+```javascript
+import { defineConfig } from 'eslint/config';
+import { eslintConfigs } from '@codefish/dev-configs';
+export default defineConfig([
+    ...eslintConfigs.next,
+    // Add this block:
+    {
+        files: ['**/*.{ts,tsx,mts,cts}'],
+        languageOptions: {
+            parserOptions: {
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
+    },
+]);
+```
 
 ### Design-system rules (shadcn/ui)
 

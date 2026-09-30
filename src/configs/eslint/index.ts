@@ -72,28 +72,4 @@ const eslintConfigs: Record<ProjectType | 'shadcn', Linter.Config[]> = {
     shadcn: shadcnConfig,
 };
 
-/**
- * Pins the TypeScript project root for type-aware rules.
- *
- * Append this after a preset in a monorepo, when ESLint is not started from the
- * directory that contains that package's `tsconfig.json`.
- *
- * @param tsconfigRootDir - Pass `import.meta.dirname` from the package `eslint.config.js`.
- * @returns An ESLint flat-config block that sets `parserOptions.tsconfigRootDir`.
- *
- * @example
- * export default defineConfig([
- *     ...eslintConfigs.vite,
- *     monorepoTsconfigRoot(import.meta.dirname),
- * ]);
- */
-export const monorepoTsconfigRoot = (tsconfigRootDir: string): Linter.Config => ({
-    files: ['**/*.{ts,tsx,mts,cts}'],
-    languageOptions: {
-        parserOptions: {
-            tsconfigRootDir,
-        },
-    },
-});
-
 export { eslintConfigs, mergeEslintConfigPlugins };

@@ -86,7 +86,8 @@ export const baseConfig = defineConfig([
         languageOptions: {
             parserOptions: {
                 // Finds each file's tsconfig from the ESLint working directory.
-                // Monorepos pin that root with `monorepoTsconfigRoot`.
+                // Monorepo packages need to set `parserOptions.tsconfigRootDir`
+                // in their own ESLint config.
                 projectService: true,
             },
         },
