@@ -96,7 +96,10 @@ export const baseConfig = defineConfig([
             '@typescript-eslint/no-floating-promises': 'warn',
             // Every union or enum member needs its own case. A default clause does not count,
             // so adding a member fails until each switch that handles it is updated.
-            '@typescript-eslint/switch-exhaustiveness-check': 'error',
+            '@typescript-eslint/switch-exhaustiveness-check': [
+                'error',
+                { considerDefaultExhaustiveForUnions: true },
+            ],
         },
     },
     /* --------------------------------------------------------
