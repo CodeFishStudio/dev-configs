@@ -34,6 +34,19 @@ export const baseConfig = defineConfig([
             // Prevent use of non-null assertion (i.e. the TypeScript `!` operator)
             '@typescript-eslint/no-non-null-assertion': 'error',
 
+            // Disallow `new Array()` in favor of array literals
+            'no-array-constructor': 'off',
+            '@typescript-eslint/no-array-constructor': 'warn',
+
+            // Disallow wrapper object types (e.g. `String` instead of `string`)
+            '@typescript-eslint/no-wrapper-object-types': 'warn',
+
+            // Prefer `as const` over type assertions for literal values
+            '@typescript-eslint/prefer-as-const': 'warn',
+
+            // Require `namespace` instead of `module` for TypeScript namespaces
+            '@typescript-eslint/prefer-namespace-keyword': 'warn',
+
             // Require type imports to use `import type` syntax
             '@typescript-eslint/consistent-type-imports': [
                 'warn',
@@ -101,6 +114,9 @@ export const baseConfig = defineConfig([
             },
         },
         rules: {
+            // Disallow duplicate members in union or intersection types
+            '@typescript-eslint/no-duplicate-type-constituents': 'error',
+
             // Prevent use of floating promises
             '@typescript-eslint/no-floating-promises': 'warn',
 
