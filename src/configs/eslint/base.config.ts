@@ -1,4 +1,5 @@
 import eslint from '@eslint/js';
+import eslintComments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
@@ -12,10 +13,18 @@ export const baseConfig = defineConfig([
     importPlugin.flatConfigs.recommended,
     importPlugin.flatConfigs.typescript,
     {
+        plugins: eslintComments.recommended.plugins,
+        linterOptions: {
+            // An eslint-disable that no longer matches a reported problem is an error
+            reportUnusedDisableDirectives: 'error',
+        },
         settings: {
             'import/resolver': 'typescript',
         },
         rules: {
+            // Every suppression needs a `-- reason` so it can be reviewed
+            '@eslint-community/eslint-comments/require-description': 'error',
+
             // Allow empty TypeScript interfaces that extend other interfaces
             '@typescript-eslint/no-empty-object-type': [
                 'warn',
@@ -94,6 +103,10 @@ export const baseConfig = defineConfig([
         rules: {
             // Prevent use of floating promises
             '@typescript-eslint/no-floating-promises': 'warn',
+
+            // Every union or enum member needs its own case. A default clause does not count,
+            // so adding a member fails until each switch that handles it is updated.
+            '@typescript-eslint/switch-exhaustiveness-check': 'error',
         },
     },
 
