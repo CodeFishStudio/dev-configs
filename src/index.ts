@@ -1,1 +1,5 @@
-export { eslintConfigs, mergeEslintConfigPlugins } from './configs/eslint/index.js';
+export {
+    eslintConfigs,
+    mergeEslintConfigPlugins,
+    monorepoTsconfigRoot,
+} from './configs/eslint/index.js';

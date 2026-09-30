@@ -81,6 +81,18 @@ This document provides detailed instructions for manually setting up each config
     | Node           | `eslintConfigs.node`          |
     | shadcn/ui      | `eslintConfigs.shadcn`        |
 
+    Type-aware rules are included in the project presets. In a monorepo, append
+    `monorepoTsconfigRoot` so TypeScript resolves `tsconfig.json` from the
+    package that owns the ESLint config, even when ESLint is started from the
+    repo root:
+
+    ```javascript
+    import { defineConfig } from 'eslint/config';
+    import { eslintConfigs, monorepoTsconfigRoot } from '@codefish/dev-configs';
+
+    export default defineConfig([...eslintConfigs.vite, monorepoTsconfigRoot(import.meta.dirname)]);
+    ```
+
 ### Design-system rules (shadcn/ui)
 
 `eslintConfigs.shadcn` adds [`@shadcn/lint`](https://github.com/shadcn-ui/lint), which

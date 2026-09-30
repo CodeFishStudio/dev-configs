@@ -70,6 +70,26 @@ export const baseConfig = defineConfig([
             'prefer-template': 'warn',
         },
     },
+    /* --------------------------------------------------------
+     * Type-aware rules
+     * -------------------------------------------------------- */
+    {
+        files: ['**/*.{ts,tsx,mts,cts}'],
+        languageOptions: {
+            parserOptions: {
+                // Finds each file's tsconfig from the ESLint working directory.
+                // Monorepos pin that root with `monorepoTsconfigRoot`.
+                projectService: true,
+            },
+        },
+        rules: {
+            // Prevent use of floating promises
+            '@typescript-eslint/no-floating-promises': 'error',
+        },
+    },
+    /* --------------------------------------------------------
+     * Global ignores
+     * -------------------------------------------------------- */
     globalIgnores(['docs/**', '.agents/**']),
 ]);
 //# sourceMappingURL=base.config.js.map
