@@ -103,6 +103,8 @@ export const baseConfig = defineConfig([
         rules: {
             // Disallow duplicate members in union or intersection types
             '@typescript-eslint/no-duplicate-type-constituents': 'error',
+            // Disallow type assertions that do not change the type of an expression
+            '@typescript-eslint/no-unnecessary-type-assertion': 'error',
             // Prevent use of floating promises
             '@typescript-eslint/no-floating-promises': 'warn',
             // Every union or enum member needs its own case. A default clause does not count,
