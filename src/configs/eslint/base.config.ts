@@ -34,6 +34,12 @@ export const baseConfig = defineConfig([
             // Prevent use of non-null assertion (i.e. the TypeScript `!` operator)
             '@typescript-eslint/no-non-null-assertion': 'error',
 
+            // Remove unused imports on --fix (not just as suggestions)
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { enableAutofixRemoval: { imports: true } },
+            ],
+
             // Disallow `new Array()` in favor of array literals
             'no-array-constructor': 'off',
             '@typescript-eslint/no-array-constructor': 'warn',
