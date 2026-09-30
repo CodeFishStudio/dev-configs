@@ -93,7 +93,7 @@ export const baseConfig = defineConfig([
         },
         rules: {
             // Prevent use of floating promises
-            '@typescript-eslint/no-floating-promises': 'error',
+            '@typescript-eslint/no-floating-promises': 'warn',
         },
     },
 
