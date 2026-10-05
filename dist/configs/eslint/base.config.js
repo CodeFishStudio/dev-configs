@@ -116,6 +116,10 @@ export const baseConfig = defineConfig([
                     allowNullableBoolean: true,
                     allowNullableString: true,
                     allowNullableEnum: true,
+                    // Allowing any as it is common to perform a boolean check
+                    // on an `error` coming from a try/catch which is typed as
+                    // unknown and would otherwise trigger this error.
+                    allowAny: true,
                 },
             ],
             // Every union or enum member needs its own case. A default clause does not count,
