@@ -107,6 +107,9 @@ export const baseConfig = defineConfig([
             '@typescript-eslint/no-unnecessary-type-assertion': 'error',
             // Prevent use of floating promises
             '@typescript-eslint/no-floating-promises': 'warn',
+            // Disallow truthiness checks on numbers and nullable primitives (e.g. `if (!id)` when
+            // `id` may be `0` or when `id` is `number | undefined`). Prefer explicit nullish checks.
+            '@typescript-eslint/strict-boolean-expressions': ['error', { allowNumber: false }],
             // Every union or enum member needs its own case. A default clause does not count,
             // so adding a member fails until each switch that handles it is updated.
             '@typescript-eslint/switch-exhaustiveness-check': [
