@@ -127,7 +127,12 @@ export const baseConfig = defineConfig([
             // `id` may be `0` or when `id` is `number | undefined`). Prefer explicit nullish checks.
             '@typescript-eslint/strict-boolean-expressions': [
                 'error',
-                { allowNumber: false, allowNullableBoolean: true },
+                {
+                    allowNumber: false,
+                    allowNullableBoolean: true,
+                    allowNullableString: true,
+                    allowNullableEnum: true,
+                },
             ],
 
             // Every union or enum member needs its own case. A default clause does not count,
