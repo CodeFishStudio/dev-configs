@@ -9,8 +9,13 @@ import tseslint from 'typescript-eslint';
 export const baseConfig = defineConfig([
     eslint.configs.recommended,
     tseslint.configs.recommended,
-    importPlugin.flatConfigs.recommended,
-    importPlugin.flatConfigs.typescript,
+    // Registered on its own so `filterOutPlugins` can drop it for frameworks that
+    // bring their own `import` plugin (e.g. eslint-config-next) while keeping the
+    // `import/*` rules below.
+    {
+        name: 'codefish/import-plugin',
+        plugins: { import: importPlugin },
+    },
     {
         plugins: eslintComments.recommended.plugins,
         linterOptions: {
@@ -18,6 +23,7 @@ export const baseConfig = defineConfig([
             reportUnusedDisableDirectives: 'error',
         },
         settings: {
+            // Lets `import/order` classify path aliases (e.g. `@/…`) as internal
             'import/resolver': 'typescript',
         },
         rules: {
@@ -47,8 +53,11 @@ export const baseConfig = defineConfig([
                     fixStyle: 'separate-type-imports',
                 },
             ],
-            // Is overly cautious, many packages have duplicated default/named exports
-            'import/no-named-as-default-member': 'off',
+            // Only the eslint-plugin-import rules TypeScript can't check and that don't
+            // parse other modules. The rest are slow or duplicate type checking, see
+            // https://typescript-eslint.io/troubleshooting/typed-linting/performance/#eslint-plugin-import
+            // Merge multiple imports from the same module
+            'import/no-duplicates': 'warn',
             // Configure import ordering
             'import/order': [
                 'warn',

@@ -1,5 +1,4 @@
 import { defineConfig } from 'eslint/config';
-import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import { baseConfig } from './base.config.js';
@@ -12,7 +11,6 @@ import type { ReactFlatConfig } from 'eslint-plugin-react';
 export const reactConfig = defineConfig([
     ...baseConfig,
 
-    importPlugin.flatConfigs.react,
     reactPlugin.configs.flat.recommended as ReactFlatConfig,
     reactPlugin.configs.flat['jsx-runtime'] as ReactFlatConfig,
     reactHooks.configs.flat.recommended,
