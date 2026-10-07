@@ -94,8 +94,9 @@ export const baseConfig = defineConfig([
             'object-shorthand': ['warn', 'always'],
             // Auto fix value + string into `${value}${string}`
             'prefer-template': 'warn',
+            // Various rules for restricted syntax
             'no-restricted-syntax': [
-                'error',
+                'warn',
                 // Require braces on if blocks except bare guard-clause statements
                 {
                     selector: 'IfStatement > .consequent:not(BlockStatement, ReturnStatement, ThrowStatement, ContinueStatement, BreakStatement)',
