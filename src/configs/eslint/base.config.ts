@@ -108,25 +108,6 @@ export const baseConfig = defineConfig([
 
             // Auto fix value + string into `${value}${string}`
             'prefer-template': 'warn',
-
-            // Various rules for restricted syntax
-            'no-restricted-syntax': [
-                'warn',
-                // Require braces on if blocks except bare guard-clause statements
-                {
-                    selector:
-                        'IfStatement > .consequent:not(BlockStatement, ReturnStatement, ThrowStatement, ContinueStatement, BreakStatement)',
-                    message:
-                        'Wrap if bodies in braces. Only a bare return/throw/continue/break guard clause may omit them.',
-                },
-                // Require braces on else blocks except bare guard-clause statements
-                {
-                    selector:
-                        'IfStatement > .alternate:not(BlockStatement, IfStatement, ReturnStatement, ThrowStatement, ContinueStatement, BreakStatement)',
-                    message:
-                        'Wrap else bodies in braces. Only a bare return/throw/continue/break may omit them.',
-                },
-            ],
         },
     },
 
