@@ -7,8 +7,11 @@ This document provides detailed instructions for manually setting up each config
 1. Install TypeScript as a dev dependency:
 
     ```bash
-    bun add -d typescript@^5.8
+    bun add -d typescript@~6.0
     ```
+
+    Stay on 6.0.x: typescript-eslint requires `typescript` below 6.1, and the editor needs
+    TypeScript's JS language service.
 
 2. Copy the relevant TypeScript config file from `/src/configs/typescript` to your
    project and rename as `tsconfig.json`.

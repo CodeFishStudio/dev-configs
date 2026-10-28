@@ -28,7 +28,7 @@
         "version": "sh -c 'tsx src/scripts/updateReadmeVersion.ts && git add README.md package.json'",
         "lint": "eslint . --cache --fix",
         "lint:check": "eslint .",
-        "types": "tsc --noEmit",
+        "types": "bun check --no-script",
         "format": "bun prettier . --write --cache --log-level=error",
         "format:check": "bun prettier . --check",
         "fix": "bun run lint && bun run types && bun run format",

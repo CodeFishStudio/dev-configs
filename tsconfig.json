@@ -5,16 +5,11 @@
         "moduleResolution": "NodeNext",
         "outDir": "dist",
         "sourceMap": true,
-        "declaration": true
+        "declaration": true,
+        "types": ["node"]
     },
     "include": ["src/**/*"],
-    "exclude": [
-        "node_modules",
-        "dist",
-        "**/*.test.ts",
-        "**/*.spec.ts",
-        "src/scripts/updateReadmeVersion.ts"
-    ],
+    "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"],
     "ts-node": {
         "esm": true
     }
