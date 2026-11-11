@@ -1,5 +1,6 @@
 import reactNativeConfig from '@react-native/eslint-config/flat';
 import { defineConfig } from 'eslint/config';
+import reactHooks from 'eslint-plugin-react-hooks';
 import { reactConfig } from './react.config.js';
 import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
@@ -16,8 +17,13 @@ mergeEslintConfigPlugins([
     // filter them from reactConfig to avoid ESLint 9 plugin redefinition errors.
     ...filterOutPlugins(reactConfig, ['react', 'react-hooks']),
     ...reactNativeConfig,
+    // `@react-native/eslint-config/flat` enables only `rules-of-hooks` and `exhaustive-deps`.
+    // The plugin is already registered above, so only the recommended rules are added.
+    { rules: reactHooks.configs.flat.recommended.rules },
     {
         rules: {
+            // React Native turns this off
+            'no-else-return': 'error',
             // `require` imports are fine in React Native
             '@typescript-eslint/no-require-imports': 'off',
             // Warn about console.X usage in React Native

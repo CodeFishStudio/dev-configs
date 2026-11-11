@@ -36,11 +36,26 @@ export const baseConfig = defineConfig([
             ],
             // Prevent use of non-null assertion (i.e. the TypeScript `!` operator)
             '@typescript-eslint/no-non-null-assertion': 'error',
+            // Drops the `else` after a `return`
+            'no-else-return': 'error',
             // Disallow `new Array()` in favor of array literals
             'no-array-constructor': 'off',
             '@typescript-eslint/no-array-constructor': 'warn',
             // Disallow wrapper object types (e.g. `String` instead of `string`)
             '@typescript-eslint/no-wrapper-object-types': 'warn',
+            // Prevent type assertions on object and array literals
+            '@typescript-eslint/consistent-type-assertions': [
+                'error',
+                {
+                    // Prevent assertions directly on object literals
+                    objectLiteralTypeAssertions: 'never',
+                    // Prevent assertions directly on array literals
+                    arrayLiteralTypeAssertions: 'never',
+                    // Requires 'as' syntax rather than angle-bracket assertions
+                    // when type assertions are needed (i.e. 'as const').
+                    assertionStyle: 'as',
+                },
+            ],
             // Prefer `as const` over type assertions for literal values
             '@typescript-eslint/prefer-as-const': 'warn',
             // Require `namespace` instead of `module` for TypeScript namespaces

@@ -15,6 +15,8 @@ export const reactConfig = defineConfig([
         rules: {
             // Turns prop={'value'} into prop="value"
             'react/jsx-curly-brace-presence': ['warn', 'never'],
+            // Prevent un-memoed context `value` props
+            'react/jsx-no-constructed-context-values': 'error',
             // Prevent useless fragments
             'react/jsx-no-useless-fragment': 'warn',
             // Allow unstable nested components to be used as props

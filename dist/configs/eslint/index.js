@@ -3,6 +3,7 @@ import { expoConfig } from './expo.config.js';
 import { nodeConfig } from './node.config.js';
 import { reactConfig } from './react.config.js';
 import { shadcnConfig } from './shadcn.config.js';
+import { tanstackQueryConfig } from './tanstackQuery.config.js';
 import { tanstackStartConfig } from './tanstackStart.config.js';
 import { filterOutPlugins } from './utils/filterOutPlugins.js';
 import { mergeEslintConfigPlugins } from './utils/mergeEslintConfigPlugins.js';
@@ -57,6 +58,11 @@ const eslintConfigs = {
      * project config, e.g. `[...eslintConfigs.nextjs, ...eslintConfigs.shadcn]`.
      */
     shadcn: shadcnConfig,
+    /**
+     * CodeFish Studio TanStack Query ESLint configuration. Extend alongside a project config for
+     * any project that uses TanStack Query, e.g. `[...eslintConfigs.expo, ...eslintConfigs.tanstackQuery]`.
+     */
+    tanstackQuery: tanstackQueryConfig,
 };
 export { eslintConfigs, mergeEslintConfigPlugins };
 //# sourceMappingURL=index.js.map

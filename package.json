@@ -40,6 +40,7 @@
         "@eslint/js": ">= 9",
         "@react-native/eslint-config": "^0.87",
         "@shadcn/lint": "^0.2.0",
+        "@tanstack/eslint-plugin-query": ">= 5",
         "eslint": ">= 9.30 < 10",
         "eslint-config-prettier": ">= 10",
         "eslint-import-resolver-typescript": ">= 4.4",
