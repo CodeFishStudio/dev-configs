@@ -1,6 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import reactYouMightNotNeedAnEffect from 'eslint-plugin-react-you-might-not-need-an-effect';
 import { baseConfig } from './base.config.js';
 import type { ReactFlatConfig } from 'eslint-plugin-react';
 
@@ -14,6 +15,7 @@ export const reactConfig = defineConfig([
     reactPlugin.configs.flat.recommended as ReactFlatConfig,
     reactPlugin.configs.flat['jsx-runtime'] as ReactFlatConfig,
     reactHooks.configs.flat.recommended,
+    reactYouMightNotNeedAnEffect.configs.recommended,
     {
         rules: {
             // Turns prop={'value'} into prop="value"
